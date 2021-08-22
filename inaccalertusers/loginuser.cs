@@ -6,6 +6,7 @@ using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using Android.Gms.Tasks;
 using Firebase;
 using Firebase.Auth;
 using Firebase.Database;
@@ -21,7 +22,7 @@ using Xamarin.Facebook.Login.Widget;
 namespace inaccalertusers
 {
     [Activity(Label = "@string/app_name", Theme = "@style/logintheme", NoHistory = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-    public class loginuser : AppCompatActivity, IFacebookCallback
+    public class loginuser : AppCompatActivity, IFacebookCallback, IOnSuccessListener, IOnFailureListener
     {
 
         EditText emailtext;
@@ -43,6 +44,8 @@ namespace inaccalertusers
 
             // Create your application here
             SetContentView(Resource.Layout.loginuser);
+            // Logout existing account
+            LoginManager.Instance.LogOut();
 
             emailtext = (EditText)FindViewById(Resource.Id.emailinput);
             passwordtext = (EditText)FindViewById(Resource.Id.passwordinput);
@@ -57,7 +60,7 @@ namespace inaccalertusers
             initializefirebase();
 
             loginfb = (LoginButton)FindViewById(Resource.Id.loginfb);
-            loginfb.SetReadPermissions(new List<string> {"email", "phone", "name"});
+            loginfb.SetReadPermissions(new List<string> { "public_profile", "email" });
             callbackManager = CallbackManagerFactory.Create();
             loginfb.RegisterCallback(callbackManager, this);
 
@@ -114,7 +117,7 @@ namespace inaccalertusers
             return mAuth;
         }
 
-            private void Loginbtn_Click(object sender, EventArgs e)
+        private void Loginbtn_Click(object sender, EventArgs e)
         {
             string email = emailtext.Text;
             string password = passwordtext.Text;
@@ -166,6 +169,7 @@ namespace inaccalertusers
 
         public void OnCancel()
         {
+
         }
 
         public void OnError(FacebookException error)
@@ -178,12 +182,10 @@ namespace inaccalertusers
             {
                 usingFirebase = true;
                 LoginResult loginResult = result as LoginResult;
-                var credential = FacebookAuthProvider.GetCredential(loginResult.AccessToken.Token);
-
-                TaskCompletionListener taskCompletionListener = new TaskCompletionListener();
-                firebaseAuth.SignInWithCredential(credential)
-                    .AddOnSuccessListener(taskCompletionListener)
-                    .AddOnFailureListener(taskCompletionListener);
+                var credentials = FacebookAuthProvider.GetCredential(loginResult.AccessToken.Token);
+                firebaseAuth.SignInWithCredential(credentials)
+                    .AddOnSuccessListener(this)
+                    .AddOnFailureListener(this);
             }
             else
             {
@@ -203,5 +205,12 @@ namespace inaccalertusers
             }
             
         }
+
+        public void OnFailure(Java.Lang.Exception e)
+        {
+
+        }
+
+        
     }
 }

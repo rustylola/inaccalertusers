@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,142 +14,142 @@
         android:id="@+id/mainlayout">
 
         <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.2"
-        android:layout_marginTop="20dp"
-        android:id="@+id/firstlayer">
-
-        <ImageView
-            android:id="@+id/iconImageView"
-            android:src="@drawable/inaccalerticon"
-            android:layout_width="160dp"
-            android:layout_height="145dp"
-            android:layout_centerInParent="true"
-            android:contentDescription="@string/icon_app"/>
-
-        <TextView
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="15sp"
-            android:layout_below="@+id/iconImageView"
-            android:text="@string/string_welcome"
-            android:textColor="@color/loginAccent" />
-    
-    </RelativeLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.9"
-        android:id="@+id/secondlayer">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/gradient"
-            android:id="@+id/secondlayerloginuser">
+            android:layout_weight="0.2"
+            android:layout_marginTop="20dp"
+            android:id="@+id/firstlayer">
 
             <ImageView
-                android:src="@drawable/usericoninput"
-                android:layout_marginTop="5dp"
-                android:layout_width="55dp"
-                android:layout_height="45dp"
-                android:contentDescription="@string/icon_app"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/usericon"/>
+                android:id="@+id/iconImageView"
+                android:src="@drawable/inaccalerticon"
+                android:layout_width="160dp"
+                android:layout_height="145dp"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/icon_app"/>
 
-            <EditText
+            <TextView
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/emailinput"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="20dp"
-                android:hint="@string/inputtextuseremail"
-                android:inputType="textEmailAddress"/>
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:layout_below="@+id/iconImageView"
+                android:text="@string/string_welcome"
+                android:textColor="@color/loginAccent" />
 
-        </LinearLayout>
-        
+        </RelativeLayout>
+
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/gradient"
-            android:id="@+id/secondlayerloginpass">
+            android:layout_height="0dp"
+            android:layout_weight="0.9"
+            android:id="@+id/secondlayer">
 
-            <ImageView
-                android:src="@drawable/passiconinput"
-                android:layout_marginTop="5dp"
-                android:layout_width="55dp"
-                android:layout_height="45dp"
-                android:contentDescription="@string/icon_app"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/usericon"/>
-
-            <EditText
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/passwordinput"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="20dp"
-                android:hint="@string/inputtextpass"
-                android:inputType="textPassword"/>
-        </LinearLayout>
+                android:layout_height="55dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/gradient"
+                android:id="@+id/secondlayerloginuser">
 
-        <Button
-            android:text="@string/login_em"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:id="@+id/loginem"
-            android:background="@drawable/gradientem"
-            android:textColor="#ffffffff"/>
+                <ImageView
+                    android:src="@drawable/usericoninput"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="55dp"
+                    android:layout_height="45dp"
+                    android:contentDescription="@string/icon_app"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/usericon"/>
 
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:id="@+id/createnew"
-            android:text="@string/createnew"
-            android:gravity="center"
-            android:textColor="@color/loginAccent"
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/emailinput"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="@string/inputtextuseremail"
+                    android:inputType="textEmailAddress"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/gradient"
+                android:id="@+id/secondlayerloginpass">
+
+                <ImageView
+                    android:src="@drawable/passiconinput"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="55dp"
+                    android:layout_height="45dp"
+                    android:contentDescription="@string/icon_app"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/usericon"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/passwordinput"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="@string/inputtextpass"
+                    android:inputType="textPassword"/>
+            </LinearLayout>
+
+            <Button
+                android:text="@string/login_em"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:id="@+id/loginem"
+                android:background="@drawable/gradientem"
+                android:textColor="#ffffffff"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:id="@+id/createnew"
+                android:text="@string/createnew"
+                android:gravity="center"
+                android:textColor="@color/loginAccent"
             />
 
 
-    </LinearLayout>
+        </LinearLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.25"
-        android:id="@+id/thirdlayer">
-
-        <Button
-            android:text="@string/login_fb"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:id="@+id/loginfb"
-            android:background="@drawable/btnstyleplain"/>
-       
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:id="@+id/thirdlayer">
+
+            <com.facebook.login.widget.LoginButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:paddingTop="18dp"
+                android:paddingBottom="18dp"
+                android:paddingLeft="40dp"
+                android:padding="40dp"
+                android:id="@+id/loginfb"/>
+        </LinearLayout>
 
     </LinearLayout>
-    
-    </LinearLayout>
 
-   
+
 </android.support.design.widget.CoordinatorLayout>

@@ -181,9 +181,9 @@ namespace inaccalertusers
             DatabaseReference userReference = database.GetReference("users/" + mAuth.CurrentUser.Uid);
             userReference.SetValue(userMap);
 
-            //TimeSpan.FromSeconds(5);
-            //StartActivity(new Intent(Application.Context, typeof(loginuser)));
-            //OverridePendingTransition(Android.Resource.Animation.FadeIn, Android.Resource.Animation.FadeOut);
+            TimeSpan.FromSeconds(5);
+            StartActivity(new Intent(Application.Context, typeof(loginuser)));
+            OverridePendingTransition(Android.Resource.Animation.FadeIn, Android.Resource.Animation.FadeOut);
         }
 
         //Creating file preferences for the local storage created by the user when registering to the app

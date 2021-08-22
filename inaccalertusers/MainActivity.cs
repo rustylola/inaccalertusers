@@ -19,17 +19,33 @@ namespace inaccalertusers
     {
         FirebaseDatabase database;
         Button btntestconnection;
+
+        TextView fbusername;
+        TextView fbuserphone;
+        TextView fbuseremail;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
 
             base.OnCreate(savedInstanceState);
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
             btntestconnection = (Button) FindViewById(Resource.Id.testbutton);
             btntestconnection.Click += Btntestconnection_Click;
+
+            fbusername = (TextView)FindViewById(Resource.Id.fbname);
+            fbuseremail = (TextView)FindViewById(Resource.Id.fbemail);
+            fbuserphone = (TextView)FindViewById(Resource.Id.fbphone);
+
+            string name = Intent.GetStringExtra("fbname" ?? "Empty");
+            string email = Intent.GetStringExtra("fbemail" ?? "Empty");
+            string phone = Intent.GetStringExtra("fbphone" ?? "Empty");
+
+            fbusername.Text = "Name: "+name;
+            fbuseremail.Text = "Email: "+email;
+            fbuserphone.Text = "Phone Number: "+phone;
         }
 
         private void Btntestconnection_Click(object sender, System.EventArgs e)

@@ -41,11 +41,11 @@ namespace inaccalertusers
 
             string name = Intent.GetStringExtra("fbname" ?? "Empty");
             string email = Intent.GetStringExtra("fbemail" ?? "Empty");
-            string phone = Intent.GetStringExtra("fbphone" ?? "Empty");
+            string uid = Intent.GetStringExtra("fbuid" ?? "Empty");
 
             fbusername.Text = "Name: "+name;
             fbuseremail.Text = "Email: "+email;
-            fbuserphone.Text = "Phone Number: "+phone;
+            fbuserphone.Text = "Phone Number: "+uid;
         }
 
         private void Btntestconnection_Click(object sender, System.EventArgs e)

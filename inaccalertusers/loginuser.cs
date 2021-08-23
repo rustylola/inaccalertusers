@@ -161,6 +161,8 @@ namespace inaccalertusers
         }
 
 
+        //Facebook Callback functions
+
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
@@ -194,14 +196,20 @@ namespace inaccalertusers
 
                 var name = firebaseAuth.CurrentUser.DisplayName;
                 var email = firebaseAuth.CurrentUser.Email;
-                var phone = firebaseAuth.CurrentUser.PhoneNumber;
+                var uid = firebaseAuth.CurrentUser.Uid;
 
                 Intent nextactivity = new Intent(this, typeof(MainActivity));
                 nextactivity.PutExtra("fbname", name);
                 nextactivity.PutExtra("fbemail", email);
-                nextactivity.PutExtra("fbphne", phone);
+                nextactivity.PutExtra("fbuid", uid);
 
-                StartActivity(nextactivity);
+                Intent fbinformation = new Intent(this, typeof(userinfoinsertActivity));
+
+                fbinformation.PutExtra("fbname", name);
+                fbinformation.PutExtra("fbemail", email);
+                fbinformation.PutExtra("fbuid", uid);
+
+                StartActivity(fbinformation);
             }
             
         }

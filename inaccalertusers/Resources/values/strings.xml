@@ -20,6 +20,9 @@
     <string name="registerform">Create Account</string>
     <string name="register">Register</string>
   
+    <string name="fbheadertext">Facebook Information</string>
+    <string name="fbbtn">Continue</string>
+  
     <string name="testbtn">test</string>
 
     <string name="fullname">Full name</string>

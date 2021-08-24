@@ -127,7 +127,7 @@ namespace inaccalertusers
                 Snackbar.Make(rootView, "Please enter a valid Email", Snackbar.LengthShort).Show();
                 return;
             }
-            else if (userphone.Length != 11)
+            else if (userphone.Length < 10)
             {
                 Snackbar.Make(rootView, "Please enter a valid Phone number", Snackbar.LengthShort).Show();
                 return;

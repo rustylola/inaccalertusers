@@ -16,7 +16,7 @@ using Java.Util;
 
 namespace inaccalertusers
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/logintheme", MainLauncher = false)]
+    [Activity(Label = "@string/app_name", Theme = "@style/logintheme", MainLauncher = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class registerationActivity : AppCompatActivity
     {
 

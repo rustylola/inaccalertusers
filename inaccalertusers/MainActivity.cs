@@ -10,19 +10,12 @@ using Firebase;
 using Firebase.Database;
 
 
-
-
 namespace inaccalertusers
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme")]
     public class MainActivity : AppCompatActivity
     {
         FirebaseDatabase database;
-        Button btntestconnection;
-
-        TextView fbusername;
-        TextView fbuserphone;
-        TextView fbuseremail;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -32,27 +25,9 @@ namespace inaccalertusers
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
-            btntestconnection = (Button) FindViewById(Resource.Id.testbutton);
-            btntestconnection.Click += Btntestconnection_Click;
-
-            fbusername = (TextView)FindViewById(Resource.Id.fbname);
-            fbuseremail = (TextView)FindViewById(Resource.Id.fbemail);
-            fbuserphone = (TextView)FindViewById(Resource.Id.fbphone);
-
-            string name = Intent.GetStringExtra("fbname" ?? "Empty");
-            string email = Intent.GetStringExtra("fbemail" ?? "Empty");
-            string uid = Intent.GetStringExtra("fbuid" ?? "Empty");
-
-            fbusername.Text = "Name: "+name;
-            fbuseremail.Text = "Email: "+email;
-            fbuserphone.Text = "Phone Number: "+uid;
         }
 
-        private void Btntestconnection_Click(object sender, System.EventArgs e)
-        {
-            initializedatabase();
-        }
-
+     
         void initializedatabase()
         {
             var app = FirebaseApp.InitializeApp(this);
@@ -74,11 +49,6 @@ namespace inaccalertusers
                 database = FirebaseDatabase.GetInstance(app);
             }
 
-            DatabaseReference dbref = database.GetReference("UserSupport");
-
-            dbref.SetValue("ticket1");
-
-            Toast.MakeText(this, "Completed", ToastLength.Short).Show();
         }
     }
 }

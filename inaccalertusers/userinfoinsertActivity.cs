@@ -16,7 +16,7 @@ using Java.Util;
 
 namespace inaccalertusers
 {
-    [Activity(Label = "userinfoinsertActivity")]
+    [Activity(Label = "@string/app_name", Theme = "@style/logintheme", MainLauncher = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class userinfoinsertActivity : AppCompatActivity
     {
 
@@ -121,6 +121,7 @@ namespace inaccalertusers
 
         void AddingFbinfo(string getname, string getemail, string getphone, string getuid)
         {
+                
             HashMap userMap = new HashMap();
             userMap.Put("email", getemail);
             userMap.Put("phone", getphone);
@@ -131,6 +132,7 @@ namespace inaccalertusers
 
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
             OverridePendingTransition(Android.Resource.Animation.FadeIn, Android.Resource.Animation.FadeOut);
+            Toast.MakeText(this, "All Done!", ToastLength.Short).Show();
 
         }
     }

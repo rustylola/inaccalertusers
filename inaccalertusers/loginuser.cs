@@ -21,7 +21,7 @@ using Xamarin.Facebook.Login.Widget;
 
 namespace inaccalertusers
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/logintheme", NoHistory = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "@string/app_name", Theme = "@style/logintheme", MainLauncher = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class loginuser : AppCompatActivity, IFacebookCallback, IOnSuccessListener, IOnFailureListener
     {
 

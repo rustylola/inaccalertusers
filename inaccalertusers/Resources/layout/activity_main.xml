@@ -7,36 +7,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
+    
     <Button
-        android:text="@string/testbtn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_weight="0.05"
-        android:id="@+id/testbutton"/>
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:layout_weight="0.3"
-        android:id="@+id/fbname"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:layout_weight="0.3"
-        android:id="@+id/fbemail"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:layout_weight="0.3"
-        android:id="@+id/fbphone"/>
-
+        android:layout_height="wrap_content"/>
     
 </LinearLayout>

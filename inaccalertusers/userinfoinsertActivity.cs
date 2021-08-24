@@ -116,8 +116,12 @@ namespace inaccalertusers
                 return;
             }
 
+
             AddingFbinfo(name, email, phone, authuid);
+            
         }
+
+        //Add OTP via twilio
 
         void AddingFbinfo(string getname, string getemail, string getphone, string getuid)
         {

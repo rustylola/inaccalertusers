@@ -18,6 +18,7 @@ using System.Text;
 using Xamarin.Facebook;
 using Xamarin.Facebook.Login;
 using Xamarin.Facebook.Login.Widget;
+using Plugin.Connectivity;
 
 namespace inaccalertusers
 {
@@ -45,12 +46,14 @@ namespace inaccalertusers
             // Create your application here
             SetContentView(Resource.Layout.loginuser);
             // Logout existing account
+            
             LoginManager.Instance.LogOut();
 
             emailtext = (EditText)FindViewById(Resource.Id.emailinput);
             passwordtext = (EditText)FindViewById(Resource.Id.passwordinput);
             loginbtn = (Button)FindViewById(Resource.Id.loginem);
             rootview = (CoordinatorLayout)FindViewById(Resource.Id.rootView);
+            checkinternet();
 
             createtext = (TextView)FindViewById(Resource.Id.createnew);
             createtext.Click += Createtext_Click;
@@ -67,6 +70,19 @@ namespace inaccalertusers
             firebaseAuth = GetFirebaseAuth();
         }
 
+        void checkinternet()
+        {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                Snackbar.Make(rootview, "No Internet Connection", Snackbar.LengthLong).Show();
+                return;
+            }
+            else
+            {
+                Snackbar.Make(rootview, "Connected to the Internet", Snackbar.LengthLong).Show();
+                return;
+            }
+        }
 
         //initializing firebase connection
         void initializefirebase()
@@ -202,11 +218,6 @@ namespace inaccalertusers
                 var name = firebaseAuth.CurrentUser.DisplayName;
                 var email = firebaseAuth.CurrentUser.Email;
                 var uid = firebaseAuth.CurrentUser.Uid;
-
-                //Intent nextactivity = new Intent(this, typeof(MainActivity));
-                //nextactivity.PutExtra("fbname", name);
-                //nextactivity.PutExtra("fbemail", email);
-                //nextactivity.PutExtra("fbuid", uid);
 
                 Intent fbinformation = new Intent(this, typeof(userinfoinsertActivity));
 

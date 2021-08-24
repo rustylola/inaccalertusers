@@ -12,21 +12,22 @@ using Firebase.Database;
 
 namespace inaccalertusers
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme")]
     public class MainActivity : AppCompatActivity
     {
         FirebaseDatabase database;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-
             base.OnCreate(savedInstanceState);
-            
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
-
         }
 
+        void phoneauth()
+        {
+            
+        }
      
         void initializedatabase()
         {

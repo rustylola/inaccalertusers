@@ -122,12 +122,12 @@ namespace inaccalertusers
                 Snackbar.Make(rootView, "Name must be 35 Characters only", Snackbar.LengthShort).Show();
                 return;
             }
-            else if (!useremail.Contains("@") || useremail.Length < 11)
+            else if (!useremail.Contains("@") || useremail.Length < 9)
             {
                 Snackbar.Make(rootView, "Please enter a valid Email", Snackbar.LengthShort).Show();
                 return;
             }
-            else if (userphone.Length < 10)
+            else if (userphone.Length < 10 || userphone.Length > 15)
             {
                 Snackbar.Make(rootView, "Please enter a valid Phone number", Snackbar.LengthShort).Show();
                 return;

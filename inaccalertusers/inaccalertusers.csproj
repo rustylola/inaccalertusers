@@ -184,13 +184,13 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mainactivityicons\Profile.png" />
+    <AndroidResource Include="Resources\drawable\Profile.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mainactivityicons\History.png" />
+    <AndroidResource Include="Resources\drawable\History.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mainactivityicons\Notify.png" />
+    <AndroidResource Include="Resources\drawable\Notify.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

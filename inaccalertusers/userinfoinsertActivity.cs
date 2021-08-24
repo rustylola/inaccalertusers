@@ -110,7 +110,7 @@ namespace inaccalertusers
                 Toast.MakeText(this, "Please Enter a Valid Email", ToastLength.Short).Show();
                 return;
             }
-            else if (phone.Length < 10)
+            else if (phone.Length < 10 || phone.Length > 15)
             {
                 Toast.MakeText(this, "Please Enter a Valid Phone number", ToastLength.Short).Show();
                 return;

@@ -122,7 +122,7 @@ namespace inaccalertusers
             string email = emailtext.Text;
             string password = passwordtext.Text;
 
-            if (!email.Contains("@"))
+            if (!email.Contains("@") || email.Length < 7)
             {
                 Snackbar.Make(rootview, "Please enter a valid Email", Snackbar.LengthShort).Show();
                 return;
@@ -130,6 +130,11 @@ namespace inaccalertusers
             else if (password.Length < 8)
             {
                 Snackbar.Make(rootview, "Please enter a valid Password", Snackbar.LengthShort).Show();
+                return;
+            }
+            else if (password.Length > 35)
+            {
+                Snackbar.Make(rootview, "Password is too long, Try again.", Snackbar.LengthShort).Show();
                 return;
             }
 
@@ -198,10 +203,10 @@ namespace inaccalertusers
                 var email = firebaseAuth.CurrentUser.Email;
                 var uid = firebaseAuth.CurrentUser.Uid;
 
-                Intent nextactivity = new Intent(this, typeof(MainActivity));
-                nextactivity.PutExtra("fbname", name);
-                nextactivity.PutExtra("fbemail", email);
-                nextactivity.PutExtra("fbuid", uid);
+                //Intent nextactivity = new Intent(this, typeof(MainActivity));
+                //nextactivity.PutExtra("fbname", name);
+                //nextactivity.PutExtra("fbemail", email);
+                //nextactivity.PutExtra("fbuid", uid);
 
                 Intent fbinformation = new Intent(this, typeof(userinfoinsertActivity));
 

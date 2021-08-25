@@ -16,7 +16,7 @@ using Java.Util;
 
 namespace inaccalertusers
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/logintheme", MainLauncher = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "@string/app_name", Theme = "@style/logintheme", NoHistory = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class userinfoinsertActivity : AppCompatActivity
     {
 

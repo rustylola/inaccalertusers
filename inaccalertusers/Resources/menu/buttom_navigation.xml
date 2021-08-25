@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <item android:id="@+id/profile"
+        android:enabled="true"
+        android:icon="@mipmap/ic_profile"
+        android:title="Profile"
+        app:showAsAction="ifRoom"/>
+  
+  <item android:id="@+id/accident"
+        android:enabled="true"
+        android:icon="@drawable/accident"
+        android:title="Notify Volunteer"
+        app:showAsAction="ifRoom"/>
+  
+  <item android:id="@+id/history"
+        android:enabled="true"
+        android:icon="@drawable/history"
+        android:title="History"
+        app:showAsAction="ifRoom"/>
+
+</menu>

@@ -8,20 +8,38 @@ using Android.Views;
 using System;
 using Firebase;
 using Firebase.Database;
-
+using Android.Support.Design.Widget;
 
 namespace inaccalertusers
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme")]
+    [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.Light.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
         FirebaseDatabase database;
-
+        BottomNavigationView bottomnavigationvar;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
+
+            bottomnavigationvar = (BottomNavigationView)FindViewById(Resource.Id.bottom_nav);
+            bottomnavigationvar.NavigationItemSelected += (s, e) => {
+
+                switch (e.Item.ItemId)
+                {
+                    case Resource.Id.profile:
+                        Toast.MakeText(this, "Profile", ToastLength.Long).Show();
+                        break;
+                    case Resource.Id.accident:
+                        Toast.MakeText(this, "Accident", ToastLength.Long).Show();
+                        break;
+                    case Resource.Id.history:
+                        Toast.MakeText(this, "History", ToastLength.Long).Show();
+                        break;
+                }
+            };
+
         }
 
         void phoneauth()

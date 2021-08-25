@@ -8,7 +8,7 @@
         <LinearLayout
         android:orientation="vertical"
         android:id="@+id/continuefb"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_centerInParent="true"
         android:layout_height="400dp"
         android:background="@drawable/gradient">
@@ -23,8 +23,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="26dp"
-                android:layout_marginTop="25dp"
+                android:textSize="24dp"
+                android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:text="@string/fbheadertext"
                 android:textColor="@color/loginAccent"/>

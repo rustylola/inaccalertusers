@@ -15,7 +15,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:id="@+id/layoutregister"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_centerInParent="true"
         android:layout_height="500dp"
         android:background="@drawable/gradient">
@@ -48,7 +48,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:id="@+id/registername"
                 android:layout_height="wrap_content">
 
@@ -64,7 +64,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:id="@+id/registeremail"
                 android:layout_height="wrap_content">
                 <EditText
@@ -72,14 +72,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:hint="@string/inputtextuseremail"
                     android:inputType="textEmailAddress"/>
              </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:id="@+id/registerphone"
                 android:layout_height="wrap_content">
                 <EditText
@@ -87,14 +87,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:hint="@string/phonenum"
                     android:inputType="phone"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:id="@+id/registerpassword"
                 android:layout_height="wrap_content">
                 <EditText
@@ -102,14 +102,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:hint="@string/inputtextpass"
                     android:inputType="textPassword"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:id="@+id/registerconfirmpassword"
                 android:layout_height="wrap_content">
                 <EditText
@@ -117,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:hint="@string/confirmpass"
                     android:inputType="textPassword"/>
             </android.support.design.widget.TextInputLayout>

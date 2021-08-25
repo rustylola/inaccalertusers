@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/activity_main"
     android:background="@drawable/background">
     
-    
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:layout_above="@+id/bottom_nav"/> 
 
-</LinearLayout>
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_gravity="start"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/loginAccent"
+        app:itemIconTint="@drawable/color_buttomselector"
+        app:itemTextColor="@drawable/color_buttomselector"
+        app:menu="@menu/buttom_navigation"
+        android:layout_height="60dp"
+        app:elevation="16dp"/>
+
+</RelativeLayout>

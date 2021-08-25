@@ -10,13 +10,13 @@
   
   <item android:id="@+id/accident"
         android:enabled="true"
-        android:icon="@drawable/accident"
+        android:icon="@mipmap/ic_notify"
         android:title="Notify Volunteer"
         app:showAsAction="ifRoom"/>
   
   <item android:id="@+id/history"
         android:enabled="true"
-        android:icon="@drawable/history"
+        android:icon="@mipmap/ic_history"
         android:title="History"
         app:showAsAction="ifRoom"/>
 

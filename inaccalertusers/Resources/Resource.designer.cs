@@ -3492,7 +3492,7 @@ namespace inaccalertusers
 			public const int GradientEM = 2131165328;
 			
 			// aapt resource value: 0x7F070091
-			public const int History = 2131165329;
+			public const int history = 2131165329;
 			
 			// aapt resource value: 0x7F070092
 			public const int ic_mtrl_chip_checked_black = 2131165330;
@@ -3558,7 +3558,7 @@ namespace inaccalertusers
 			public const int passiconinput = 2131165350;
 			
 			// aapt resource value: 0x7F0700A7
-			public const int Profile = 2131165351;
+			public const int profile = 2131165351;
 			
 			// aapt resource value: 0x7F0700A8
 			public const int splashscreen = 2131165352;
@@ -4758,16 +4758,22 @@ namespace inaccalertusers
 		{
 			
 			// aapt resource value: 0x7F0D0000
-			public const int ic_launcher = 2131558400;
+			public const int ic_history = 2131558400;
 			
 			// aapt resource value: 0x7F0D0001
-			public const int ic_launcher_foreground = 2131558401;
+			public const int ic_launcher = 2131558401;
 			
 			// aapt resource value: 0x7F0D0002
-			public const int ic_launcher_round = 2131558402;
+			public const int ic_launcher_foreground = 2131558402;
 			
 			// aapt resource value: 0x7F0D0003
-			public const int ic_profile = 2131558403;
+			public const int ic_launcher_round = 2131558403;
+			
+			// aapt resource value: 0x7F0D0004
+			public const int ic_notify = 2131558404;
+			
+			// aapt resource value: 0x7F0D0005
+			public const int ic_profile = 2131558405;
 			
 			static Mipmap()
 			{

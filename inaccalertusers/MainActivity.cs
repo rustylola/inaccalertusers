@@ -9,6 +9,8 @@ using System;
 using Firebase;
 using Firebase.Database;
 using Android.Support.Design.Widget;
+using Android.Support.V4.View;
+using inaccalertusers.Adapter;
 
 namespace inaccalertusers
 {
@@ -16,6 +18,7 @@ namespace inaccalertusers
     public class MainActivity : AppCompatActivity
     {
         FirebaseDatabase database;
+        ViewPager viewpager; 
         BottomNavigationView bottomnavigationvar;
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -23,7 +26,8 @@ namespace inaccalertusers
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
-            bottomnavigationvar = (BottomNavigationView)FindViewById(Resource.Id.bottom_nav);
+            connectView();
+            
             bottomnavigationvar.NavigationItemSelected += (s, e) => {
 
                 switch (e.Item.ItemId)
@@ -42,11 +46,21 @@ namespace inaccalertusers
 
         }
 
-        void phoneauth()
+        void connectView()
         {
-            
+            bottomnavigationvar = (BottomNavigationView)FindViewById(Resource.Id.bottom_nav);
+            viewpager = (ViewPager)FindViewById(Resource.Id.viewpager);
+            viewpager.OffscreenPageLimit = 2;
+            viewpager.BeginFakeDrag();
+
+            SetupViewpager();
         }
-     
+
+        private void SetupViewpager()
+        {
+            ViewPagerAdapter adapter = new ViewPagerAdapter(SupportFragmentManager);
+        }
+
         void initializedatabase()
         {
             var app = FirebaseApp.InitializeApp(this);

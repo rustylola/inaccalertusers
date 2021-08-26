@@ -31,5 +31,6 @@
     <string name="inputtextpass">Password</string>
     <string name="confirmpass">Confirm Password</string>
 
+    <string name="title">Title</string>
     
 </resources>

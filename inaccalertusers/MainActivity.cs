@@ -11,6 +11,7 @@ using Firebase.Database;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using inaccalertusers.Adapter;
+using inaccalertusers.Fragments;
 
 namespace inaccalertusers
 {
@@ -18,8 +19,17 @@ namespace inaccalertusers
     public class MainActivity : AppCompatActivity
     {
         FirebaseDatabase database;
-        ViewPager viewpager; 
+        //viewer
+        ViewPager viewpager;
+        TextView title;
+        //navigation tab
         BottomNavigationView bottomnavigationvar;
+
+        //fragments
+        historyFragment Hfragment = new historyFragment();
+        notificationFragment Nfragment = new notificationFragment();
+        profileFragment Pfragment = new profileFragment();
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -27,38 +37,50 @@ namespace inaccalertusers
             SetContentView(Resource.Layout.activity_main);
 
             connectView();
-            
-            bottomnavigationvar.NavigationItemSelected += (s, e) => {
-
-                switch (e.Item.ItemId)
-                {
-                    case Resource.Id.profile:
-                        Toast.MakeText(this, "Profile", ToastLength.Long).Show();
-                        break;
-                    case Resource.Id.accident:
-                        Toast.MakeText(this, "Accident", ToastLength.Long).Show();
-                        break;
-                    case Resource.Id.history:
-                        Toast.MakeText(this, "History", ToastLength.Long).Show();
-                        break;
-                }
-            };
+            viewpager.SetCurrentItem(1, true);
+            title.Text = "Notify Volunteer";
 
         }
 
+        
+
         void connectView()
         {
+            title = (TextView)FindViewById(Resource.Id.textTitle);
             bottomnavigationvar = (BottomNavigationView)FindViewById(Resource.Id.bottom_nav);
             viewpager = (ViewPager)FindViewById(Resource.Id.viewpager);
             viewpager.OffscreenPageLimit = 2;
             viewpager.BeginFakeDrag();
-
+            bottomnavigationvar.NavigationItemSelected += Bottomnavigationvar_NavigationItemSelected;
             SetupViewpager();
+        }
+
+        private void Bottomnavigationvar_NavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs e)
+        {
+            if (e.Item.ItemId == Resource.Id.accident)
+            {
+                viewpager.SetCurrentItem(1, true);
+                title.Text = "Notify Volunteer";
+            }
+            else if (e.Item.ItemId == Resource.Id.profile)
+            {
+                viewpager.SetCurrentItem(0, true);
+                title.Text = "My Profile";
+            }
+            else if (e.Item.ItemId == Resource.Id.history)
+            {
+                viewpager.SetCurrentItem(2, true);
+                title.Text = "Notification History";
+            }
         }
 
         private void SetupViewpager()
         {
             ViewPagerAdapter adapter = new ViewPagerAdapter(SupportFragmentManager);
+            adapter.AddFragment(Pfragment, "Profile");
+            adapter.AddFragment(Nfragment, "Notify");
+            adapter.AddFragment(Hfragment, "History");
+            viewpager.Adapter = adapter;
         }
 
         void initializedatabase()

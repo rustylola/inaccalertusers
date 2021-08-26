@@ -3,7 +3,7 @@
 
   <item android:color="@color/loginPrimary" android:state_checked="true">
   </item>
-  <item android:color="@color/loginPrimaryDark">
+  <item android:color="@color/loginPrimary">
   </item>
 
 </selector>

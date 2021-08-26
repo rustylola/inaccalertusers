@@ -67,6 +67,9 @@
   <ItemGroup>
     <Compile Include="Adapter\ViewPagerAdapter.cs" />
     <Compile Include="EventListener\TaskCompletionListener.cs" />
+    <Compile Include="Fragments\historyFragment.cs" />
+    <Compile Include="Fragments\notificationFragment.cs" />
+    <Compile Include="Fragments\profileFragment.cs" />
     <Compile Include="getstartedActivity.cs" />
     <Compile Include="loginuser.cs" />
     <Compile Include="MainActivity.cs" />

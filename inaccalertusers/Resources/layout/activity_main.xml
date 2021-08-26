@@ -18,16 +18,16 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_weight="0.1"
+            android:layout_weight="0.09"
             android:background="@color/loginPrimary"
             android:id="@+id/continuefbheader">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="25dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="13dp"
                 android:gravity="center"
-                android:text="@string/title"
+                android:id="@+id/textTitle"
                 android:textColor="@color/loginAccent"/>
         </RelativeLayout>
 

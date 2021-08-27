@@ -4,11 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="0.1"
+            android:background="@color/loginPrimary"
+            android:id="@+id/continuefbheader">
+            <TextView
+                android:text="@string/titleprofile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:layout_marginTop="13dp"
+                android:gravity="center"
+                android:id="@+id/textTitle"
+                android:textColor="@color/loginAccent"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/profilecontent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Profile View"
-        android:gravity="center"
-        android:layout_centerInParent="true"/>
+        android:layout_height="1dp"
+        android:layout_weight="0.9" />
 
 </LinearLayout>

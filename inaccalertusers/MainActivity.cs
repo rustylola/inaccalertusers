@@ -12,6 +12,8 @@ using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using inaccalertusers.Adapter;
 using inaccalertusers.Fragments;
+using Android;
+using Android.Support.V4.App;
 
 namespace inaccalertusers
 {
@@ -21,7 +23,7 @@ namespace inaccalertusers
         FirebaseDatabase database;
         //viewer
         ViewPager viewpager;
-        TextView title;
+        
         //navigation tab
         BottomNavigationView bottomnavigationvar;
 
@@ -30,23 +32,28 @@ namespace inaccalertusers
         notificationFragment Nfragment = new notificationFragment();
         profileFragment Pfragment = new profileFragment();
 
+        //request permission
+
+        const int RequestID = 0;
+        readonly string[] permissionGroup =
+        {
+            Manifest.Permission.AccessCoarseLocation,
+            Manifest.Permission.AccessFineLocation,
+        };
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
-
+            CheckSpecialPermission();
             connectView();
             viewpager.SetCurrentItem(1, true);
-            title.Text = "Notify Volunteer";
-
+            
         }
-
-        
 
         void connectView()
         {
-            title = (TextView)FindViewById(Resource.Id.textTitle);
             bottomnavigationvar = (BottomNavigationView)FindViewById(Resource.Id.bottom_nav);
             viewpager = (ViewPager)FindViewById(Resource.Id.viewpager);
             viewpager.OffscreenPageLimit = 2;
@@ -60,17 +67,14 @@ namespace inaccalertusers
             if (e.Item.ItemId == Resource.Id.accident)
             {
                 viewpager.SetCurrentItem(1, true);
-                title.Text = "Notify Volunteer";
             }
             else if (e.Item.ItemId == Resource.Id.profile)
             {
                 viewpager.SetCurrentItem(0, true);
-                title.Text = "My Profile";
             }
             else if (e.Item.ItemId == Resource.Id.history)
             {
                 viewpager.SetCurrentItem(2, true);
-                title.Text = "Notification History";
             }
         }
 
@@ -104,6 +108,21 @@ namespace inaccalertusers
                 database = FirebaseDatabase.GetInstance(app);
             }
 
+        }
+
+        bool CheckSpecialPermission()
+        {
+            bool permissionGranted = false;
+            if (ActivityCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) != Android.Content.PM.Permission.Granted &&
+                ActivityCompat.CheckSelfPermission(this, Manifest.Permission.AccessCoarseLocation) != Android.Content.PM.Permission.Granted)
+            {
+                RequestPermissions(permissionGroup, RequestID);
+            }
+            else
+            {
+                permissionGranted = true;
+            }
+            return permissionGranted;
         }
     }
 }

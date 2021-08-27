@@ -1,4 +1,7 @@
 <resources>
+
+  <string name="mapkey">AIzaSyANTgMSdIXcpIA8UqkdmaPWQvG-cH52gDM</string>
+  
   <string name="facebook_app_id">837800107097842</string>
   <string name="fb_login_protocol_scheme">fb837800107097842</string>
 
@@ -31,6 +34,7 @@
     <string name="inputtextpass">Password</string>
     <string name="confirmpass">Confirm Password</string>
 
-    <string name="title">Title</string>
+    <string name="titleprofile">My Profile</string>
+    <string name="titlehistory">History Notification</string>
     
 </resources>

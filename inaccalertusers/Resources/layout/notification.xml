@@ -1,13 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notification View"
-        android:gravity="center"
-        android:layout_centerInParent="true"/>
 
-</RelativeLayout>
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/colorsearch">
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="com.google.android.gms.maps.SupportMapFragment"/>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:src="@drawable/ic_pinme"
+        android:id="@+id/centermarker"/>
+
+     <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="50dp"
+        android:clickable="true"
+        android:id="@+id/mylocationsearch"
+        android:background="@drawable/gradient">
+    
+        <ImageView
+            android:contentDescription="@string/icon_app"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/mylocation"
+            android:src="@drawable/mylocationicon"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="fill"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="18dp"
+            android:text="Current Location"/>
+
+       </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="10dp"
+            android:clickable="true"
+            android:id="@+id/mylocationbtn"
+            android:layout_gravity="center|right"
+            android:background="@drawable/gradient">
+            
+            <ImageView
+                android:contentDescription="@string/icon_app"
+                android:src="@mipmap/ic_locateme"
+                android:layout_width="wrap_content"
+                android:padding="5dp"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+        <Button
+            android:text="Notify Near Volunteer"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:textSize="20dp"
+            android:id="@+id/sendnotification"
+            android:layout_gravity="center|bottom"
+            android:textColor="@color/colorsearch"
+            android:background="@color/loginPrimary"
+            android:drawableLeft="@drawable/ic_notifynear"
+            android:paddingLeft="60dp"
+            android:elevation="2dp"
+            android:paddingRight="50dp"/>
+
+    </FrameLayout>
+
+</android.support.design.widget.CoordinatorLayout>

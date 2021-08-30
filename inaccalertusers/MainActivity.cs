@@ -14,6 +14,7 @@ using inaccalertusers.Adapter;
 using inaccalertusers.Fragments;
 using Android;
 using Android.Support.V4.App;
+using Android.Content.PM;
 
 namespace inaccalertusers
 {
@@ -123,6 +124,18 @@ namespace inaccalertusers
                 permissionGranted = true;
             }
             return permissionGranted;
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            if (grantResults[0] == (int) Android.Content.PM.Permission.Granted)
+            {
+                Toast.MakeText(this, "Permission Success", ToastLength.Short).Show();
+            }
+            else
+            {
+                Toast.MakeText(this, "Permission Failed", ToastLength.Short).Show();
+            }
         }
     }
 }

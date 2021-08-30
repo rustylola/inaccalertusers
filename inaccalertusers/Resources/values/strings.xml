@@ -36,5 +36,9 @@
 
     <string name="titleprofile">My Profile</string>
     <string name="titlehistory">History Notification</string>
+
+    <string name="sendnotifybtn">Notify Near Volunteer</string>
+    <string name="currentlocationstring">Current Location</string>
+    <string name="mylocationicon">My Location</string>
     
 </resources>

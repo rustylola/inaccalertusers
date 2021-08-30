@@ -1,0 +1,26 @@
+[
+  {
+    "featureType": "landscape",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#ffa8ad"
+      },
+      {
+        "weight": 0.5
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#ff5c67"
+      },
+      {
+        "weight": 0.5
+      }
+    ]
+  }
+]

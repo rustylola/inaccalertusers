@@ -33,7 +33,7 @@ namespace inaccalertusers
         notificationFragment Nfragment = new notificationFragment();
         profileFragment Pfragment = new profileFragment();
 
-        //request permission
+        //request permission list
 
         const int RequestID = 0;
         readonly string[] permissionGroup =
@@ -42,6 +42,7 @@ namespace inaccalertusers
             Manifest.Permission.AccessFineLocation,
         };
 
+        //Calling methods
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -53,6 +54,7 @@ namespace inaccalertusers
             
         }
 
+        //Bottom navigation count and view pager
         void connectView()
         {
             bottomnavigationvar = (BottomNavigationView)FindViewById(Resource.Id.bottom_nav);
@@ -63,6 +65,7 @@ namespace inaccalertusers
             SetupViewpager();
         }
 
+        //Bottom navigation events per fragment
         private void Bottomnavigationvar_NavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs e)
         {
             if (e.Item.ItemId == Resource.Id.accident)
@@ -79,6 +82,7 @@ namespace inaccalertusers
             }
         }
 
+        //Setting ViewpagerAdapter for the declared fragments 
         private void SetupViewpager()
         {
             ViewPagerAdapter adapter = new ViewPagerAdapter(SupportFragmentManager);
@@ -111,6 +115,7 @@ namespace inaccalertusers
 
         }
 
+        //Permission for GPS used for this app
         bool CheckSpecialPermission()
         {
             bool permissionGranted = false;
@@ -126,6 +131,7 @@ namespace inaccalertusers
             return permissionGranted;
         }
 
+        //Show Text Permission result
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             if (grantResults[0] == (int) Android.Content.PM.Permission.Granted)

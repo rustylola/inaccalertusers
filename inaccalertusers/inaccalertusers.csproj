@@ -71,6 +71,7 @@
     <Compile Include="Fragments\notificationFragment.cs" />
     <Compile Include="Fragments\profileFragment.cs" />
     <Compile Include="getstartedActivity.cs" />
+    <Compile Include="LocateUpdate\LocationCallbackUpdate.cs" />
     <Compile Include="loginuser.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="registerationActivity.cs" />

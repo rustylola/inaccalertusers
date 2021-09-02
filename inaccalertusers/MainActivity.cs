@@ -18,7 +18,7 @@ using Android.Content.PM;
 
 namespace inaccalertusers
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.Light.NoActionBar", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.Light.NoActionBar", MainLauncher = false)]
     public class MainActivity : AppCompatActivity
     {
         FirebaseDatabase database;

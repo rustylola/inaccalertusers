@@ -45,6 +45,7 @@
             android:src="@drawable/mylocationicon"/>
 
         <TextView
+            android:id="@+id/searchtextbox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="fill"
@@ -53,7 +54,7 @@
             android:textSize="18dp"
             android:text="@string/currentlocationstring"/>
 
-       </LinearLayout>
+    </LinearLayout>
 
         <RelativeLayout
             android:layout_width="35dp"

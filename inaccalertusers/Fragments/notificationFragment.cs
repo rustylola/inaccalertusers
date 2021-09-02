@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content;
 using Android.Gms.Location;
+using Android.Gms.Location.Places.UI;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.OS;
@@ -20,8 +21,11 @@ namespace inaccalertusers.Fragments
 {
     public class notificationFragment : Android.Support.V4.App.Fragment, IOnMapReadyCallback // call back for google map
     {
-        //Declare variable including google maps
+        //Declare variable including google maps and Layouts
         public GoogleMap mainMap;
+        TextView searchtext;
+        LinearLayout searchbar;
+
         LocationRequest mylocationRequest;
         FusedLocationProviderClient locationclient;
         Android.Locations.Location mylastlocation;
@@ -45,13 +49,29 @@ namespace inaccalertusers.Fragments
             View view = inflater.Inflate(Resource.Layout.notification, container, false);
 
             //btnsample = (Button)view.FindViewById(Resource.Id.btnsample);
+            searchbar = (LinearLayout)view.FindViewById(Resource.Id.mylocationsearch);
+            searchtext = (TextView)view.FindViewById(Resource.Id.searchtextbox);
             SupportMapFragment mapFragment = (SupportMapFragment)ChildFragmentManager.FindFragmentById(Resource.Id.map);
             mapFragment.GetMapAsync(this);
-
+            Connectcontrol();
             createlocationrequest();
             getmyCurrentLocation();
             locationUpdate();
             return view;
+        }
+
+        void Connectcontrol()
+        {
+            searchbar.Click += Searchbar_Click;
+        }
+
+        //linear layout click event
+        private void Searchbar_Click(object sender, EventArgs e)
+        {
+
+            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.ModeOverlay)
+                .Build(Activity);
+            StartActivityForResult(intent, 1);
         }
 
         //Map Styling
@@ -78,7 +98,7 @@ namespace inaccalertusers.Fragments
         {
             mylastlocation = e.Location;
             LatLng mycurrentposition = new LatLng(mylastlocation.Latitude, mylastlocation.Longitude);
-            mainMap.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(mycurrentposition, 19)); // set the zoom
+            mainMap.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(mycurrentposition, 18)); // set the zoom
         }
 
 
@@ -96,7 +116,7 @@ namespace inaccalertusers.Fragments
                 if (mylastlocation != null)
                 {
                     LatLng myposition = new LatLng(mylastlocation.Latitude, mylastlocation.Longitude);
-                    mainMap.MoveCamera(CameraUpdateFactory.NewLatLngZoom(myposition, 19)); //set the zoom 
+                    mainMap.MoveCamera(CameraUpdateFactory.NewLatLngZoom(myposition, 18)); //set the zoom 
                 }
             }
         }
@@ -123,5 +143,21 @@ namespace inaccalertusers.Fragments
                 locationclient.RemoveLocationUpdates(locationCallbackupdate);
             }
         }
+
+        public override void OnActivityResult(int requestCode, int resultCode, Intent data)
+        {
+            if (requestCode == 1)
+            {
+                if (requestCode == (int) Android.App.Result.Ok)
+                {
+                    var place = PlaceAutocomplete.GetPlace(Activity, data);
+                    searchtext.Text = place.AddressFormatted.ToString();
+                    mainMap.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(place.LatLng, 18));
+                }
+            }
+        }
+
+        
+
     }
 }

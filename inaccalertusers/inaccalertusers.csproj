@@ -148,6 +148,9 @@
     <PackageReference Include="Xamarin.GooglePlayServices.Maps">
       <Version>71.1610.4</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.GooglePlayServices.Places">
+      <Version>71.1600.4</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\splashscreen.xml" />

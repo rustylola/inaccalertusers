@@ -2,7 +2,6 @@
 using Android.App;
 using Android.Content;
 using Android.Gms.Location;
-using Android.Gms.Location.Places.UI;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.OS;
@@ -11,6 +10,7 @@ using Android.Support.V4.App;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Google.Places;
 using inaccalertusers.LocateUpdate;
 using System;
 using System.Collections.Generic;
@@ -39,7 +39,7 @@ namespace inaccalertusers.Fragments
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            
+
         }
 
         //Fragment calling ID and Map Sync
@@ -52,6 +52,7 @@ namespace inaccalertusers.Fragments
             searchbar = (LinearLayout)view.FindViewById(Resource.Id.mylocationsearch);
             searchtext = (TextView)view.FindViewById(Resource.Id.searchtextbox);
             SupportMapFragment mapFragment = (SupportMapFragment)ChildFragmentManager.FindFragmentById(Resource.Id.map);
+            initializeplaces();
             mapFragment.GetMapAsync(this);
             Connectcontrol();
             createlocationrequest();
@@ -68,10 +69,29 @@ namespace inaccalertusers.Fragments
         //linear layout click event
         private void Searchbar_Click(object sender, EventArgs e)
         {
+            // Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.ModeOverlay)
+            //    .Build(Activity);
+            // StartActivityForResult(intent, 1);
 
-            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.ModeOverlay)
+            List<Place.Field> fields = new List<Place.Field>();
+            fields.Add(Place.Field.Id);
+            fields.Add(Place.Field.Name);
+            fields.Add(Place.Field.LatLng);
+            fields.Add(Place.Field.Address);
+
+            Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.Overlay, fields)
+                .SetCountry("PH")
                 .Build(Activity);
             StartActivityForResult(intent, 1);
+        }
+
+        void initializeplaces()
+        {
+            string mapkey = Resources.GetString(Resource.String.mapkey);
+            if (!PlacesApi.IsInitialized)
+            {
+                PlacesApi.Initialize(Activity, mapkey);
+            }
         }
 
         //Map Styling
@@ -127,7 +147,7 @@ namespace inaccalertusers.Fragments
             if (ActivityCompat.CheckSelfPermission(Activity, Manifest.Permission.AccessFineLocation) == Android.Content.PM.Permission.Granted &&
                 ActivityCompat.CheckSelfPermission(Activity, Manifest.Permission.AccessCoarseLocation) == Android.Content.PM.Permission.Granted)
             {
-                locationclient.RequestLocationUpdates(mylocationRequest,locationCallbackupdate, null);
+                locationclient.RequestLocationUpdates(mylocationRequest, locationCallbackupdate, null);
             }
             else
             {
@@ -144,20 +164,22 @@ namespace inaccalertusers.Fragments
             }
         }
 
+
+
         public override void OnActivityResult(int requestCode, int resultCode, Intent data)
         {
             if (requestCode == 1)
             {
-                if (requestCode == (int) Android.App.Result.Ok)
+                if (resultCode == (int)Android.App.Result.Ok)
                 {
-                    var place = PlaceAutocomplete.GetPlace(Activity, data);
-                    searchtext.Text = place.AddressFormatted.ToString();
+                    var place = Autocomplete.GetPlaceFromIntent(data);
+                    searchtext.Text = place.Name.ToString();
                     mainMap.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(place.LatLng, 18));
                 }
             }
         }
 
-        
+
 
     }
 }

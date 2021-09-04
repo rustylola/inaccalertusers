@@ -69,7 +69,6 @@ namespace inaccalertusers.Fragments
         //linear layout click event
         private void Searchbar_Click(object sender, EventArgs e)
         {
-
             // Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.ModeOverlay)
             //    .Build(Activity);
             // StartActivityForResult(intent, 1);

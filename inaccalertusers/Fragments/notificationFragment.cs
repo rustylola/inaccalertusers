@@ -36,6 +36,10 @@ namespace inaccalertusers.Fragments
         //Declare Locationupdate
         LocationCallbackUpdate locationCallbackupdate;
 
+        //helper
+        MapFunctionUpdate mapUpdate;
+        LatLng currentlocationLatlng;
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -66,7 +70,7 @@ namespace inaccalertusers.Fragments
             searchbar.Click += Searchbar_Click;
         }
 
-        //linear layout click event
+        //Search bar layout click event
         private void Searchbar_Click(object sender, EventArgs e)
         {
             // Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.ModeOverlay)
@@ -99,6 +103,18 @@ namespace inaccalertusers.Fragments
         {
             bool mapstyling = googleMap.SetMapStyle(MapStyleOptions.LoadRawResourceStyle(Activity, Resource.Raw.mymapstyle));
             mainMap = googleMap;
+
+            // this particular event will launch if the camera move and the coordinate change the place inside the search bar will throw the
+            // particular address of the specific coordinate
+            mainMap.CameraIdle += MainMap_CameraIdle;
+            string mapkey = Resources.GetString(Resource.String.mapkey);
+            mapUpdate = new MapFunctionUpdate(mapkey);
+        }
+
+        async private void MainMap_CameraIdle(object sender, EventArgs e)
+        {
+            currentlocationLatlng = mainMap.CameraPosition.Target;
+            searchtext.Text = await mapUpdate.FindcoordinateAddress(currentlocationLatlng); 
         }
 
         // Creating Location request and setting it in high accuracy
@@ -165,7 +181,7 @@ namespace inaccalertusers.Fragments
         }
 
 
-
+        // Response for selected address in autocomplete search google place api
         public override void OnActivityResult(int requestCode, int resultCode, Intent data)
         {
             if (requestCode == 1)
@@ -179,7 +195,12 @@ namespace inaccalertusers.Fragments
             }
         }
 
-
+        void FindCordinateAddress()
+        {
+            //var currentCulture = CultureInfo.DefaultThreadCurrentCulture;
+            //CultureInfo.DefaultThreadCurrentCulture = new System.Globalization.CultureInfo("en-US");
+            //CultureInfo.DefaultThreadCurrentCulture = currentCulture;
+        }
 
     }
 }

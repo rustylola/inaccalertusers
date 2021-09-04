@@ -1,11 +1,11 @@
 <resources>
 
-  <string name="mapkey">AIzaSyANTgMSdIXcpIA8UqkdmaPWQvG-cH52gDM</string>
+    <string name="mapkey">AIzaSyC29_cjbk_dSepIWIyjN0qULWxB7MLmfRk</string>
   
-  <string name="facebook_app_id">837800107097842</string>
-  <string name="fb_login_protocol_scheme">fb837800107097842</string>
+    <string name="facebook_app_id">837800107097842</string>
+    <string name="fb_login_protocol_scheme">fb837800107097842</string>
 
-  <string name="app_name">IN-ACC-ALERT:USER</string>
+    <string name="app_name">IN-ACC-ALERT:USER</string>
     <string name="action_settings">Settings</string>
 
     <string name="string_user">USERS</string>

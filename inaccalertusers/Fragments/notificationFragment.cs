@@ -4,6 +4,7 @@ using Android.Content;
 using Android.Gms.Location;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
@@ -35,6 +36,7 @@ namespace inaccalertusers.Fragments
 
         //Declare Locationupdate
         LocationCallbackUpdate locationCallbackupdate;
+        Circle circle;
 
         //helper
         MapFunctionUpdate mapUpdate;
@@ -103,7 +105,6 @@ namespace inaccalertusers.Fragments
         {
             bool mapstyling = googleMap.SetMapStyle(MapStyleOptions.LoadRawResourceStyle(Activity, Resource.Raw.mymapstyle));
             mainMap = googleMap;
-
             // this particular event will launch if the camera move and the coordinate change the place inside the search bar will throw the
             // particular address of the specific coordinate
             mainMap.CameraIdle += MainMap_CameraIdle;
@@ -111,10 +112,22 @@ namespace inaccalertusers.Fragments
             mapUpdate = new MapFunctionUpdate(mapkey);
         }
 
+        //Moving Screen update location function
         async private void MainMap_CameraIdle(object sender, EventArgs e)
         {
-            currentlocationLatlng = mainMap.CameraPosition.Target;
-            searchtext.Text = await mapUpdate.FindcoordinateAddress(currentlocationLatlng); 
+            if (circle == null)
+            {
+                currentlocationLatlng = mainMap.CameraPosition.Target;
+                searchtext.Text = await mapUpdate.FindcoordinateAddress(currentlocationLatlng);
+                DrawCircle(mainMap);
+            }
+            else
+            {
+                circle.Remove();
+                currentlocationLatlng = mainMap.CameraPosition.Target;
+                searchtext.Text = await mapUpdate.FindcoordinateAddress(currentlocationLatlng);
+                DrawCircle(mainMap);
+            }
         }
 
         // Creating Location request and setting it in high accuracy
@@ -200,6 +213,17 @@ namespace inaccalertusers.Fragments
             //var currentCulture = CultureInfo.DefaultThreadCurrentCulture;
             //CultureInfo.DefaultThreadCurrentCulture = new System.Globalization.CultureInfo("en-US");
             //CultureInfo.DefaultThreadCurrentCulture = currentCulture;
+        }
+
+        public void DrawCircle(GoogleMap gMap)
+        {
+            circle = mainMap.AddCircle(new CircleOptions()
+                .InvokeCenter(currentlocationLatlng)
+                .InvokeRadius(100)
+                .InvokeStrokeWidth(4)
+                .InvokeStrokeColor(Android.Graphics.Color.ParseColor("#e6d9534f"))
+                .InvokeFillColor(Color.Argb(034, 209, 72, 54))); //Gmap Add Circle
+
         }
 
     }

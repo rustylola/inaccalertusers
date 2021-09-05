@@ -87,7 +87,8 @@
             android:drawableLeft="@drawable/ic_notifynear"
             android:paddingLeft="60dp"
             android:elevation="2dp"
-            android:paddingRight="50dp"/>
+            android:paddingRight="50dp"
+            android:visibility="invisible"/>
 
     </FrameLayout>
 

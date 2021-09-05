@@ -26,6 +26,8 @@ namespace inaccalertusers.Fragments
         public GoogleMap mainMap;
         TextView searchtext;
         LinearLayout searchbar;
+        Button notifybtn;
+        RelativeLayout locatemebtn;
 
         LocationRequest mylocationRequest;
         FusedLocationProviderClient locationclient;
@@ -57,6 +59,8 @@ namespace inaccalertusers.Fragments
             //btnsample = (Button)view.FindViewById(Resource.Id.btnsample);
             searchbar = (LinearLayout)view.FindViewById(Resource.Id.mylocationsearch);
             searchtext = (TextView)view.FindViewById(Resource.Id.searchtextbox);
+            notifybtn = (Button)view.FindViewById(Resource.Id.sendnotification);
+            locatemebtn = (RelativeLayout)view.FindViewById(Resource.Id.mylocationbtn);
             SupportMapFragment mapFragment = (SupportMapFragment)ChildFragmentManager.FindFragmentById(Resource.Id.map);
             initializeplaces();
             mapFragment.GetMapAsync(this);
@@ -70,6 +74,12 @@ namespace inaccalertusers.Fragments
         void Connectcontrol()
         {
             searchbar.Click += Searchbar_Click;
+            locatemebtn.Click += Locatemebtn_Click;
+        }
+
+        private void Locatemebtn_Click(object sender, EventArgs e)
+        {
+            getmyCurrentLocation();
         }
 
         //Search bar layout click event
@@ -148,6 +158,7 @@ namespace inaccalertusers.Fragments
             mylastlocation = e.Location;
             LatLng mycurrentposition = new LatLng(mylastlocation.Latitude, mylastlocation.Longitude);
             mainMap.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(mycurrentposition, 18)); // set the zoom
+            notifybtn.Visibility = ViewStates.Visible;
         }
 
 
@@ -166,6 +177,7 @@ namespace inaccalertusers.Fragments
                 {
                     LatLng myposition = new LatLng(mylastlocation.Latitude, mylastlocation.Longitude);
                     mainMap.MoveCamera(CameraUpdateFactory.NewLatLngZoom(myposition, 18)); //set the zoom 
+                    notifybtn.Visibility = ViewStates.Visible;
                 }
             }
         }

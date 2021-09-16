@@ -16,7 +16,7 @@ using Java.Util;
 
 namespace inaccalertusers
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/logintheme", MainLauncher = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class registerationActivity : AppCompatActivity
     {
 
@@ -122,7 +122,7 @@ namespace inaccalertusers
                 Snackbar.Make(rootView, "Name must be 35 Characters only", Snackbar.LengthShort).Show();
                 return;
             }
-            else if (!useremail.Contains("@") || useremail.Length < 9)
+            else if (!useremail.Contains("@") || useremail.Length < 9 || useremail.Contains(" "))
             {
                 Snackbar.Make(rootView, "Please enter a valid Email", Snackbar.LengthShort).Show();
                 return;

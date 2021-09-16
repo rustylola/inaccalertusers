@@ -122,7 +122,7 @@ namespace inaccalertusers.Fragments
             mapUpdate = new MapFunctionUpdate(mapkey);
         }
 
-        //Moving Screen update location function
+        //Moving Screen update location function and circle marker
         async private void MainMap_CameraIdle(object sender, EventArgs e)
         {
             if (circle == null)
@@ -235,7 +235,6 @@ namespace inaccalertusers.Fragments
                 .InvokeStrokeWidth(4)
                 .InvokeStrokeColor(Android.Graphics.Color.ParseColor("#e6d9534f"))
                 .InvokeFillColor(Color.Argb(034, 209, 72, 54))); //Gmap Add Circle
-
         }
 
     }

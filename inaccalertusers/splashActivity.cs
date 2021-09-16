@@ -30,7 +30,7 @@ namespace inaccalertusers
         {
             await Task.Delay(TimeSpan.FromSeconds(8));
             
-            StartActivity(new Intent(Application.Context, typeof(getstartedActivity)));
+            StartActivity(typeof(getstartedActivity));
             OverridePendingTransition(Android.Resource.Animation.FadeIn, Android.Resource.Animation.FadeOut);
 
         }

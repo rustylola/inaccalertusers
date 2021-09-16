@@ -105,7 +105,7 @@ namespace inaccalertusers
             phone = fbphonetext.EditText.Text;
             var authuid = uid;
 
-            if (!email.Contains("@"))
+            if (!email.Contains("@") || email.Length < 6 || email.Contains(" "))
             {
                 Toast.MakeText(this, "Please Enter a Valid Email", ToastLength.Short).Show();
                 return;

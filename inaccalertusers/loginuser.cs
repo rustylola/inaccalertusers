@@ -138,7 +138,7 @@ namespace inaccalertusers
             string email = emailtext.Text;
             string password = passwordtext.Text;
 
-            if (!email.Contains("@") || email.Length < 7)
+            if (!email.Contains("@") || email.Length < 7 || email.Contains(" "))
             {
                 Snackbar.Make(rootview, "Please enter a valid Email", Snackbar.LengthShort).Show();
                 return;

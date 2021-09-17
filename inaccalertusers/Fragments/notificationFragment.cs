@@ -32,8 +32,8 @@ namespace inaccalertusers.Fragments
         LocationRequest mylocationRequest;
         FusedLocationProviderClient locationclient;
         Android.Locations.Location mylastlocation;
-        static int Update_interval = 5; //5 second
-        static int Fastest_interval = 5;
+        static int Update_interval = 3; //3 second replace update
+        static int Fastest_interval = 3;
         static int Displacement = 1;
 
         //Declare Locationupdate

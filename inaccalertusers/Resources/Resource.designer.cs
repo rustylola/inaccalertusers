@@ -6150,7 +6150,10 @@ namespace inaccalertusers
 			public const int ic_notify = 2131558405;
 			
 			// aapt resource value: 0x7F0D0006
-			public const int ic_profile = 2131558406;
+			public const int ic_notifynear = 2131558406;
+			
+			// aapt resource value: 0x7F0D0007
+			public const int ic_profile = 2131558407;
 			
 			static Mipmap()
 			{

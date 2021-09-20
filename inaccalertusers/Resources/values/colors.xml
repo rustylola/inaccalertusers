@@ -14,6 +14,7 @@
     <color name="loginAccent">#ffffff</color>
 
     <color name="colorsearch">#EFEAEA</color>
-    
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#ffffff</color>
   
 </resources>

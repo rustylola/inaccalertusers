@@ -41,4 +41,9 @@
     <string name="currentlocationstring">Current Location</string>
     <string name="mylocationicon">My Location</string>
     
+    <string name="checkdetail">Request Details</string>
+    <string name="sendto">Receiver :</string>
+    <string name="near">Nearby Online Volunteers</string>
+    <string name="sendrequest">Send Request</string>
+    
 </resources>

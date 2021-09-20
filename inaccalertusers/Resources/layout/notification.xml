@@ -92,4 +92,6 @@
 
     </FrameLayout>
 
+    <include layout="@layout/notifdetails"/>
+
 </android.support.design.widget.CoordinatorLayout>

@@ -7,6 +7,7 @@ using Android.Gms.Maps.Model;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.Design.Widget;
 using Android.Support.V4.App;
 using Android.Util;
 using Android.Views;
@@ -27,6 +28,8 @@ namespace inaccalertusers.Fragments
         TextView searchtext;
         LinearLayout searchbar;
         Button notifybtn;
+        //layout
+        BottomSheetBehavior requestdeailbottomsheet;
         RelativeLayout locatemebtn;
 
         LocationRequest mylocationRequest;
@@ -61,6 +64,8 @@ namespace inaccalertusers.Fragments
             searchtext = (TextView)view.FindViewById(Resource.Id.searchtextbox);
             notifybtn = (Button)view.FindViewById(Resource.Id.sendnotification);
             locatemebtn = (RelativeLayout)view.FindViewById(Resource.Id.mylocationbtn);
+            FrameLayout requestdetailsheets = (FrameLayout)view.FindViewById(Resource.Id.notifdetails_bottomsheets);
+            requestdeailbottomsheet = BottomSheetBehavior.From(requestdetailsheets);
             SupportMapFragment mapFragment = (SupportMapFragment)ChildFragmentManager.FindFragmentById(Resource.Id.map);
             initializeplaces();
             mapFragment.GetMapAsync(this);
@@ -75,6 +80,12 @@ namespace inaccalertusers.Fragments
         {
             searchbar.Click += Searchbar_Click;
             locatemebtn.Click += Locatemebtn_Click;
+            notifybtn.Click += Notifybtn_Click;
+        }
+
+        private void Notifybtn_Click(object sender, EventArgs e)
+        {
+            requestdeailbottomsheet.State = BottomSheetBehavior.StateExpanded;
         }
 
         private void Locatemebtn_Click(object sender, EventArgs e)
@@ -216,6 +227,7 @@ namespace inaccalertusers.Fragments
                     var place = Autocomplete.GetPlaceFromIntent(data);
                     searchtext.Text = place.Name.ToString();
                     mainMap.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(place.LatLng, 18));
+                    //notifybtn.Visibility = ViewStates.Visible;
                 }
             }
         }

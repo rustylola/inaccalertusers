@@ -169,7 +169,7 @@ namespace inaccalertusers.Fragments
             mylastlocation = e.Location;
             LatLng mycurrentposition = new LatLng(mylastlocation.Latitude, mylastlocation.Longitude);
             mainMap.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(mycurrentposition, 18)); // set the zoom
-            notifybtn.Visibility = ViewStates.Visible;
+            //notifybtn.Visibility = ViewStates.Visible;
         }
 
 

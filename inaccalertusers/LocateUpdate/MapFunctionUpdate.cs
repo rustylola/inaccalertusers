@@ -1,10 +1,15 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Com.Google.Maps.Android;
+using inaccalert.Helpers;
+using Java.Util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,9 +24,11 @@ namespace inaccalertusers.LocateUpdate
     public class MapFunctionUpdate
     {
         string mapkey;
-        public MapFunctionUpdate(string key)
+        GoogleMap map;
+        public MapFunctionUpdate(string key, GoogleMap mmap)
         {
             mapkey = key;
+            map = mmap;
         }
 
         //setting url geocode
@@ -89,6 +96,49 @@ namespace inaccalertusers.LocateUpdate
             string json = "";
             json = await GetGeojasonAsync(url);
             return json;
+        }
+
+        public void DrawOnMap(string json)
+        {
+            var directiondata = JsonConvert.DeserializeObject<DirectionParser>(json);
+            //decode encoded routes
+            var points = directiondata.routes[0].overview_polyline.points;
+            var line = PolyUtil.Decode(points);
+            ArrayList routeList = new ArrayList();
+            foreach(LatLng item in line)
+            {
+                routeList.Add(item);
+            }
+
+            //draw polylines on map
+            PolylineOptions drawpolylines = new PolylineOptions()
+                .AddAll(routeList)
+                .InvokeWidth(10)
+                .InvokeColor(Color.OrangeRed)
+                .InvokeStartCap(new SquareCap())
+                .InvokeEndCap(new SquareCap())
+                .InvokeJointType(JointType.Round)
+                .Geodesic(true);
+
+            Android.Gms.Maps.Model.Polyline myPolyline = map.AddPolyline(drawpolylines);
+
+            //Get first point and Lastpoint
+            LatLng firstpoint = line[0];
+            LatLng lastpoing = line[line.Count-1]; // total item line minus one
+
+            //create marker with title popup
+            MarkerOptions userlocationOption = new MarkerOptions();
+            userlocationOption.SetPosition(firstpoint);
+            userlocationOption.SetTitle("Accident Location"); // title of the marker
+            userlocationOption.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed)); // icon of the marker
+
+            MarkerOptions volunteerlocationOption = new MarkerOptions();
+            volunteerlocationOption.SetPosition(lastpoing);
+            volunteerlocationOption.SetTitle("Volunteer First-aid Location");
+            volunteerlocationOption.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueBlue));
+
+            Marker usermarker = map.AddMarker(userlocationOption);
+            Marker volunteermarker = map.AddMarker(volunteerlocationOption);
         }
     }
 

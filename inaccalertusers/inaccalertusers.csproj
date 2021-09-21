@@ -73,6 +73,7 @@
     <Compile Include="Fragments\notificationFragment.cs" />
     <Compile Include="Fragments\profileFragment.cs" />
     <Compile Include="getstartedActivity.cs" />
+    <Compile Include="LocateUpdate\DirectionParser.cs" />
     <Compile Include="LocateUpdate\GeoCodingParser.cs" />
     <Compile Include="LocateUpdate\LocationCallbackUpdate.cs" />
     <Compile Include="LocateUpdate\MapFunctionUpdate.cs" />

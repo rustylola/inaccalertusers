@@ -28,7 +28,9 @@ namespace inaccalertusers.Fragments
         TextView searchtext;
         LinearLayout searchbar;
         Button notifybtn;
+
         //layout
+        ImageView centermarker;
         BottomSheetBehavior requestdeailbottomsheet;
         RelativeLayout locatemebtn;
 
@@ -46,6 +48,8 @@ namespace inaccalertusers.Fragments
         //helper
         MapFunctionUpdate mapUpdate;
         LatLng currentlocationLatlng;
+        LatLng volunteerSampleLocation = new LatLng(14.6749, 120.9428);
+        
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -60,13 +64,18 @@ namespace inaccalertusers.Fragments
             View view = inflater.Inflate(Resource.Layout.notification, container, false);
 
             //btnsample = (Button)view.FindViewById(Resource.Id.btnsample);
+            //Layout Define and initalization
+            centermarker = (ImageView)view.FindViewById(Resource.Id.centermarker);
             searchbar = (LinearLayout)view.FindViewById(Resource.Id.mylocationsearch);
             searchtext = (TextView)view.FindViewById(Resource.Id.searchtextbox);
             notifybtn = (Button)view.FindViewById(Resource.Id.sendnotification);
             locatemebtn = (RelativeLayout)view.FindViewById(Resource.Id.mylocationbtn);
             FrameLayout requestdetailsheets = (FrameLayout)view.FindViewById(Resource.Id.notifdetails_bottomsheets);
+            //BottomSheet Initialization
             requestdeailbottomsheet = BottomSheetBehavior.From(requestdetailsheets);
+            //Map Fragmet Initialization
             SupportMapFragment mapFragment = (SupportMapFragment)ChildFragmentManager.FindFragmentById(Resource.Id.map);
+            //Method Initialization
             initializeplaces();
             mapFragment.GetMapAsync(this);
             Connectcontrol();
@@ -76,6 +85,7 @@ namespace inaccalertusers.Fragments
             return view;
         }
 
+        //Click event method
         void Connectcontrol()
         {
             searchbar.Click += Searchbar_Click;
@@ -83,10 +93,28 @@ namespace inaccalertusers.Fragments
             notifybtn.Click += Notifybtn_Click;
         }
 
-        private void Notifybtn_Click(object sender, EventArgs e)
+        async void Notifybtn_Click(object sender, EventArgs e)
         {
-            requestdeailbottomsheet.State = BottomSheetBehavior.StateExpanded;
+            //notifybtn.Text = "Please Wait...";
+            //notifybtn.Enabled = false;
+
+            //Remeber : this method must call if the volunteer alread accept the request
+            // then run this code
+            string json;
+            json = await mapUpdate.GetDirectionJsonAsync(currentlocationLatlng, volunteerSampleLocation);
+
+            if (!string.IsNullOrEmpty(json))
+            {
+                mapUpdate.DrawOnMap(json);
+                requestdeailbottomsheet.State = BottomSheetBehavior.StateExpanded;
+                //test
+                circle.Remove();
+                centermarker.Visibility = ViewStates.Invisible;
+            }
+
         }
+
+
 
         private void Locatemebtn_Click(object sender, EventArgs e)
         {
@@ -130,7 +158,7 @@ namespace inaccalertusers.Fragments
             // particular address of the specific coordinate
             mainMap.CameraIdle += MainMap_CameraIdle;
             string mapkey = Resources.GetString(Resource.String.mapkey);
-            mapUpdate = new MapFunctionUpdate(mapkey);
+            mapUpdate = new MapFunctionUpdate(mapkey,mainMap);
         }
 
         //Moving Screen update location function and circle marker
@@ -138,14 +166,14 @@ namespace inaccalertusers.Fragments
         {
             if (circle == null)
             {
-                currentlocationLatlng = mainMap.CameraPosition.Target;
+                currentlocationLatlng = mainMap.CameraPosition.Target; // NOTE : able to // for request
                 searchtext.Text = await mapUpdate.FindcoordinateAddress(currentlocationLatlng);
                 DrawCircle(mainMap);
             }
             else
             {
                 circle.Remove();
-                currentlocationLatlng = mainMap.CameraPosition.Target;
+                currentlocationLatlng = mainMap.CameraPosition.Target; // NOTE : able to // for request
                 searchtext.Text = await mapUpdate.FindcoordinateAddress(currentlocationLatlng);
                 DrawCircle(mainMap);
             }
@@ -168,6 +196,7 @@ namespace inaccalertusers.Fragments
         {
             mylastlocation = e.Location;
             LatLng mycurrentposition = new LatLng(mylastlocation.Latitude, mylastlocation.Longitude);
+            currentlocationLatlng = mycurrentposition; // for request
             mainMap.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(mycurrentposition, 18)); // set the zoom
             //notifybtn.Visibility = ViewStates.Visible;
         }
@@ -187,6 +216,7 @@ namespace inaccalertusers.Fragments
                 if (mylastlocation != null)
                 {
                     LatLng myposition = new LatLng(mylastlocation.Latitude, mylastlocation.Longitude);
+                    currentlocationLatlng = myposition;// for request
                     mainMap.MoveCamera(CameraUpdateFactory.NewLatLngZoom(myposition, 18)); //set the zoom 
                     notifybtn.Visibility = ViewStates.Visible;
                 }
@@ -226,6 +256,7 @@ namespace inaccalertusers.Fragments
                 {
                     var place = Autocomplete.GetPlaceFromIntent(data);
                     searchtext.Text = place.Name.ToString();
+                    currentlocationLatlng = place.LatLng; // for request
                     mainMap.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(place.LatLng, 18));
                     //notifybtn.Visibility = ViewStates.Visible;
                 }

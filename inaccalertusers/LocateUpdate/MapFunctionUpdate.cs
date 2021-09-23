@@ -124,7 +124,7 @@ namespace inaccalertusers.LocateUpdate
 
             //Get first point and Lastpoint
             LatLng firstpoint = line[0];
-            LatLng lastpoing = line[line.Count-1]; // total item line minus one
+            LatLng lastpoint = line[line.Count-1]; // total item line minus one
 
             //create marker with title popup
             MarkerOptions userlocationOption = new MarkerOptions();
@@ -133,12 +133,27 @@ namespace inaccalertusers.LocateUpdate
             userlocationOption.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed)); // icon of the marker
 
             MarkerOptions volunteerlocationOption = new MarkerOptions();
-            volunteerlocationOption.SetPosition(lastpoing);
+            volunteerlocationOption.SetPosition(lastpoint);
             volunteerlocationOption.SetTitle("Volunteer First-aid Location");
             volunteerlocationOption.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueBlue));
 
             Marker usermarker = map.AddMarker(userlocationOption);
             Marker volunteermarker = map.AddMarker(volunteerlocationOption);
+
+            //Get Accident Bounds
+            double southlng = directiondata.routes[0].bounds.southwest.lng;
+            double southlat = directiondata.routes[0].bounds.southwest.lat;
+            double northlng = directiondata.routes[0].bounds.northeast.lng;
+            double northlat = directiondata.routes[0].bounds.northeast.lat;
+
+            LatLng southwest = new LatLng(southlat, southlng);
+            LatLng northeast = new LatLng(northlat, northlng);
+            LatLngBounds bounds = new LatLngBounds(southwest, northeast);
+
+            map.AnimateCamera(CameraUpdateFactory.NewLatLngBounds(bounds, 420));
+            map.SetPadding(30,60,30,60);
+            usermarker.ShowInfoWindow();
+
         }
     }
 

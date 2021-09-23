@@ -132,6 +132,7 @@ namespace inaccalertusers.LocateUpdate
             userlocationOption.SetTitle("Accident Location"); // title of the marker
             userlocationOption.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed)); // icon of the marker
 
+
             MarkerOptions volunteerlocationOption = new MarkerOptions();
             volunteerlocationOption.SetPosition(lastpoint);
             volunteerlocationOption.SetTitle("Volunteer First-aid Location");

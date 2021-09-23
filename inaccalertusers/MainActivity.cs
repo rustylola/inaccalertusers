@@ -135,9 +135,14 @@ namespace inaccalertusers
         //Show Text Permission result
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
+            if (grantResults.Length > 1)
+            {
+                return;
+            }
             if (grantResults[0] == (int) Android.Content.PM.Permission.Granted)
             {
                 Toast.MakeText(this, "Permission Success", ToastLength.Short).Show();
+                Nfragment.locationUpdate();
             }
             else
             {

@@ -49,8 +49,9 @@ namespace inaccalertusers.Fragments
         MapFunctionUpdate mapUpdate;
         LatLng currentlocationLatlng;
         LatLng volunteerSampleLocation = new LatLng(14.6749, 120.9428);
-        
 
+        //flags
+        bool circleMarkerFlags = true;
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -98,7 +99,7 @@ namespace inaccalertusers.Fragments
             //notifybtn.Text = "Please Wait...";
             //notifybtn.Enabled = false;
 
-            //Remeber : this method must call if the volunteer alread accept the request
+            //Remeber : this method must call if the volunteer already accept the request
             // then run this code
             string json;
             json = await mapUpdate.GetDirectionJsonAsync(currentlocationLatlng, volunteerSampleLocation);
@@ -108,13 +109,18 @@ namespace inaccalertusers.Fragments
                 mapUpdate.DrawOnMap(json);
                 requestdeailbottomsheet.State = BottomSheetBehavior.StateExpanded;
                 //test
-                circle.Remove();
-                centermarker.Visibility = ViewStates.Invisible;
+                RequestShow();
             }
 
         }
 
-
+        //Trip Draw Request
+        void RequestShow()
+        {
+            circleMarkerFlags = false; // to remove circle marker every move the camera
+            centermarker.Visibility = ViewStates.Invisible;
+            searchbar.Enabled = false;
+        }
 
         private void Locatemebtn_Click(object sender, EventArgs e)
         {
@@ -164,18 +170,21 @@ namespace inaccalertusers.Fragments
         //Moving Screen update location function and circle marker
         async private void MainMap_CameraIdle(object sender, EventArgs e)
         {
-            if (circle == null)
+            if (circleMarkerFlags)
             {
-                currentlocationLatlng = mainMap.CameraPosition.Target; // NOTE : able to // for request
-                searchtext.Text = await mapUpdate.FindcoordinateAddress(currentlocationLatlng);
-                DrawCircle(mainMap);
-            }
-            else
-            {
-                circle.Remove();
-                currentlocationLatlng = mainMap.CameraPosition.Target; // NOTE : able to // for request
-                searchtext.Text = await mapUpdate.FindcoordinateAddress(currentlocationLatlng);
-                DrawCircle(mainMap);
+                if (circle == null)
+                {
+                    currentlocationLatlng = mainMap.CameraPosition.Target; // NOTE : able to // for request
+                    searchtext.Text = await mapUpdate.FindcoordinateAddress(currentlocationLatlng);
+                    DrawCircle(mainMap);
+                }
+                else
+                {
+                    circle.Remove();
+                    currentlocationLatlng = mainMap.CameraPosition.Target; // NOTE : able to // for request
+                    searchtext.Text = await mapUpdate.FindcoordinateAddress(currentlocationLatlng);
+                    DrawCircle(mainMap);
+                }
             }
         }
 
@@ -224,7 +233,7 @@ namespace inaccalertusers.Fragments
         }
 
         // Location update if the user move (live location update)
-        void locationUpdate()
+        public void locationUpdate()
         {
             if (ActivityCompat.CheckSelfPermission(Activity, Manifest.Permission.AccessFineLocation) == Android.Content.PM.Permission.Granted &&
                 ActivityCompat.CheckSelfPermission(Activity, Manifest.Permission.AccessCoarseLocation) == Android.Content.PM.Permission.Granted)

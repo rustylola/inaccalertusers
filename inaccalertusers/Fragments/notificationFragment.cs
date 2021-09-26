@@ -33,6 +33,9 @@ namespace inaccalertusers.Fragments
         ImageView centermarker;
         BottomSheetBehavior requestdeailbottomsheet;
         RelativeLayout locatemebtn;
+        //layout sheets
+        TextView detaillocation;
+        TextView timeEstimatelocation;
 
         LocationRequest mylocationRequest;
         FusedLocationProviderClient locationclient;
@@ -72,6 +75,9 @@ namespace inaccalertusers.Fragments
             notifybtn = (Button)view.FindViewById(Resource.Id.sendnotification);
             locatemebtn = (RelativeLayout)view.FindViewById(Resource.Id.mylocationbtn);
             FrameLayout requestdetailsheets = (FrameLayout)view.FindViewById(Resource.Id.notifdetails_bottomsheets);
+            //Layout for sheets
+            detaillocation = (TextView)view.FindViewById(Resource.Id.detaillocation);
+            timeEstimatelocation = (TextView)view.FindViewById(Resource.Id.detailtime);
             //BottomSheet Initialization
             requestdeailbottomsheet = BottomSheetBehavior.From(requestdetailsheets);
             //Map Fragmet Initialization
@@ -108,10 +114,10 @@ namespace inaccalertusers.Fragments
             {
                 mapUpdate.DrawOnMap(json);
                 requestdeailbottomsheet.State = BottomSheetBehavior.StateExpanded;
-                //test
+                //test // Display views
                 RequestShow();
             }
-
+            
         }
 
         //Trip Draw Request
@@ -120,6 +126,10 @@ namespace inaccalertusers.Fragments
             circleMarkerFlags = false; // to remove circle marker every move the camera
             centermarker.Visibility = ViewStates.Invisible;
             searchbar.Enabled = false;
+
+            //Estimate time and show current location
+            detaillocation.Text = searchtext.Text;
+            timeEstimatelocation.Text = mapUpdate.durationString;
         }
 
         private void Locatemebtn_Click(object sender, EventArgs e)

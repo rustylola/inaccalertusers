@@ -15,13 +15,16 @@ using inaccalertusers.Fragments;
 using Android;
 using Android.Support.V4.App;
 using Android.Content.PM;
+using inaccalertusers.EventListener;
 
 namespace inaccalertusers
 {
     [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.Light.NoActionBar", MainLauncher = false)]
     public class MainActivity : AppCompatActivity
     {
-        FirebaseDatabase database;
+        //firebase
+        UserProfileEventListener userProfileEventListener = new UserProfileEventListener();
+
         //viewer
         ViewPager viewpager;
         
@@ -51,7 +54,7 @@ namespace inaccalertusers
             CheckSpecialPermission();
             connectView();
             viewpager.SetCurrentItem(1, true);
-            
+            userProfileEventListener.Create();
         }
 
         //Bottom navigation count and view pager
@@ -93,28 +96,7 @@ namespace inaccalertusers
             viewpager.Adapter = adapter;
         }
 
-        void initializedatabase()
-        {
-            var app = FirebaseApp.InitializeApp(this);
-
-            if (app == null)
-            {
-                var option = new FirebaseOptions.Builder()
-                    .SetApplicationId("inaccalert-database")
-                    .SetApiKey("AIzaSyCDcTY55MlwDzx2r_zAij1uGu0QOMzdzVQ")
-                    .SetDatabaseUrl("https://inaccalert-database-default-rtdb.firebaseio.com")
-                    .SetStorageBucket("inaccalert-database.appspot.com")
-                    .Build();
-
-                app = FirebaseApp.InitializeApp(this, option);
-                database = FirebaseDatabase.GetInstance(app);
-            }
-            else
-            {
-                database = FirebaseDatabase.GetInstance(app);
-            }
-
-        }
+        
 
         //Permission for GPS used for this app
         bool CheckSpecialPermission()
@@ -135,7 +117,7 @@ namespace inaccalertusers
         //Show Text Permission result
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
-            if (grantResults.Length > 1)
+            if (grantResults.Length < 1)
             {
                 return;
             }

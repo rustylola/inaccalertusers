@@ -9,15 +9,16 @@
     android:id="@+id/notifdetails_bottomsheets">
 
     <View
+        android:id="@+id/view1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/loginPrimary"/>
-
+    
     <LinearLayout
         android:id="@+id/layoutdetails"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_height="280dp"
         android:background="@color/loginAccent"
         android:padding="16dp">
 
@@ -45,11 +46,6 @@
                 android:textColor="@color/colorBlack"
                 android:text="@string/checkdetail"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/loginPrimary"/>
-        
         </LinearLayout>
 
         <LinearLayout
@@ -80,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:layout_marginLeft="5dp"/>
                 
             </LinearLayout>
@@ -96,22 +92,31 @@
                     android:orientation="horizontal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.4">
+                    android:layout_weight="0.8">
                 <ImageView
                     android:contentDescription="@string/icon_app"
                     android:src="@drawable/ic_nearby"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"/>
-
                 <TextView
-                    android:id="@+id/detailtime"
+                    android:id="@+id/receiveby"
                     android:text="@string/sendto"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
+                    android:layout_marginLeft="5dp"/>
+
+                <TextView
+                    android:id="@+id/estimatetime"
+                    android:text="@string/near"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="14dp"
                     android:layout_marginLeft="5dp"/>
                 
                 </LinearLayout>
@@ -119,17 +124,26 @@
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.6">
-
+                    android:layout_weight="0.4">
                 <TextView
-                    android:id="@+id/estimatetime"
-                    android:text="@string/near"
+                    android:id="@+id/timetext"
+                    android:text="@string/time"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="14dp"
+                    android:layout_marginLeft="5dp"/>
+                <TextView
+                    android:id="@+id/detailtime"
+                    android:text="@string/test"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:layout_marginLeft="5dp"/>
                 
                 </RelativeLayout>

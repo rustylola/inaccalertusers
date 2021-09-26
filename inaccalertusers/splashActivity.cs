@@ -4,6 +4,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Firebase.Auth;
+using inaccalertusers.LocateUpdate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,16 +25,29 @@ namespace inaccalertusers
         protected override async void OnResume()
         {
             base.OnResume();
-            await SimulateStartup();
+
+            FirebaseUser currentUser = AppDataHelper.Getcurrentuser();
+            if (currentUser == null)
+            {
+                await SimulateStartup();
+            }
+            else
+            {
+                await SimulateMainActivity();
+            }
         }
 
         async Task SimulateStartup()
         {
             await Task.Delay(TimeSpan.FromSeconds(8));
-            
             StartActivity(typeof(getstartedActivity));
             OverridePendingTransition(Android.Resource.Animation.FadeIn, Android.Resource.Animation.FadeOut);
-
+        }
+        async Task SimulateMainActivity()
+        {
+            await Task.Delay(TimeSpan.FromSeconds(8));
+            StartActivity(typeof(MainActivity));
+            OverridePendingTransition(Android.Resource.Animation.FadeIn, Android.Resource.Animation.FadeOut);
         }
     }
 }

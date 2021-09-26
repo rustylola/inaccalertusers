@@ -25,6 +25,12 @@ namespace inaccalertusers.LocateUpdate
     {
         string mapkey;
         GoogleMap map;
+        //calculation
+        public double distance;
+        public double duration;
+        public string distanceString;
+        public string durationString;
+
         public MapFunctionUpdate(string key, GoogleMap mmap)
         {
             mapkey = key;
@@ -155,7 +161,13 @@ namespace inaccalertusers.LocateUpdate
             map.SetPadding(30,60,30,60);
             usermarker.ShowInfoWindow();
 
+            duration = directiondata.routes[0].legs[0].duration.value; // gives seconds/miliseconds
+            distance = directiondata.routes[0].legs[0].distance.value;
+            durationString = directiondata.routes[0].legs[0].duration.text; // gives minutes/hour
+            distanceString = directiondata.routes[0].legs[0].distance.text;
         }
+
+        
     }
 
 }

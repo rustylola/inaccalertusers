@@ -23,14 +23,12 @@ namespace inaccalertusers
             // Create your application here
             SetContentView(Resource.Layout.getstarted);
 
-         
             getstartbtn = (Button)FindViewById(Resource.Id.getstarted);
             getstartbtn.Click += Getstartbtn_Click;
         }
 
         private void Getstartbtn_Click(object sender, EventArgs e)
         {
-            
             StartActivity(new Intent(Application.Context, typeof(loginuser)));
             OverridePendingTransition(Android.Resource.Animation.SlideInLeft, Android.Resource.Animation.FadeOut);
         }

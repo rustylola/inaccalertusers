@@ -13,6 +13,7 @@ using Android.Support.Design.Widget;
 using Android.Gms.Tasks;
 using inaccalertusers.EventListener;
 using Java.Util;
+using inaccalertusers.LocateUpdate;
 
 namespace inaccalertusers
 {
@@ -31,8 +32,8 @@ namespace inaccalertusers
 
         CoordinatorLayout rootView;
 
-        FirebaseAuth mAuth;
-        FirebaseDatabase database;
+        FirebaseAuth mAuth = AppDataHelper.GetfirebaseAuth();
+        FirebaseDatabase database = AppDataHelper.Getdatabase();
 
         //Adding Eventlistener hadler
         TaskCompletionListener taskCompletionListener = new TaskCompletionListener();
@@ -49,8 +50,6 @@ namespace inaccalertusers
             // Create your application here
             SetContentView(Resource.Layout.registerActivity);
 
-            initializefirebase();
-            mAuth = FirebaseAuth.Instance;
             connectcontrol();
         }
 

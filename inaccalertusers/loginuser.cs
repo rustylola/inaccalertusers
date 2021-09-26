@@ -19,21 +19,23 @@ using Xamarin.Facebook;
 using Xamarin.Facebook.Login;
 using Xamarin.Facebook.Login.Widget;
 using Plugin.Connectivity;
+using inaccalertusers.LocateUpdate;
 
 namespace inaccalertusers
 {
     [Activity(Label = "@string/app_name", Theme = "@style/logintheme", MainLauncher = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class loginuser : AppCompatActivity, IFacebookCallback, IOnSuccessListener, IOnFailureListener
     {
-
+        //Define layouts
         EditText emailtext;
         EditText passwordtext;
         Button loginbtn;
         LoginButton loginfb;
         CoordinatorLayout rootview;
-        FirebaseAuth mAuth;
 
-        FirebaseAuth firebaseAuth;
+        //Initialize firebase
+        FirebaseAuth mAuth = AppDataHelper.GetfirebaseAuth();
+        
 
         TextView createtext;
         private bool usingFirebase;
@@ -49,25 +51,28 @@ namespace inaccalertusers
             
             LoginManager.Instance.LogOut();
 
+            //connect layouts
             emailtext = (EditText)FindViewById(Resource.Id.emailinput);
             passwordtext = (EditText)FindViewById(Resource.Id.passwordinput);
             loginbtn = (Button)FindViewById(Resource.Id.loginem);
             rootview = (CoordinatorLayout)FindViewById(Resource.Id.rootView);
+
+            //check internet
             checkinternet();
 
+            //click event
             createtext = (TextView)FindViewById(Resource.Id.createnew);
             createtext.Click += Createtext_Click;
-
             loginbtn.Click += Loginbtn_Click;
 
-            initializefirebase();
-
+            
+            //facebook initialization
             loginfb = (LoginButton)FindViewById(Resource.Id.loginfb);
             loginfb.SetReadPermissions(new List<string> { "public_profile", "email" });
             callbackManager = CallbackManagerFactory.Create();
             loginfb.RegisterCallback(callbackManager, this);
 
-            firebaseAuth = GetFirebaseAuth();
+            //firebaseAuth = GetFirebaseAuth();
         }
 
         void checkinternet()
@@ -85,53 +90,7 @@ namespace inaccalertusers
         }
 
         //initializing firebase connection
-        void initializefirebase()
-        {
-            var app = FirebaseApp.InitializeApp(this);
-
-            if (app == null)
-            {
-                var option = new FirebaseOptions.Builder()
-                    .SetApplicationId("inaccalert-database")
-                    .SetApiKey("AIzaSyCDcTY55MlwDzx2r_zAij1uGu0QOMzdzVQ")
-                    .SetDatabaseUrl("https://inaccalert-database-default-rtdb.firebaseio.com")
-                    .SetStorageBucket("inaccalert-database.appspot.com")
-                    .Build();
-
-                app = FirebaseApp.InitializeApp(this, option);
-                mAuth = FirebaseAuth.Instance;
-            }
-            else
-            {
-                mAuth = FirebaseAuth.Instance;
-            }
-
-        }
-
-        FirebaseAuth GetFirebaseAuth()
-        {
-            var app = FirebaseApp.InitializeApp(this);
-
-            if (app == null)
-            {
-                var option = new FirebaseOptions.Builder()
-                    .SetProjectId("inaccalert-database")
-                    .SetApplicationId("inaccalert-database")
-                    .SetApiKey("AIzaSyCDcTY55MlwDzx2r_zAij1uGu0QOMzdzVQ")
-                    .SetDatabaseUrl("https://inaccalert-database-default-rtdb.firebaseio.com")
-                    .SetStorageBucket("inaccalert-database.appspot.com")
-                    .Build();
-
-                app = FirebaseApp.InitializeApp(this, option);
-                mAuth = FirebaseAuth.Instance;
-            }
-            else
-            {
-                mAuth = FirebaseAuth.Instance;
-            }
-
-            return mAuth;
-        }
+        
 
         private void Loginbtn_Click(object sender, EventArgs e)
         {
@@ -206,7 +165,7 @@ namespace inaccalertusers
                 usingFirebase = true;
                 LoginResult loginResult = result as LoginResult;
                 var credentials = FacebookAuthProvider.GetCredential(loginResult.AccessToken.Token);
-                firebaseAuth.SignInWithCredential(credentials)
+                mAuth.SignInWithCredential(credentials)
                     .AddOnSuccessListener(this)
                     .AddOnFailureListener(this);
             }
@@ -215,9 +174,9 @@ namespace inaccalertusers
                 Toast.MakeText(this, "Login successful", ToastLength.Short).Show();
                 usingFirebase = false;
 
-                var name = firebaseAuth.CurrentUser.DisplayName;
-                var email = firebaseAuth.CurrentUser.Email;
-                var uid = firebaseAuth.CurrentUser.Uid;
+                var name = mAuth.CurrentUser.DisplayName;
+                var email = mAuth.CurrentUser.Email;
+                var uid = mAuth.CurrentUser.Uid;
 
                 Intent fbinformation = new Intent(this, typeof(userinfoinsertActivity));
 

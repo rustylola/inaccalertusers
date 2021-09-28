@@ -159,7 +159,10 @@ namespace inaccalertusers.LocateUpdate
 
             map.AnimateCamera(CameraUpdateFactory.NewLatLngBounds(bounds, 420));
             map.SetPadding(30,60,30,60);
+            
+            //show window marker
             usermarker.ShowInfoWindow();
+            volunteermarker.ShowInfoWindow();
 
             duration = directiondata.routes[0].legs[0].duration.value; // gives seconds/miliseconds
             distance = directiondata.routes[0].legs[0].distance.value;

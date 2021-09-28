@@ -33,9 +33,11 @@ namespace inaccalertusers.Fragments
         ImageView centermarker;
         BottomSheetBehavior requestdeailbottomsheet;
         RelativeLayout locatemebtn;
+
         //layout sheets
         TextView detaillocation;
         TextView timeEstimatelocation;
+        Button gonotifybtn;
 
         LocationRequest mylocationRequest;
         FusedLocationProviderClient locationclient;
@@ -55,10 +57,15 @@ namespace inaccalertusers.Fragments
 
         //flags
         bool circleMarkerFlags = true;
+
+        //Dialog Fragments 
+        requestfirsaider requestfirsaiderfragment;
+        Android.Support.V4.App.FragmentTransaction manager;
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            
         }
 
         //Fragment calling ID and Map Sync
@@ -66,8 +73,8 @@ namespace inaccalertusers.Fragments
         {
             // Use this to return your custom view for this Fragment
             View view = inflater.Inflate(Resource.Layout.notification, container, false);
-
             //btnsample = (Button)view.FindViewById(Resource.Id.btnsample);
+            
             //Layout Define and initalization
             centermarker = (ImageView)view.FindViewById(Resource.Id.centermarker);
             searchbar = (LinearLayout)view.FindViewById(Resource.Id.mylocationsearch);
@@ -78,6 +85,7 @@ namespace inaccalertusers.Fragments
             //Layout for sheets
             detaillocation = (TextView)view.FindViewById(Resource.Id.detaillocation);
             timeEstimatelocation = (TextView)view.FindViewById(Resource.Id.detailtime);
+            gonotifybtn = (Button)view.FindViewById(Resource.Id.gonotify);
             //BottomSheet Initialization
             requestdeailbottomsheet = BottomSheetBehavior.From(requestdetailsheets);
             //Map Fragmet Initialization
@@ -98,10 +106,22 @@ namespace inaccalertusers.Fragments
             searchbar.Click += Searchbar_Click;
             locatemebtn.Click += Locatemebtn_Click;
             notifybtn.Click += Notifybtn_Click;
+            gonotifybtn.Click += Gonotifybtn_Click;
+        }
+
+        //gonotify = send reqeuest
+        private void Gonotifybtn_Click(object sender, EventArgs e)
+        {
+            // it returns text current location and name of the user
+            requestfirsaiderfragment = new requestfirsaider(searchtext.Text, AppDataHelper.Getname());
+            requestfirsaiderfragment.Cancelable = false;
+            manager = FragmentManager.BeginTransaction();
+            requestfirsaiderfragment.Show(manager, "Request");
         }
 
         async void Notifybtn_Click(object sender, EventArgs e)
         {
+
             //notifybtn.Text = "Please Wait...";
             //notifybtn.Enabled = false;
 

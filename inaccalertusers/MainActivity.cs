@@ -22,6 +22,7 @@ namespace inaccalertusers
     [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.Light.NoActionBar", MainLauncher = false)]
     public class MainActivity : AppCompatActivity
     {
+        
         //firebase
         UserProfileEventListener userProfileEventListener = new UserProfileEventListener();
 
@@ -55,11 +56,13 @@ namespace inaccalertusers
             connectView();
             viewpager.SetCurrentItem(1, true);
             userProfileEventListener.Create();
+            
         }
 
         //Bottom navigation count and view pager
         void connectView()
         {
+            //initialize layouts
             bottomnavigationvar = (BottomNavigationView)FindViewById(Resource.Id.bottom_nav);
             viewpager = (ViewPager)FindViewById(Resource.Id.viewpager);
             //view pager limit note : 0 is included

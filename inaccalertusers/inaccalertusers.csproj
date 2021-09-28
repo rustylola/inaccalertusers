@@ -73,6 +73,7 @@
     <Compile Include="Fragments\historyFragment.cs" />
     <Compile Include="Fragments\notificationFragment.cs" />
     <Compile Include="Fragments\profileFragment.cs" />
+    <Compile Include="Fragments\requestfirsaider.cs" />
     <Compile Include="getstartedActivity.cs" />
     <Compile Include="LocateUpdate\AppDataHelper.cs" />
     <Compile Include="LocateUpdate\DirectionParser.cs" />
@@ -329,6 +330,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_nearby.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\request_volunteer.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

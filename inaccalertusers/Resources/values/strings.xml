@@ -41,11 +41,17 @@
     <string name="currentlocationstring">Current Location</string>
     <string name="mylocationicon">My Location</string>
     
+    <!--Notify details and request volunteer xml-->
     <string name="checkdetail">Request Details</string>
     <string name="sendto">Receiver :</string>
     <string name="near">Online Volunteers</string>
     <string name="sendrequest">Send Request</string>
     <string name="time">Estimate :</string>
     <string name="test">Test</string>
+    <string name="finding">Finding a nearby first-aider</string>
+    <string name="nameandlocation">Users Name and Location</string>
+    <string name="namelocation">Location :</string>
+    <string name="nameuser">Name :</string>
+    <string name="canceltext">Cancel</string>
     
 </resources>

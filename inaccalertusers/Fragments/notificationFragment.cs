@@ -14,6 +14,7 @@ using Android.Views;
 using Android.Widget;
 using Google.Places;
 using inaccalertusers.Datamodels;
+using inaccalertusers.EventListener;
 using inaccalertusers.LocateUpdate;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,8 @@ namespace inaccalertusers.Fragments
 {
     public class notificationFragment : Android.Support.V4.App.Fragment, IOnMapReadyCallback // call back for google map
     {
+        //firebase
+        CreateRequestEventListener requestListener;
         //Declare variable including google maps and Layouts
         public GoogleMap mainMap;
         TextView searchtext;
@@ -37,7 +40,6 @@ namespace inaccalertusers.Fragments
 
         //layout sheets
         TextView detaillocation;
-        TextView timeEstimatelocation;
         Button gonotifybtn;
 
         LocationRequest mylocationRequest;
@@ -90,7 +92,6 @@ namespace inaccalertusers.Fragments
             FrameLayout requestdetailsheets = (FrameLayout)view.FindViewById(Resource.Id.notifdetails_bottomsheets);
             //Layout for sheets
             detaillocation = (TextView)view.FindViewById(Resource.Id.detaillocation);
-            timeEstimatelocation = (TextView)view.FindViewById(Resource.Id.detailtime);
             gonotifybtn = (Button)view.FindViewById(Resource.Id.gonotify);
             //BottomSheet Initialization
             requestdeailbottomsheet = BottomSheetBehavior.From(requestdetailsheets);
@@ -123,45 +124,72 @@ namespace inaccalertusers.Fragments
             requestfirsaiderfragment.Cancelable = false;
             manager = FragmentManager.BeginTransaction();
             requestfirsaiderfragment.Show(manager, "Request");
+            //cancelrequest click event
+            requestfirsaiderfragment.CancelRequest += Requestfirsaiderfragment_CancelRequest;
             //Data fetch in request
+            //from user
             newdataRequestmodel = new NewRequestDetails();
             newdataRequestmodel.userLat = currentlocationLatlng.Latitude;
             newdataRequestmodel.userLng = currentlocationLatlng.Longitude;
             newdataRequestmodel.userAdrress = userAddressLocation;
-            newdataRequestmodel.Timestamp = DateTime.Now;
+            //from volunteer
+            //newdataRequestmodel.volunteerLat = 0;
+            //newdataRequestmodel.volunteerLng = 0;
+            //distance and duration
+            //newdataRequestmodel.distanceString = "waiting";
+            //newdataRequestmodel.distanceValue = 0;
+            //newdataRequestmodel.durationgString = "waiting";
+            //newdataRequestmodel.Timestamp = DateTime.Now;
+            requestListener = new CreateRequestEventListener(newdataRequestmodel);
+            requestListener.CreateRequest();
         }
 
-        async void Notifybtn_Click(object sender, EventArgs e)
+        //cancel event
+        private void Requestfirsaiderfragment_CancelRequest(object sender, EventArgs e)
+        {
+            //user cancel request before the volunteer accept
+            if (requestfirsaiderfragment != null && requestListener != null)
+            {
+                requestListener.CancelRequestdetails();
+                requestListener = null;
+                requestfirsaiderfragment.Dismiss();
+                requestfirsaiderfragment = null;
+            }
+        }
+
+        void Notifybtn_Click(object sender, EventArgs e)
         {
 
             //notifybtn.Text = "Please Wait...";
             //notifybtn.Enabled = false;
-
+            requestdeailbottomsheet.State = BottomSheetBehavior.StateExpanded;
+            RequestShow();
             //Remeber : this method must call if the volunteer already accept the request
             // then run this code
+            //jsonMapdirection();
+        }
+
+        async void jsonMapdirection()
+        {
             string json;
             json = await mapUpdate.GetDirectionJsonAsync(currentlocationLatlng, volunteerSampleLocation);
 
             if (!string.IsNullOrEmpty(json))
             {
                 mapUpdate.DrawOnMap(json);
-                requestdeailbottomsheet.State = BottomSheetBehavior.StateExpanded;
                 //test // Display views
-                RequestShow();
             }
-            
         }
 
         //Trip Draw Request
         void RequestShow()
         {
             circleMarkerFlags = false; // to remove circle marker every move the camera
+            DrawMark(mainMap); // inputting marker
             centermarker.Visibility = ViewStates.Invisible;
             searchbar.Enabled = false;
-
-            //Estimate time and show current location
+            //show current location
             detaillocation.Text = searchtext.Text;
-            timeEstimatelocation.Text = mapUpdate.durationString;
         }
 
         private void Locatemebtn_Click(object sender, EventArgs e)
@@ -332,5 +360,15 @@ namespace inaccalertusers.Fragments
                 .InvokeFillColor(Color.Argb(034, 209, 72, 54))); //Gmap Add Circle
         }
 
+        public void DrawMark(GoogleMap gMap)
+        {
+            MarkerOptions mymarker = new MarkerOptions();
+            mymarker.SetPosition(currentlocationLatlng);
+            mymarker.SetTitle("Accident Location"); // title of the marker
+            mymarker.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed));
+            Marker userpin = gMap.AddMarker(mymarker);
+            userpin.ShowInfoWindow();
+            //userpin.Remove();
+        }
     }
 }

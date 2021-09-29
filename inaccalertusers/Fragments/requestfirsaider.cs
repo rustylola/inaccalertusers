@@ -14,6 +14,8 @@ namespace inaccalertusers.Fragments
 {
     public class requestfirsaider : Android.Support.V4.App.DialogFragment
     {
+        //eventhandler
+        public event EventHandler CancelRequest;
         //define layout
         TextView nameuser;
         TextView locationuser;
@@ -38,9 +40,15 @@ namespace inaccalertusers.Fragments
             nameuser = (TextView)view.FindViewById(Resource.Id.nameofuser);
             locationuser = (TextView)view.FindViewById(Resource.Id.nameoflocation);
             cancelbtn = (Button)view.FindViewById(Resource.Id.cancelbutton);
+            cancelbtn.Click += Cancelbtn_Click;
             nameuser.Text = username;
             locationuser.Text = location;
             return view;
+        }
+
+        private void Cancelbtn_Click(object sender, EventArgs e)
+        {
+            CancelRequest?.Invoke(this, new EventArgs());
         }
 
         public requestfirsaider(string mylocation, string name)

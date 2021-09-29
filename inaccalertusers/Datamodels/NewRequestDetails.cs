@@ -19,7 +19,7 @@ namespace inaccalertusers.Datamodels
         public double volunteerLng { get; set; }
         public string userAdrress { get; set; }
         public string distanceString { get; set; }
-        public string distanceValue { get; set; }
+        public double distanceValue { get; set; }
         public string durationgString { get; set; }
         public double durationValue { get; set; }
         public DateTime Timestamp { get; set; }

@@ -49,7 +49,7 @@
     <string name="time">Estimate :</string>
     <string name="test">Test</string>
     <string name="finding">Finding a nearby first-aider</string>
-    <string name="nameandlocation">Users Name and Location</string>
+    <string name="sendrequestfrom">Send request from</string>
     <string name="namelocation">Location :</string>
     <string name="nameuser">Name :</string>
     <string name="canceltext">Cancel</string>

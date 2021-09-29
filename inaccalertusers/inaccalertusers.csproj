@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapter\ViewPagerAdapter.cs" />
+    <Compile Include="Datamodels\NewRequestDetails.cs" />
     <Compile Include="EventListener\TaskCompletionListener.cs" />
     <Compile Include="EventListener\UserProfileEventListener.cs" />
     <Compile Include="Fragments\historyFragment.cs" />
@@ -335,6 +336,9 @@
     <AndroidResource Include="Resources\layout\request_volunteer.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

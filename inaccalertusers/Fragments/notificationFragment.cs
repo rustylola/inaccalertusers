@@ -13,6 +13,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Google.Places;
+using inaccalertusers.Datamodels;
 using inaccalertusers.LocateUpdate;
 using System;
 using System.Collections.Generic;
@@ -52,8 +53,11 @@ namespace inaccalertusers.Fragments
 
         //helper
         MapFunctionUpdate mapUpdate;
+
+        //Location
         LatLng currentlocationLatlng;
         LatLng volunteerSampleLocation = new LatLng(14.6749, 120.9428);
+        string userAddressLocation;
 
         //flags
         bool circleMarkerFlags = true;
@@ -62,6 +66,8 @@ namespace inaccalertusers.Fragments
         requestfirsaider requestfirsaiderfragment;
         Android.Support.V4.App.FragmentTransaction manager;
 
+        //Datamodel
+        NewRequestDetails newdataRequestmodel;
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -117,6 +123,12 @@ namespace inaccalertusers.Fragments
             requestfirsaiderfragment.Cancelable = false;
             manager = FragmentManager.BeginTransaction();
             requestfirsaiderfragment.Show(manager, "Request");
+            //Data fetch in request
+            newdataRequestmodel = new NewRequestDetails();
+            newdataRequestmodel.userLat = currentlocationLatlng.Latitude;
+            newdataRequestmodel.userLng = currentlocationLatlng.Longitude;
+            newdataRequestmodel.userAdrress = userAddressLocation;
+            newdataRequestmodel.Timestamp = DateTime.Now;
         }
 
         async void Notifybtn_Click(object sender, EventArgs e)
@@ -255,7 +267,7 @@ namespace inaccalertusers.Fragments
                 if (mylastlocation != null)
                 {
                     LatLng myposition = new LatLng(mylastlocation.Latitude, mylastlocation.Longitude);
-                    currentlocationLatlng = myposition;// for request
+                    currentlocationLatlng = myposition; // for request
                     mainMap.MoveCamera(CameraUpdateFactory.NewLatLngZoom(myposition, 18)); //set the zoom 
                     notifybtn.Visibility = ViewStates.Visible;
                 }
@@ -295,6 +307,7 @@ namespace inaccalertusers.Fragments
                 {
                     var place = Autocomplete.GetPlaceFromIntent(data);
                     searchtext.Text = place.Name.ToString();
+                    userAddressLocation = place.Name.ToString();
                     currentlocationLatlng = place.LatLng; // for request
                     mainMap.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(place.LatLng, 18));
                     //notifybtn.Visibility = ViewStates.Visible;

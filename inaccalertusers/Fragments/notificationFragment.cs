@@ -27,6 +27,8 @@ namespace inaccalertusers.Fragments
     {
         //firebase
         CreateRequestEventListener requestListener;
+        FindvolunteerListener findvolunteerListener;
+
         //Declare variable including google maps and Layouts
         public GoogleMap mainMap;
         TextView searchtext;
@@ -132,6 +134,7 @@ namespace inaccalertusers.Fragments
             newdataRequestmodel.userLat = currentlocationLatlng.Latitude;
             newdataRequestmodel.userLng = currentlocationLatlng.Longitude;
             newdataRequestmodel.userAdrress = userAddressLocation;
+            newdataRequestmodel.Timestamp = DateTime.Now;
             //from volunteer
             //newdataRequestmodel.volunteerLat = 0;
             //newdataRequestmodel.volunteerLng = 0;
@@ -139,9 +142,36 @@ namespace inaccalertusers.Fragments
             //newdataRequestmodel.distanceString = "waiting";
             //newdataRequestmodel.distanceValue = 0;
             //newdataRequestmodel.durationgString = "waiting";
-            //newdataRequestmodel.Timestamp = DateTime.Now;
             requestListener = new CreateRequestEventListener(newdataRequestmodel);
             requestListener.CreateRequest();
+
+            findvolunteerListener = new FindvolunteerListener(currentlocationLatlng, newdataRequestmodel.UserID);
+            findvolunteerListener.VolunteersFound += FindvolunteerListener_VolunteersFound;
+            findvolunteerListener.VolunteernotFound += FindvolunteerListener_VolunteernotFound;
+            findvolunteerListener.Create();
+        }
+
+        //if no found near volunteer
+        private void FindvolunteerListener_VolunteernotFound(object sender, EventArgs e)
+        {
+            if (requestfirsaiderfragment !=null && requestListener != null)
+            {
+                requestListener.CancelRequestdetails();
+                requestListener = null;
+                requestfirsaiderfragment.Dismiss();
+                requestfirsaiderfragment = null;
+                //alert dialog to say no available volunteer nearby
+                Android.Support.V7.App.AlertDialog.Builder alert = new Android.Support.V7.App.AlertDialog.Builder(Activity);
+                alert.SetTitle("Volunteer Availability Message");
+                alert.SetMessage("No Available volunteer found, Try again later");
+                alert.Show();
+            }
+        }
+
+        // if there is an near volunteer
+        private void FindvolunteerListener_VolunteersFound(object sender, FindvolunteerListener.VolunteerFoundEventArgs e)
+        {
+            
         }
 
         //cancel event

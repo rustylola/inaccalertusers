@@ -49,7 +49,7 @@ namespace inaccalertusers.EventListener
 
             HashMap accidentDetail = new HashMap();
 
-            newRequest.UserID = newRequestRef.Key;
+            newRequest.UserID = newRequestRef.Key; //Accident Request ID
             accidentDetail.Put("userlocation", userlocation);
             accidentDetail.Put("volunteerlocation", volunteerlocation);
             accidentDetail.Put("userlocation_address", newRequest.userAdrress);

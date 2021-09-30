@@ -68,8 +68,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapter\ViewPagerAdapter.cs" />
+    <Compile Include="Datamodels\AvailableVolunteer.cs" />
     <Compile Include="Datamodels\NewRequestDetails.cs" />
     <Compile Include="EventListener\CreateRequestEventListener.cs" />
+    <Compile Include="EventListener\FindvolunteerListener.cs" />
     <Compile Include="EventListener\TaskCompletionListener.cs" />
     <Compile Include="EventListener\UserProfileEventListener.cs" />
     <Compile Include="Fragments\historyFragment.cs" />

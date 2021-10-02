@@ -5781,32 +5781,29 @@ namespace inaccalertusers
 			// aapt resource value: 0x7F08013B
 			public const int usericon = 2131231035;
 			
+			// aapt resource value: 0x7F08013D
+			public const int viewpager = 2131231037;
+			
 			// aapt resource value: 0x7F08013C
-			public const int view1 = 2131231036;
+			public const int view_offset_helper = 2131231036;
 			
 			// aapt resource value: 0x7F08013E
-			public const int viewpager = 2131231038;
-			
-			// aapt resource value: 0x7F08013D
-			public const int view_offset_helper = 2131231037;
+			public const int visible = 2131231038;
 			
 			// aapt resource value: 0x7F08013F
-			public const int visible = 2131231039;
+			public const int webview = 2131231039;
 			
 			// aapt resource value: 0x7F080140
-			public const int webview = 2131231040;
+			public const int wide = 2131231040;
 			
 			// aapt resource value: 0x7F080141
-			public const int wide = 2131231041;
+			public const int window = 2131231041;
 			
 			// aapt resource value: 0x7F080142
-			public const int window = 2131231042;
+			public const int withText = 2131231042;
 			
 			// aapt resource value: 0x7F080143
-			public const int withText = 2131231043;
-			
-			// aapt resource value: 0x7F080144
-			public const int wrap_content = 2131231044;
+			public const int wrap_content = 2131231043;
 			
 			static Id()
 			{

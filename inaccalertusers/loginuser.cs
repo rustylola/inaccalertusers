@@ -125,7 +125,7 @@ namespace inaccalertusers
 
         private void TaskCompletionListener_Failure(object sender, EventArgs e)
         {
-            Snackbar.Make(rootview, "Login Failed", Snackbar.LengthShort).Show();
+            Snackbar.Make(rootview, "Login Failed, Check your Email and Password.", Snackbar.LengthShort).Show();
             return;
         }
 

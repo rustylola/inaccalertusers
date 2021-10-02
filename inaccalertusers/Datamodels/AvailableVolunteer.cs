@@ -15,5 +15,7 @@ namespace inaccalertusers.Datamodels
     {
         public string ID { get; set; }
         public double DistanceFromUsers { get; set; }
+        public double volunteerlat { get; set; }
+        public double volunteerlng { get; set; }
     }
 }

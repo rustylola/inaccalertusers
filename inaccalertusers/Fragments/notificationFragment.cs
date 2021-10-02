@@ -68,7 +68,7 @@ namespace inaccalertusers.Fragments
 
         //Dialog Fragments 
         requestfirsaider requestfirsaiderfragment;
-        Android.Support.V4.App.FragmentTransaction manager;
+        Android.Support.V4.App.FragmentTransaction manager; // Transaction
 
         //Datamodel
         NewRequestDetails newdataRequestmodel;
@@ -143,12 +143,32 @@ namespace inaccalertusers.Fragments
             //newdataRequestmodel.distanceValue = 0;
             //newdataRequestmodel.durationgString = "waiting";
             requestListener = new CreateRequestEventListener(newdataRequestmodel);
+            requestListener.NoVolunteerAcceptRequest += RequestListener_NoVolunteerAcceptRequest;
             requestListener.CreateRequest();
 
             findvolunteerListener = new FindvolunteerListener(currentlocationLatlng, newdataRequestmodel.UserID);
             findvolunteerListener.VolunteersFound += FindvolunteerListener_VolunteersFound;
             findvolunteerListener.VolunteernotFound += FindvolunteerListener_VolunteernotFound;
             findvolunteerListener.Create();
+        }
+
+        //if no one accept request
+        private void RequestListener_NoVolunteerAcceptRequest(object sender, EventArgs e)
+        {
+            Activity.RunOnUiThread(() => {
+                if (requestfirsaiderfragment != null && requestListener != null)
+                {
+                    requestListener.CancelRequestonTimeoutdetails();
+                    requestListener = null;
+                    requestfirsaiderfragment.Dismiss();
+                    requestfirsaiderfragment = null;
+                    //alert dialog to say no available volunteer nearby
+                    Android.Support.V7.App.AlertDialog.Builder alert = new Android.Support.V7.App.AlertDialog.Builder(Activity);
+                    alert.SetTitle("Volunteer Availability Message");
+                    alert.SetMessage("Available Volunteers Couldn't accept your request, Try again later");
+                    alert.Show();
+                }
+            });
         }
 
         //if no found near volunteer
@@ -171,7 +191,10 @@ namespace inaccalertusers.Fragments
         // if there is an near volunteer
         private void FindvolunteerListener_VolunteersFound(object sender, FindvolunteerListener.VolunteerFoundEventArgs e)
         {
-            
+            if (requestListener != null)
+            {
+                requestListener.NotifyVolunteer(e.Volunteers);
+            }
         }
 
         //cancel event
@@ -276,6 +299,7 @@ namespace inaccalertusers.Fragments
                 {
                     currentlocationLatlng = mainMap.CameraPosition.Target; // NOTE : able to // for request
                     searchtext.Text = await mapUpdate.FindcoordinateAddress(currentlocationLatlng);
+                    userAddressLocation = searchtext.Text;
                     DrawCircle(mainMap);
                 }
                 else
@@ -283,6 +307,7 @@ namespace inaccalertusers.Fragments
                     circle.Remove();
                     currentlocationLatlng = mainMap.CameraPosition.Target; // NOTE : able to // for request
                     searchtext.Text = await mapUpdate.FindcoordinateAddress(currentlocationLatlng);
+                    userAddressLocation = searchtext.Text;
                     DrawCircle(mainMap);
                 }
             }

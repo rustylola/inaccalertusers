@@ -53,14 +53,17 @@ namespace inaccalertusers.EventListener
                 availableVolunteers.Clear();
                 foreach (DataSnapshot data in child)
                 {
-                    if (data.Child("volunteer_id").Value != null)
+                    if (data.Child("accident_id").Value != null)
                     {
-                        if (data.Child("volunteer_id").Value.ToString() == "waiting")
+                        if (data.Child("accident_id").Value.ToString() == "waiting") // waiting, cancelled, and timeout
                         {
                             double latitude = double.Parse(data.Child("location").Child("latitude").Value.ToString());
                             double longitude = double.Parse(data.Child("location").Child("longitude").Value.ToString());
                             LatLng volunteerlocation = new LatLng(latitude, longitude);
                             AvailableVolunteer volunteer = new AvailableVolunteer();
+                            //get set volunteer lat and lng
+                            volunteer.volunteerlat = latitude;
+                            volunteer.volunteerlng = longitude;
                             volunteer.DistanceFromUsers = SphericalUtil.ComputeDistanceBetween(myCurrentlocation, volunteerlocation);
                             // this show the distance from user and volunteer
                             volunteer.ID = data.Key; // get parent key

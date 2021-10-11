@@ -88,10 +88,11 @@
             android:paddingLeft="60dp"
             android:elevation="2dp"
             android:paddingRight="50dp"
-            android:visibility="visible"/>
+            android:visibility="invisible"/>
 
     </FrameLayout>
 
     <include layout="@layout/notifdetails"/>
+    <include layout="@layout/volunteerinfo"/>
 
 </android.support.design.widget.CoordinatorLayout>

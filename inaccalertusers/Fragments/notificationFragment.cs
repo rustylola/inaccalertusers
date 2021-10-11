@@ -38,11 +38,16 @@ namespace inaccalertusers.Fragments
         //layout
         ImageView centermarker;
         BottomSheetBehavior requestdeailbottomsheet;
+        BottomSheetBehavior volunteerinfobehavior;
         RelativeLayout locatemebtn;
 
         //layout sheets
         TextView detaillocation;
         Button gonotifybtn;
+        //layout sheets
+        TextView volunteername;
+        TextView distanceEstimate;
+        RelativeLayout callintent;
 
         LocationRequest mylocationRequest;
         FusedLocationProviderClient locationclient;
@@ -60,7 +65,6 @@ namespace inaccalertusers.Fragments
 
         //Location
         LatLng currentlocationLatlng;
-        LatLng volunteerSampleLocation = new LatLng(14.6749, 120.9428);
         string userAddressLocation;
 
         //flags
@@ -72,6 +76,9 @@ namespace inaccalertusers.Fragments
 
         //Datamodel
         NewRequestDetails newdataRequestmodel;
+
+        //marker
+        Marker userpin;
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -92,13 +99,24 @@ namespace inaccalertusers.Fragments
             notifybtn = (Button)view.FindViewById(Resource.Id.sendnotification);
             locatemebtn = (RelativeLayout)view.FindViewById(Resource.Id.mylocationbtn);
             FrameLayout requestdetailsheets = (FrameLayout)view.FindViewById(Resource.Id.notifdetails_bottomsheets);
+            FrameLayout volunteerinformationsheets = (FrameLayout)view.FindViewById(Resource.Id.volunteer_details);
+
             //Layout for sheets
             detaillocation = (TextView)view.FindViewById(Resource.Id.detaillocation);
             gonotifybtn = (Button)view.FindViewById(Resource.Id.gonotify);
+
+            //layout for other sheets //////////////
+            volunteername = (TextView)view.FindViewById(Resource.Id.volunteername);
+            distanceEstimate = (TextView)view.FindViewById(Resource.Id.volunteerdistance);
+            callintent = (RelativeLayout)view.FindViewById(Resource.Id.calluserbtn);
+
             //BottomSheet Initialization
             requestdeailbottomsheet = BottomSheetBehavior.From(requestdetailsheets);
+            volunteerinfobehavior = BottomSheetBehavior.From(volunteerinformationsheets);
+
             //Map Fragmet Initialization
             SupportMapFragment mapFragment = (SupportMapFragment)ChildFragmentManager.FindFragmentById(Resource.Id.map);
+
             //Method Initialization
             initializeplaces();
             mapFragment.GetMapAsync(this);
@@ -107,6 +125,22 @@ namespace inaccalertusers.Fragments
             getmyCurrentLocation();
             locationUpdate();
             return view;
+        }
+
+        private void RequestListener_AcceptedRequestVolunteer(object sender, CreateRequestEventListener.VolunteerAcceptEventArgs e)
+        {
+            if (requestfirsaiderfragment != null)
+            {
+                requestfirsaiderfragment.Dismiss();
+                requestfirsaiderfragment = null;
+            }
+
+            volunteername.Text = e.acceptedVolunteer.volunteerName;
+
+            requestdeailbottomsheet.State = BottomSheetBehavior.StateHidden;
+            volunteerinfobehavior.State = BottomSheetBehavior.StateExpanded;
+
+            jsonMapdirection(double.Parse(e.acceptedVolunteer.volunteerLat),double.Parse(e.acceptedVolunteer.volunteerLng));
         }
 
         //Click event method
@@ -144,6 +178,7 @@ namespace inaccalertusers.Fragments
             //newdataRequestmodel.durationgString = "waiting";
             requestListener = new CreateRequestEventListener(newdataRequestmodel);
             requestListener.NoVolunteerAcceptRequest += RequestListener_NoVolunteerAcceptRequest;
+            requestListener.AcceptedRequestVolunteer += RequestListener_AcceptedRequestVolunteer; // event handler
             requestListener.CreateRequest();
 
             findvolunteerListener = new FindvolunteerListener(currentlocationLatlng, newdataRequestmodel.UserID);
@@ -222,14 +257,18 @@ namespace inaccalertusers.Fragments
             //jsonMapdirection();
         }
 
-        async void jsonMapdirection()
+        async void jsonMapdirection(double lat, double lng)
         {
+            LatLng volunteerSampleLocation = new LatLng(lat, lng);
             string json;
             json = await mapUpdate.GetDirectionJsonAsync(currentlocationLatlng, volunteerSampleLocation);
 
             if (!string.IsNullOrEmpty(json))
             {
+                userpin.Remove();
                 mapUpdate.DrawOnMap(json);
+                distanceEstimate.Text = mapUpdate.distanceString;
+
                 //test // Display views
             }
         }
@@ -412,7 +451,7 @@ namespace inaccalertusers.Fragments
                 .InvokeRadius(100)
                 .InvokeStrokeWidth(4)
                 .InvokeStrokeColor(Android.Graphics.Color.ParseColor("#e6d9534f"))
-                .InvokeFillColor(Color.Argb(034, 209, 72, 54))); //Gmap Add Circle
+                .InvokeFillColor(Color.Argb(020, 209, 72, 54))); //Gmap Add Circle
         }
 
         public void DrawMark(GoogleMap gMap)
@@ -421,7 +460,7 @@ namespace inaccalertusers.Fragments
             mymarker.SetPosition(currentlocationLatlng);
             mymarker.SetTitle("Accident Location"); // title of the marker
             mymarker.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed));
-            Marker userpin = gMap.AddMarker(mymarker);
+            userpin = gMap.AddMarker(mymarker);
             userpin.ShowInfoWindow();
             //userpin.Remove();
         }

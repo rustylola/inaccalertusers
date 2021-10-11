@@ -53,5 +53,8 @@
     <string name="namelocation">Location :</string>
     <string name="nameuser">Name :</string>
     <string name="canceltext">Cancel</string>
+    <string name="distanceloc">Distance :</string>
+    
+    <string name="volunteerinfo">Volunteer Information</string>
     
 </resources>

@@ -30,6 +30,12 @@ namespace inaccalertusers.EventListener
         int TimeCounter = 0;
         bool isVolunteerAccepted;
         //Event
+        public class VolunteerAcceptEventArgs : EventArgs
+        {
+            public AcceptedVolunteer acceptedVolunteer { get; set; }
+        }
+        public event EventHandler<VolunteerAcceptEventArgs> AcceptedRequestVolunteer;
+
         public event EventHandler NoVolunteerAcceptRequest;
 
         public void OnCancelled(DatabaseError error)
@@ -39,7 +45,24 @@ namespace inaccalertusers.EventListener
 
         public void OnDataChange(DataSnapshot snapshot)
         {
-            
+            if (snapshot.Value != null)
+            {
+                if (snapshot.Child("volunteerID").Value.ToString() != "waiting")
+                {
+                    if (!isVolunteerAccepted)
+                    {
+                        AcceptedVolunteer acceptedVolunteer = new AcceptedVolunteer();
+                        acceptedVolunteer.volunteerID = snapshot.Child("volunteerID").Value.ToString();
+                        acceptedVolunteer.volunteerName = snapshot.Child("volunteer_name").Value.ToString();
+                        acceptedVolunteer.volunteerPhone = snapshot.Child("volunteer_phone").Value.ToString();
+                        acceptedVolunteer.volunteerLat = snapshot.Child("volunteerlocation").Child("latitude").Value.ToString();
+                        acceptedVolunteer.volunteerLng = snapshot.Child("volunteerlocation").Child("longitude").Value.ToString();
+
+                        isVolunteerAccepted = true;
+                        AcceptedRequestVolunteer?.Invoke(this, new VolunteerAcceptEventArgs { acceptedVolunteer = acceptedVolunteer });
+                    }
+                }
+            }
         }
 
         public CreateRequestEventListener(NewRequestDetails myNewRequestDetail)

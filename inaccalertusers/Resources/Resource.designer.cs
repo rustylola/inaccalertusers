@@ -6289,70 +6289,73 @@ namespace inaccalertusers
 		{
 			
 			// aapt resource value: 0x7F0E0000
-			public const int amu_ballon_gx_prefix = 2131623936;
+			public const int AccidentAlert = 2131623936;
 			
 			// aapt resource value: 0x7F0E0001
-			public const int amu_basic_folder = 2131623937;
+			public const int amu_ballon_gx_prefix = 2131623937;
 			
 			// aapt resource value: 0x7F0E0002
-			public const int amu_basic_placemark = 2131623938;
+			public const int amu_basic_folder = 2131623938;
 			
 			// aapt resource value: 0x7F0E0003
-			public const int amu_cdata = 2131623939;
+			public const int amu_basic_placemark = 2131623939;
 			
 			// aapt resource value: 0x7F0E0004
-			public const int amu_default_balloon = 2131623940;
+			public const int amu_cdata = 2131623940;
 			
 			// aapt resource value: 0x7F0E0005
-			public const int amu_document_nest = 2131623941;
+			public const int amu_default_balloon = 2131623941;
 			
 			// aapt resource value: 0x7F0E0006
-			public const int amu_draw_order_ground_overlay = 2131623942;
+			public const int amu_document_nest = 2131623942;
 			
 			// aapt resource value: 0x7F0E0007
-			public const int amu_extended_data = 2131623943;
+			public const int amu_draw_order_ground_overlay = 2131623943;
 			
 			// aapt resource value: 0x7F0E0008
-			public const int amu_ground_overlay = 2131623944;
+			public const int amu_extended_data = 2131623944;
 			
 			// aapt resource value: 0x7F0E0009
-			public const int amu_ground_overlay_color = 2131623945;
+			public const int amu_ground_overlay = 2131623945;
 			
 			// aapt resource value: 0x7F0E000A
-			public const int amu_inline_style = 2131623946;
+			public const int amu_ground_overlay_color = 2131623946;
 			
 			// aapt resource value: 0x7F0E000B
-			public const int amu_multigeometry_placemarks = 2131623947;
+			public const int amu_inline_style = 2131623947;
 			
 			// aapt resource value: 0x7F0E000C
-			public const int amu_multiple_placemarks = 2131623948;
+			public const int amu_multigeometry_placemarks = 2131623948;
 			
 			// aapt resource value: 0x7F0E000D
-			public const int amu_nested_folders = 2131623949;
+			public const int amu_multiple_placemarks = 2131623949;
 			
 			// aapt resource value: 0x7F0E000E
-			public const int amu_nested_multigeometry = 2131623950;
+			public const int amu_nested_folders = 2131623950;
 			
 			// aapt resource value: 0x7F0E000F
-			public const int amu_poly_style_boolean_alpha = 2131623951;
+			public const int amu_nested_multigeometry = 2131623951;
 			
 			// aapt resource value: 0x7F0E0010
-			public const int amu_poly_style_boolean_numeric = 2131623952;
+			public const int amu_poly_style_boolean_alpha = 2131623952;
 			
 			// aapt resource value: 0x7F0E0011
-			public const int amu_unknwown_folder = 2131623953;
+			public const int amu_poly_style_boolean_numeric = 2131623953;
 			
 			// aapt resource value: 0x7F0E0012
-			public const int amu_unsupported = 2131623954;
+			public const int amu_unknwown_folder = 2131623954;
 			
 			// aapt resource value: 0x7F0E0013
-			public const int amu_visibility_ground_overlay = 2131623955;
+			public const int amu_unsupported = 2131623955;
 			
 			// aapt resource value: 0x7F0E0014
-			public const int mymapstyle = 2131623956;
+			public const int amu_visibility_ground_overlay = 2131623956;
 			
 			// aapt resource value: 0x7F0E0015
-			public const int places_keep = 2131623957;
+			public const int mymapstyle = 2131623957;
+			
+			// aapt resource value: 0x7F0E0016
+			public const int places_keep = 2131623958;
 			
 			static Raw()
 			{

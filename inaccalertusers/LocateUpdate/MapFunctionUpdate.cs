@@ -189,13 +189,19 @@ namespace inaccalertusers.LocateUpdate
                 isrequestDirection = true;
                 string json = await GetDirectionJsonAsync(firstpoint, lastpoint);
                 var directionData = JsonConvert.DeserializeObject<DirectionParser>(json);
-                string duration = directionData.routes[0].legs[0].duration.text;
-                string distance = directionData.routes[0].legs[0].distance.text;
+                durationString = directionData.routes[0].legs[0].duration.text;
+                distanceString = directionData.routes[0].legs[0].distance.text;
                 VolunteerMarkers.Title = "Volunteer First-aid Location";
-                VolunteerMarkers.Snippet = duration + " / " + distance + " Away";
+                VolunteerMarkers.Snippet = durationString + " / " + distanceString + " Away";
                 VolunteerMarkers.ShowInfoWindow();
                 isrequestDirection = false;
             }
+        }
+        public void UpdateArrive()
+        {
+            VolunteerMarkers.Title = "Volunteer First-aid Location";
+            VolunteerMarkers.Snippet = "Volunteer was Arrive.";
+            VolunteerMarkers.ShowInfoWindow();
         }
 
         

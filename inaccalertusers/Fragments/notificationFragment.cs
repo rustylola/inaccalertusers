@@ -5,6 +5,7 @@ using Android.Gms.Location;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.Graphics;
+using Android.Media;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
@@ -195,12 +196,19 @@ namespace inaccalertusers.Fragments
                 try
                 {
                     mapUpdate.UpdateVolunteerLocation(currentlocationLatlng, e.VolunteerLocation);
+                    distanceEstimate.Text = mapUpdate.distanceString + " / " + mapUpdate.durationString;
                 }
                 catch
                 {
                     Console.WriteLine("Can't perform");
                 }
                 
+            }else if (e.Status == "arrive")
+            {
+                mapUpdate.UpdateArrive();
+                distanceEstimate.Text = "Volunteer Arriving";
+                MediaPlayer player = MediaPlayer.Create(Activity, Resource.Raw.AccidentAlert);
+                player.Start();
             }
         }
 

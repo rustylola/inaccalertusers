@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Gms.Maps.Model;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -30,6 +31,11 @@ namespace inaccalertusers.EventListener
         int TimeCounter = 0;
         bool isVolunteerAccepted;
         //Event
+        public class VolunteerLocationUpdateEventArgs : EventArgs
+        {
+            public LatLng VolunteerLocation { get; set; }
+            public string Status { get; set; }
+        }
         public class VolunteerAcceptEventArgs : EventArgs
         {
             public AcceptedVolunteer acceptedVolunteer { get; set; }
@@ -37,6 +43,7 @@ namespace inaccalertusers.EventListener
         public event EventHandler<VolunteerAcceptEventArgs> AcceptedRequestVolunteer;
 
         public event EventHandler NoVolunteerAcceptRequest;
+        public event EventHandler<VolunteerLocationUpdateEventArgs> VolunteerUpdate;
 
         public void OnCancelled(DatabaseError error)
         {
@@ -49,17 +56,32 @@ namespace inaccalertusers.EventListener
             {
                 if (snapshot.Child("volunteerID").Value.ToString() != "waiting")
                 {
+                    string status = "";
                     if (!isVolunteerAccepted)
                     {
                         AcceptedVolunteer acceptedVolunteer = new AcceptedVolunteer();
                         acceptedVolunteer.volunteerID = snapshot.Child("volunteerID").Value.ToString();
                         acceptedVolunteer.volunteerName = snapshot.Child("volunteer_name").Value.ToString();
                         acceptedVolunteer.volunteerPhone = snapshot.Child("volunteer_phone").Value.ToString();
-                        acceptedVolunteer.volunteerLat = snapshot.Child("volunteerlocation").Child("latitude").Value.ToString();
-                        acceptedVolunteer.volunteerLng = snapshot.Child("volunteerlocation").Child("longitude").Value.ToString();
+                        //Change it, if the given location doesnt match
+                        acceptedVolunteer.volunteerLat = snapshot.Child("volunteerlocation").Child("latitude").Value.ToString(); //here
+                        acceptedVolunteer.volunteerLng = snapshot.Child("volunteerlocation").Child("longitude").Value.ToString(); //here
 
                         isVolunteerAccepted = true;
                         AcceptedRequestVolunteer?.Invoke(this, new VolunteerAcceptEventArgs { acceptedVolunteer = acceptedVolunteer });
+                    }
+
+                    if (snapshot.Child("status").Value != null)
+                    {
+                        status = snapshot.Child("status").Value.ToString();
+                    }
+                    //Get volunteer Location update
+                    if (isVolunteerAccepted)
+                    {
+                        double volunteerLatitude = double.Parse(snapshot.Child("volunteerlocation").Child("latitude").Value.ToString());
+                        double volunteerLongitude = double.Parse(snapshot.Child("volunteerlocation").Child("longitude").Value.ToString());
+                        LatLng volunteerLocLatLng = new LatLng(volunteerLatitude, volunteerLongitude);
+                        VolunteerUpdate?.Invoke(this, new VolunteerLocationUpdateEventArgs { VolunteerLocation = volunteerLocLatLng, Status = status});
                     }
                 }
             }

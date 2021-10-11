@@ -139,6 +139,7 @@ namespace inaccalertusers.Fragments
 
             requestdeailbottomsheet.State = BottomSheetBehavior.StateHidden;
             volunteerinfobehavior.State = BottomSheetBehavior.StateExpanded;
+            notifybtn.Visibility = ViewStates.Invisible;
 
             jsonMapdirection(double.Parse(e.acceptedVolunteer.volunteerLat),double.Parse(e.acceptedVolunteer.volunteerLng));
         }
@@ -185,6 +186,22 @@ namespace inaccalertusers.Fragments
             findvolunteerListener.VolunteersFound += FindvolunteerListener_VolunteersFound;
             findvolunteerListener.VolunteernotFound += FindvolunteerListener_VolunteernotFound;
             findvolunteerListener.Create();
+        }
+
+        private void RequestListener_VolunteerUpdate(object sender, CreateRequestEventListener.VolunteerLocationUpdateEventArgs e)
+        {
+            if (e.Status == "accept")
+            {
+                try
+                {
+                    mapUpdate.UpdateVolunteerLocation(currentlocationLatlng, e.VolunteerLocation);
+                }
+                catch
+                {
+                    Console.WriteLine("Can't perform");
+                }
+                
+            }
         }
 
         //if no one accept request
@@ -267,8 +284,8 @@ namespace inaccalertusers.Fragments
             {
                 userpin.Remove();
                 mapUpdate.DrawOnMap(json);
-                distanceEstimate.Text = mapUpdate.distanceString;
-
+                distanceEstimate.Text = mapUpdate.distanceString + " / " + mapUpdate.durationString;
+                requestListener.VolunteerUpdate += RequestListener_VolunteerUpdate;
                 //test // Display views
             }
         }

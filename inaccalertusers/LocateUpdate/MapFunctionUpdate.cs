@@ -26,10 +26,12 @@ namespace inaccalertusers.LocateUpdate
         string mapkey;
         GoogleMap map;
         //calculation
+        bool isrequestDirection;
         public double distance;
         public double duration;
         public string distanceString;
         public string durationString;
+        Marker VolunteerMarkers;
 
         public MapFunctionUpdate(string key, GoogleMap mmap)
         {
@@ -147,6 +149,14 @@ namespace inaccalertusers.LocateUpdate
             Marker usermarker = map.AddMarker(userlocationOption);
             Marker volunteermarker = map.AddMarker(volunteerlocationOption);
 
+            MarkerOptions VolunteerMarkerOptions = new MarkerOptions();
+            VolunteerMarkerOptions.SetPosition(lastpoint);
+            VolunteerMarkerOptions.SetTitle("Volunteer First-aid Location");
+            VolunteerMarkerOptions.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.ic_volunteeric));
+            VolunteerMarkerOptions.Visible(false);
+
+            VolunteerMarkers = map.AddMarker(VolunteerMarkerOptions);
+
             //Get Accident Bounds
             double southlng = directiondata.routes[0].bounds.southwest.lng;
             double southlat = directiondata.routes[0].bounds.southwest.lat;
@@ -168,6 +178,24 @@ namespace inaccalertusers.LocateUpdate
             distance = directiondata.routes[0].legs[0].distance.value;
             durationString = directiondata.routes[0].legs[0].duration.text; // gives minutes/hour
             distanceString = directiondata.routes[0].legs[0].distance.text;
+        }
+
+        public async void UpdateVolunteerLocation(LatLng firstpoint, LatLng lastpoint)
+        {
+            VolunteerMarkers.Visible = true;
+            VolunteerMarkers.Position = lastpoint;
+            if (!isrequestDirection)
+            {
+                isrequestDirection = true;
+                string json = await GetDirectionJsonAsync(firstpoint, lastpoint);
+                var directionData = JsonConvert.DeserializeObject<DirectionParser>(json);
+                string duration = directionData.routes[0].legs[0].duration.text;
+                string distance = directionData.routes[0].legs[0].distance.text;
+                VolunteerMarkers.Title = "Volunteer First-aid Location";
+                VolunteerMarkers.Snippet = duration + " / " + distance + " Away";
+                VolunteerMarkers.ShowInfoWindow();
+                isrequestDirection = false;
+            }
         }
 
         

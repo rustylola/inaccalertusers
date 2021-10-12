@@ -87,7 +87,7 @@ namespace inaccalertusers.LocateUpdate
             string str_destination = "destination=" + volunteerlocation.Latitude + "," + volunteerlocation.Longitude;
 
             //mode
-            string mode = "mode=driving";
+            string mode = "mode=walking";
 
             //Building Parameters for url webservice
             string parameters = str_orig + "&" + str_destination + "&" + mode + "&";

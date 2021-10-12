@@ -56,5 +56,11 @@
     <string name="distanceloc">Distance :</string>
     
     <string name="volunteerinfo">Volunteer Information</string>
+
+  <string name="nameofuser">My Name</string>
+  <string name="nameofvolunteer">Name of first-aider</string>
+  <string name="addressofaccident">Accident Address</string>
+  <string name="accidentinfolist">Accident Information</string>
+  <string name="success">Done</string>
     
 </resources>

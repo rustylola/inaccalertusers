@@ -67,6 +67,8 @@ namespace inaccalertusers.Fragments
         //Location
         LatLng currentlocationLatlng;
         string userAddressLocation;
+        string volunteerNameaccept;
+        string volunteerPhoneaccept;
 
         //flags
         bool circleMarkerFlags = true;
@@ -135,7 +137,8 @@ namespace inaccalertusers.Fragments
                 requestfirsaiderfragment.Dismiss();
                 requestfirsaiderfragment = null;
             }
-
+            volunteerPhoneaccept = e.acceptedVolunteer.volunteerPhone;
+            volunteerNameaccept = e.acceptedVolunteer.volunteerName;
             volunteername.Text = e.acceptedVolunteer.volunteerName;
 
             requestdeailbottomsheet.State = BottomSheetBehavior.StateHidden;
@@ -152,6 +155,14 @@ namespace inaccalertusers.Fragments
             locatemebtn.Click += Locatemebtn_Click;
             notifybtn.Click += Notifybtn_Click;
             gonotifybtn.Click += Gonotifybtn_Click;
+            callintent.Click += Callintent_Click;
+        }
+        //call volunteer
+        private void Callintent_Click(object sender, EventArgs e)
+        {
+            var uri = Android.Net.Uri.Parse("tel:" + volunteerPhoneaccept);
+            Intent intent = new Intent(Intent.ActionDial, uri);
+            StartActivity(intent);
         }
 
         //gonotify = send reqeuest
@@ -203,12 +214,27 @@ namespace inaccalertusers.Fragments
                     Console.WriteLine("Can't perform");
                 }
                 
-            }else if (e.Status == "arrive")
+            }
+            else if(e.Status == "arrive")
             {
                 mapUpdate.UpdateArrive();
                 distanceEstimate.Text = "Volunteer Arriving";
                 MediaPlayer player = MediaPlayer.Create(Activity, Resource.Raw.AccidentAlert);
                 player.Start();
+            }
+            else if(e.Status == "ended")
+            {
+                string accidentlocationaddress = searchtext.Text;
+                RequestEndFragment requestEnd = new RequestEndFragment(AppDataHelper.Getname(), volunteerNameaccept,accidentlocationaddress);
+                requestEnd.Cancelable = false;
+                manager = FragmentManager.BeginTransaction();
+                requestEnd.Show(manager,"end request");
+                requestEnd.AccidentCompleted += (i, o) =>
+                {
+                    requestEnd.Dismiss();
+                    Toast.MakeText(Activity, "Report Uploaded.", ToastLength.Long).Show();
+                };
+                // Reset the app
             }
         }
 
@@ -489,5 +515,7 @@ namespace inaccalertusers.Fragments
             userpin.ShowInfoWindow();
             //userpin.Remove();
         }
+
+
     }
 }

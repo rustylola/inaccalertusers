@@ -47,5 +47,10 @@ namespace inaccalertusers.EventListener
             DatabaseReference userReference = database.GetReference("users/" + userID);
             userReference.AddValueEventListener(this);
         }
+        public void Logout()
+        {
+            editor = preferences.Edit();
+            editor.Clear();
+        }
     }
 }

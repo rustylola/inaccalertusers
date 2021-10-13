@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using System;
@@ -12,7 +13,7 @@ using System.Text;
 namespace inaccalertusers
 {
     [Activity(Label = "@string/app_name", Theme = "@style/logintheme", NoHistory = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-    public class getstartedActivity : Activity
+    public class getstartedActivity : AppCompatActivity
     {
         
         Button getstartbtn;

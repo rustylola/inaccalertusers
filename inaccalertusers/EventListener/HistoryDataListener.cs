@@ -32,7 +32,7 @@ namespace inaccalertusers.EventListener
 
         public void OnDataChange(DataSnapshot snapshot)
         {
-            if (snapshot.Value != null)
+            if (snapshot != null)
             {
                 var child = snapshot.Children.ToEnumerable<DataSnapshot>();
                 historyList.Clear();
@@ -47,7 +47,7 @@ namespace inaccalertusers.EventListener
                     datamodel.time = historyData.Child("time-happen").Value.ToString();
                     historyList.Add(datamodel);
                 }
-                HistoryDataRetrieve?.Invoke(this, new HistoryDataEventArgs { HistoryDataGet = historyList });
+                HistoryDataRetrieve.Invoke(this, new HistoryDataEventArgs { HistoryDataGet = historyList });
             }
         }
 

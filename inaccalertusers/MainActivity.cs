@@ -16,6 +16,7 @@ using Android;
 using Android.Support.V4.App;
 using Android.Content.PM;
 using inaccalertusers.EventListener;
+using inaccalertusers.LocateUpdate;
 
 namespace inaccalertusers
 {
@@ -31,6 +32,8 @@ namespace inaccalertusers
         
         //navigation tab
         BottomNavigationView bottomnavigationvar;
+        //toolbar
+        Android.Support.V7.Widget.Toolbar toolbar;
 
         //fragments
         historyFragment Hfragment = new historyFragment();
@@ -54,14 +57,41 @@ namespace inaccalertusers
             SetContentView(Resource.Layout.activity_main);
             CheckSpecialPermission();
             connectView();
-            viewpager.SetCurrentItem(1, true);
+            ShowFirstFragment();
             userProfileEventListener.Create();
             
+        }
+        void ShowFirstFragment()
+        {
+            viewpager.SetCurrentItem(1, true);
+            SupportActionBar.Title = "Map Notification";
+        }
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.toolbarmenu, menu);
+
+            return base.OnCreateOptionsMenu(menu);
+        }
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            if (item.ItemId == Resource.Id.sidemenufirst)
+            {
+                Toast.MakeText(this, "first", ToastLength.Long).Show();
+            }
+            else if (item.ItemId == Resource.Id.sidemenusecond)
+            {
+                Toast.MakeText(this, "second", ToastLength.Long).Show();
+            }
+            return base.OnOptionsItemSelected(item);
         }
 
         //Bottom navigation count and view pager
         void connectView()
         {
+            //toolbar
+            toolbar = (Android.Support.V7.Widget.Toolbar)FindViewById(Resource.Id.onlinetoolbar);
+            SetSupportActionBar(toolbar);
+            SupportActionBar.Title = "";
             //initialize layouts
             bottomnavigationvar = (BottomNavigationView)FindViewById(Resource.Id.bottom_nav);
             viewpager = (ViewPager)FindViewById(Resource.Id.viewpager);
@@ -78,14 +108,18 @@ namespace inaccalertusers
             if (e.Item.ItemId == Resource.Id.accident)
             {
                 viewpager.SetCurrentItem(1, true);
+                SupportActionBar.Title = "Map Notification";
             }
             else if (e.Item.ItemId == Resource.Id.profile)
             {
                 viewpager.SetCurrentItem(0, true);
+                SupportActionBar.Title = "My Profile";
+                Pfragment.MyDetails(AppDataHelper.Getname(), AppDataHelper.Getphone(), AppDataHelper.Getemail());
             }
             else if (e.Item.ItemId == Resource.Id.history)
             {
                 viewpager.SetCurrentItem(2, true);
+                SupportActionBar.Title = "History Notification";
             }
         }
 

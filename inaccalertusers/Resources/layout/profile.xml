@@ -2,29 +2,155 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
 
-    <RelativeLayout
+        <LinearLayout
+            android:id="@+id/statuslayout"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/usertype"
+                android:textAllCaps="true"
+                android:padding="10dp"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"/>
+            <TextView
+                android:id="@+id/accountstathere"
+                android:text="@string/citizen"
+                android:gravity="right"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_weight="0.1"
-            android:background="@color/loginPrimary"
-            android:id="@+id/continuefbheader">
+            android:background="@color/loginPrimary"/>
+         <RelativeLayout
+            android:id="@+id/picture"
+            android:orientation="vertical"
+            android:layout_height="1dp"
+            android:layout_weight="0.2"
+            android:layout_width="match_parent"
+            android:background="@drawable/background">
+            
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/loginPrimary"/>
+        <LinearLayout
+            android:id="@+id/infrohere"
+            android:orientation="vertical"
+            android:layout_weight="0.7"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorWhite">
+            
+        <LinearLayout
+            android:id="@+id/namehere"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            
             <TextView
-                android:text="@string/titleprofile"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="25dp"
-                android:layout_marginTop="13dp"
-                android:gravity="center"
-                android:id="@+id/textTitle"
-                android:textColor="@color/loginAccent"/>
-    </RelativeLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:id="@+id/profilecontent"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_weight="0.9" />
+                android:text="@string/fullname"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"/>
+            <TextView
+                android:id="@+id/usernamehere"
+                android:paddingLeft="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/loginPrimary"/>
+
+        <LinearLayout
+            android:id="@+id/emailhere"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inputtextuseremail"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"/>
+            <TextView
+                android:id="@+id/usermailhere"
+                android:paddingLeft="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/loginPrimary"/>
+
+        <LinearLayout
+            android:id="@+id/phonehere"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phonenum"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"/>
+            <TextView
+                android:id="@+id/userphonehere"
+                android:paddingLeft="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/loginPrimary"/>
+        
+        </LinearLayout>
+        <Button
+            android:id="@+id/logoutbtn"
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:background="@drawable/btnstylered"
+            android:layout_height="45dp"
+            android:text="@string/logoutbtn"
+            android:textColor="@color/loginAccent"/>
 
 </LinearLayout>
+

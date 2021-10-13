@@ -8,13 +8,25 @@
     android:id="@+id/activity_main"
     android:background="@drawable/background">
     
+    <android.support.v7.widget.Toolbar
+        app:titleTextColor="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/onlinetoolbar"
+        android:background="@color/loginPrimary"
+        android:minHeight="49dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:elevation="4dp">
+        
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/content_frame"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent" 
-        android:layout_above="@+id/bottom_nav">
+        android:layout_above="@+id/bottom_nav"
+        android:layout_below="@id/onlinetoolbar">
 
         <android.support.v4.view.ViewPager
             android:layout_weight="0.8"

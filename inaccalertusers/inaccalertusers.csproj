@@ -74,6 +74,7 @@
     <Compile Include="Datamodels\HistoryDataModel.cs" />
     <Compile Include="Datamodels\NewRequestDetails.cs" />
     <Compile Include="EventListener\CreateRequestEventListener.cs" />
+    <Compile Include="EventListener\CreateUpdateAccListener.cs" />
     <Compile Include="EventListener\FindvolunteerListener.cs" />
     <Compile Include="EventListener\HistoryDataListener.cs" />
     <Compile Include="EventListener\SendReportUserListener.cs" />
@@ -376,6 +377,17 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\ListViewDataTemplate.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\toolbarmenu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\btnstylered.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\progressdialogue.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

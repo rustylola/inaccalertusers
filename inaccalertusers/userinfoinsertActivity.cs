@@ -13,6 +13,7 @@ using Android.Support.Design.Widget;
 using Android.Gms.Tasks;
 using inaccalertusers.EventListener;
 using Java.Util;
+using inaccalertusers.LocateUpdate;
 
 namespace inaccalertusers
 {
@@ -53,24 +54,7 @@ namespace inaccalertusers
 
         void initializefirebase()
         {
-            var app = FirebaseApp.InitializeApp(this);
-
-            if (app == null)
-            {
-                var option = new FirebaseOptions.Builder()
-                    .SetApplicationId("inaccalert-database")
-                    .SetApiKey("AIzaSyCDcTY55MlwDzx2r_zAij1uGu0QOMzdzVQ")
-                    .SetDatabaseUrl("https://inaccalert-database-default-rtdb.firebaseio.com")
-                    .SetStorageBucket("inaccalert-database.appspot.com")
-                    .Build();
-
-                app = FirebaseApp.InitializeApp(this, option);
-                database = FirebaseDatabase.GetInstance(app);
-            }
-            else
-            {
-                database = FirebaseDatabase.GetInstance(app);
-            }
+            database = AppDataHelper.Getdatabase();
         }
 
         void checktext(string takename, string takeemail, string takeuid)
@@ -125,14 +109,10 @@ namespace inaccalertusers
 
         void AddingFbinfo(string getname, string getemail, string getphone, string getuid)
         {
-                
-            HashMap userMap = new HashMap();
-            userMap.Put("email", getemail);
-            userMap.Put("phone", getphone);
-            userMap.Put("name", getname);
 
-            DatabaseReference userReference = database.GetReference("users/" + getuid);
-            userReference.SetValue(userMap);
+            CreateUpdateAccListener createUpdateAccListener = new CreateUpdateAccListener(getname,getemail,getphone);
+            createUpdateAccListener.CreateRef();
+            
 
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
             OverridePendingTransition(Android.Resource.Animation.FadeIn, Android.Resource.Animation.FadeOut);

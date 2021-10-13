@@ -68,5 +68,9 @@
   <string name="historyaddress">Address Location : </string>
   <string name="historydate">Date</string>
   <string name="historytime">Time Complete : </string>
-    
+
+  <string name="logoutbtn">Logout</string>
+  <string name="usertype">user type</string>
+  <string name="citizen">Citizen</string>
+  <string name="loader">Loading...</string>
 </resources>

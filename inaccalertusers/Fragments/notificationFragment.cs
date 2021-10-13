@@ -5,6 +5,7 @@ using Android.Gms.Location;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.Graphics;
+using Android.Locations;
 using Android.Media;
 using Android.OS;
 using Android.Runtime;
@@ -17,6 +18,7 @@ using Google.Places;
 using inaccalertusers.Datamodels;
 using inaccalertusers.EventListener;
 using inaccalertusers.LocateUpdate;
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -125,7 +127,7 @@ namespace inaccalertusers.Fragments
             mapFragment.GetMapAsync(this);
             Connectcontrol();
             createlocationrequest();
-            getmyCurrentLocation();
+            getmyCurrentLocation(); 
             locationUpdate();
             return view;
         }
@@ -346,7 +348,20 @@ namespace inaccalertusers.Fragments
 
         private void Locatemebtn_Click(object sender, EventArgs e)
         {
-            getmyCurrentLocation();
+            // Check if the GPS and has Internet Connection ------------->
+
+            if (!CheckInternet())
+            {
+                Toast.MakeText(Activity, "Please Connect to the Internet.", ToastLength.Long).Show();
+                return;
+            }
+            if (!CheckGPS())
+            {
+                Toast.MakeText(Activity, "Please Turn on your GPS.", ToastLength.Long).Show();
+                return;
+            }
+
+            getmyCurrentLocation(); // ------------> go to locatemebtn event
         }
 
         //Search bar layout click event
@@ -451,6 +466,7 @@ namespace inaccalertusers.Fragments
                     LatLng myposition = new LatLng(mylastlocation.Latitude, mylastlocation.Longitude);
                     currentlocationLatlng = myposition; // for request
                     mainMap.MoveCamera(CameraUpdateFactory.NewLatLngZoom(myposition, 18)); //set the zoom 
+                    centermarker.Visibility = ViewStates.Visible;
                     notifybtn.Visibility = ViewStates.Visible;
                 }
             }
@@ -535,6 +551,27 @@ namespace inaccalertusers.Fragments
             //show current location
             getmyCurrentLocation();
             volunteerinfobehavior.State = BottomSheetBehavior.StateHidden;
+        }
+
+        bool CheckInternet()
+        {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                //Toast.MakeText(this, "No Internet Connection", ToastLength.Long).Show();
+                return false;
+            }
+            else
+            {
+                //Toast.MakeText(this, "Connected to the Internet", ToastLength.Long).Show();
+                return true;
+            }
+        }
+
+        bool CheckGPS()
+        {
+            LocationManager locationManager = (LocationManager)Activity.GetSystemService(Context.LocationService);
+            bool gpsEnable = locationManager.IsProviderEnabled(LocationManager.GpsProvider);
+            return gpsEnable;
         }
 
 

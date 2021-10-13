@@ -6,8 +6,7 @@
 
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_weight="0.1"
+            android:layout_height="60dp"
             android:background="@color/loginPrimary"
             android:id="@+id/continuefbheader">
             <TextView
@@ -20,11 +19,11 @@
                 android:id="@+id/textTitle"
                 android:textColor="@color/loginAccent"/>
     </RelativeLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:id="@+id/profilecontent"
+    
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_weight="0.9"/>
+        android:layout_height="match_parent"
+        android:id="@+id/historylistview"
+        android:scrollbars="vertical"/>
 
 </LinearLayout>

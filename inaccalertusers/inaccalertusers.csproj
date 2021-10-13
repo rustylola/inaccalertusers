@@ -67,12 +67,15 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapter\HistoryViewAdapter.cs" />
     <Compile Include="Adapter\ViewPagerAdapter.cs" />
     <Compile Include="Datamodels\AcceptedVolunteer.cs" />
     <Compile Include="Datamodels\AvailableVolunteer.cs" />
+    <Compile Include="Datamodels\HistoryDataModel.cs" />
     <Compile Include="Datamodels\NewRequestDetails.cs" />
     <Compile Include="EventListener\CreateRequestEventListener.cs" />
     <Compile Include="EventListener\FindvolunteerListener.cs" />
+    <Compile Include="EventListener\HistoryDataListener.cs" />
     <Compile Include="EventListener\SendReportUserListener.cs" />
     <Compile Include="EventListener\TaskCompletionListener.cs" />
     <Compile Include="EventListener\UserProfileEventListener.cs" />
@@ -147,7 +150,13 @@
     <PackageReference Include="Xamarin.Android.Support.Design">
       <Version>28.0.0.3</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.v4">
+      <Version>28.0.0.3</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
+      <Version>28.0.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView">
       <Version>28.0.0.3</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Volley">
@@ -362,6 +371,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\RequestEnd.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ListViewDataTemplate.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

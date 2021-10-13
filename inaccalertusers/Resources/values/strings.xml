@@ -62,5 +62,11 @@
   <string name="addressofaccident">Accident Address</string>
   <string name="accidentinfolist">Accident Information</string>
   <string name="success">Done</string>
+  
+  <string name="nameofuserhistory">My Name : </string>
+  <string name="nameofvolunteerhistory">Name of Volunteer : </string>
+  <string name="historyaddress">Address Location : </string>
+  <string name="historydate">Date</string>
+  <string name="historytime">Time Complete : </string>
     
 </resources>

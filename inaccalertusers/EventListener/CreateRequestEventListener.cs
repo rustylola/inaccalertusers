@@ -193,5 +193,11 @@ namespace inaccalertusers.EventListener
                 }
             }
         }
+
+        public void EndRequest()
+        {
+            newRequestRef.RemoveEventListener(this);
+            newRequestRef = null;
+        }
     }
 }

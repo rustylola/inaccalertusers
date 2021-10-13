@@ -141,9 +141,11 @@ namespace inaccalertusers.Fragments
             volunteerNameaccept = e.acceptedVolunteer.volunteerName;
             volunteername.Text = e.acceptedVolunteer.volunteerName;
 
-            requestdeailbottomsheet.State = BottomSheetBehavior.StateHidden;
-            volunteerinfobehavior.State = BottomSheetBehavior.StateExpanded;
+            requestdeailbottomsheet.State = BottomSheetBehavior.StateHidden; //requesting buttom sheet
+            volunteerinfobehavior.State = BottomSheetBehavior.StateExpanded; //volunteer buttom sheet details
             notifybtn.Visibility = ViewStates.Invisible;
+
+            // PUT LOADING BAR ---------------------------->
 
             jsonMapdirection(double.Parse(e.acceptedVolunteer.volunteerLat),double.Parse(e.acceptedVolunteer.volunteerLng));
         }
@@ -224,6 +226,8 @@ namespace inaccalertusers.Fragments
             }
             else if(e.Status == "ended")
             {
+                 // hide volunteer detail bottom sheet
+
                 string accidentlocationaddress = searchtext.Text;
                 RequestEndFragment requestEnd = new RequestEndFragment(AppDataHelper.Getname(), volunteerNameaccept,accidentlocationaddress);
                 requestEnd.Cancelable = false;
@@ -234,7 +238,11 @@ namespace inaccalertusers.Fragments
                     requestEnd.Dismiss();
                     Toast.MakeText(Activity, "Report Uploaded.", ToastLength.Long).Show();
                 };
-                // Reset the app
+                // Reset the app ------------------------------->
+                
+                requestListener.EndRequest();
+                requestListener = null;
+                ResetApp();
             }
         }
 
@@ -301,6 +309,7 @@ namespace inaccalertusers.Fragments
 
             //notifybtn.Text = "Please Wait...";
             //notifybtn.Enabled = false;
+            notifybtn.Visibility = ViewStates.Invisible;
             requestdeailbottomsheet.State = BottomSheetBehavior.StateExpanded;
             RequestShow();
             //Remeber : this method must call if the volunteer already accept the request
@@ -514,6 +523,18 @@ namespace inaccalertusers.Fragments
             userpin = gMap.AddMarker(mymarker);
             userpin.ShowInfoWindow();
             //userpin.Remove();
+        }
+
+        public void ResetApp()
+        {
+            mainMap.Clear();
+            circleMarkerFlags = true; // to remove circle marker every move the camera
+            DrawCircle(mainMap);
+            centermarker.Visibility = ViewStates.Visible;
+            searchbar.Enabled = true;
+            //show current location
+            getmyCurrentLocation();
+            volunteerinfobehavior.State = BottomSheetBehavior.StateHidden;
         }
 
 

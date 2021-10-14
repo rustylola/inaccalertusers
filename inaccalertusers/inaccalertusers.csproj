@@ -67,12 +67,14 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutActivity.cs" />
     <Compile Include="Adapter\HistoryViewAdapter.cs" />
     <Compile Include="Adapter\ViewPagerAdapter.cs" />
     <Compile Include="Datamodels\AcceptedVolunteer.cs" />
     <Compile Include="Datamodels\AvailableVolunteer.cs" />
     <Compile Include="Datamodels\HistoryDataModel.cs" />
     <Compile Include="Datamodels\NewRequestDetails.cs" />
+    <Compile Include="DevActivity.cs" />
     <Compile Include="EventListener\CreateRequestEventListener.cs" />
     <Compile Include="EventListener\CreateUpdateAccListener.cs" />
     <Compile Include="EventListener\FindvolunteerListener.cs" />
@@ -388,6 +390,31 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\progressdialogue.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_citizen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_developer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_avail.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_dev.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_privacy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\AboutAppActivity.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\AboutDev.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

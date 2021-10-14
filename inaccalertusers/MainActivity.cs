@@ -20,7 +20,7 @@ using inaccalertusers.LocateUpdate;
 
 namespace inaccalertusers
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.Light.NoActionBar", MainLauncher = false)]
+    [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.Light.NoActionBar", MainLauncher = false, NoHistory = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MainActivity : AppCompatActivity
     {
         
@@ -76,11 +76,11 @@ namespace inaccalertusers
         {
             if (item.ItemId == Resource.Id.sidemenufirst)
             {
-                Toast.MakeText(this, "first", ToastLength.Long).Show();
+                StartActivity(new Intent(Application.Context, typeof(AboutActivity)));
             }
             else if (item.ItemId == Resource.Id.sidemenusecond)
             {
-                Toast.MakeText(this, "second", ToastLength.Long).Show();
+                StartActivity(new Intent(Application.Context, typeof(DevActivity)));
             }
             return base.OnOptionsItemSelected(item);
         }

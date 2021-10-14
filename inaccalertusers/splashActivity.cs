@@ -28,18 +28,7 @@ namespace inaccalertusers
         {
             base.OnResume();
 
-            if (!CheckInternet())
-            {
-                Android.Support.V7.App.AlertDialog.Builder alertDialog = new Android.Support.V7.App.AlertDialog.Builder(this);
-                alertDialog.SetTitle("Internet Connection");
-                alertDialog.SetMessage("You are not connected to the internet. This application will close.");
-                alertDialog.SetPositiveButton("Close", (close, args) =>
-                {
-                    Finish();
-                });
-                alertDialog.Show();
-            }
-
+            
             FirebaseUser currentUser = AppDataHelper.Getcurrentuser();
             if (currentUser == null)
             {
@@ -61,8 +50,23 @@ namespace inaccalertusers
         async Task SimulateMainActivity()
         {
             await Task.Delay(TimeSpan.FromSeconds(8));
-            StartActivity(typeof(MainActivity));
-            OverridePendingTransition(Android.Resource.Animation.FadeIn, Android.Resource.Animation.FadeOut);
+
+            if (!CheckInternet())
+            {
+                Android.Support.V7.App.AlertDialog.Builder alertDialog = new Android.Support.V7.App.AlertDialog.Builder(this);
+                alertDialog.SetTitle("Internet Connection");
+                alertDialog.SetMessage("You are not connected to the internet. This application will close.");
+                alertDialog.SetPositiveButton("Close", (close, args) =>
+                {
+                    Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
+                });
+                alertDialog.Show();
+            }
+            else
+            {
+                StartActivity(typeof(MainActivity));
+                OverridePendingTransition(Android.Resource.Animation.FadeIn, Android.Resource.Animation.FadeOut);
+            }
         }
 
         bool CheckInternet()

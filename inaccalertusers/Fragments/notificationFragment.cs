@@ -79,6 +79,10 @@ namespace inaccalertusers.Fragments
         requestfirsaider requestfirsaiderfragment;
         Android.Support.V4.App.FragmentTransaction manager; // Transaction
 
+        //Dialog Fragments Accident Check
+        AccidentAroundFragment accidentAround;
+        NotifyNowFragment notifyNowFragment;
+
         //Datamodel
         NewRequestDetails newdataRequestmodel;
 
@@ -129,6 +133,7 @@ namespace inaccalertusers.Fragments
             createlocationrequest();
             getmyCurrentLocation(); 
             locationUpdate();
+            CheckAccident();
             return view;
         }
 
@@ -574,6 +579,43 @@ namespace inaccalertusers.Fragments
             return gpsEnable;
         }
 
+        //Accident Check pannel ----------------------------------->
+        public void CheckAccident()
+        {
+            accidentAround = new AccidentAroundFragment();
+            accidentAround.Cancelable = false;
+            manager = FragmentManager.BeginTransaction();
+            accidentAround.Show(manager, "FirstCheck");
+            //cancelrequest click event
+            accidentAround.YesEvent += AccidentAround_YesEvent;
+            accidentAround.NoEvent += AccidentAround_NoEvent;
+        }
+        private void AccidentAround_YesEvent(object sender, EventArgs e)
+        {
+            //Show Other Fragment here -----------
+            accidentAround.Dismiss();
+            accidentAround = null;
+            notifyNowFragment = new NotifyNowFragment();
+            notifyNowFragment.Cancelable = false;
+            manager = FragmentManager.BeginTransaction();
+            notifyNowFragment.Show(manager, "SecondCheck");
+            notifyNowFragment.Clicknotifynow += NotifyNowFragment_Clicknotifynow;
+        }
+
+        private void AccidentAround_NoEvent(object sender, EventArgs e)
+        {
+            accidentAround.Dismiss();
+            accidentAround = null;
+        }
+        //Accident Check pannel ----------------------------------->
+        private void NotifyNowFragment_Clicknotifynow(object sender, EventArgs e)
+        {
+            notifybtn.Visibility = ViewStates.Invisible;
+            requestdeailbottomsheet.State = BottomSheetBehavior.StateExpanded;
+            RequestShow();
+            notifyNowFragment.Dismiss();
+            notifyNowFragment = null;
+        }
 
     }
 }

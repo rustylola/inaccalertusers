@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:minWidth="350dp"
+    android:paddingBottom="25dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorWhite"
+        android:id="@+id/layoutaccidentaround"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="22dp"
+            android:gravity="center"
+            android:text="@string/checkaccident"
+            android:textColor="@color/loginPrimary"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/loginPrimary"/>
+    
+    <LinearLayout
+        android:id="@+id/btnhere"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="@string/nostring"
+            android:layout_width="1dp"
+            android:layout_weight="0.5"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/nobtn"
+            android:textAllCaps="false"
+            android:background="@drawable/btnstyleplain"/>
+        <Button
+            android:text="@string/yesstring"
+            android:layout_width="1dp"
+            android:layout_weight="0.5"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/yesbtn"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/btnstylered"/>
+
+    </LinearLayout>
+
+</LinearLayout>

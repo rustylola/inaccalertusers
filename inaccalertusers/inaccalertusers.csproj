@@ -82,8 +82,10 @@
     <Compile Include="EventListener\SendReportUserListener.cs" />
     <Compile Include="EventListener\TaskCompletionListener.cs" />
     <Compile Include="EventListener\UserProfileEventListener.cs" />
+    <Compile Include="Fragments\AccidentAroundFragment.cs" />
     <Compile Include="Fragments\historyFragment.cs" />
     <Compile Include="Fragments\notificationFragment.cs" />
+    <Compile Include="Fragments\NotifyNowFragment.cs" />
     <Compile Include="Fragments\profileFragment.cs" />
     <Compile Include="Fragments\RequestEndFragment.cs" />
     <Compile Include="Fragments\requestfirsaider.cs" />
@@ -417,6 +419,19 @@
     <AndroidResource Include="Resources\layout\AboutDev.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\AccidentAround.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\NotifyNowLayout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_click_it.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

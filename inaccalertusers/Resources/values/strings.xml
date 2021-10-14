@@ -73,4 +73,12 @@
   <string name="usertype">user type</string>
   <string name="citizen">Citizen</string>
   <string name="loader">Loading...</string>
+  
+  <string name="checkaccident">Is there Accident Around you?</string>
+  <string name="yesstring">Yes</string>
+  <string name="nostring">No</string>
+
+  <string name="notifynowgo">Click this now!</string>
+  <string name="okbtn">Notify Now !</string>
+  
 </resources>

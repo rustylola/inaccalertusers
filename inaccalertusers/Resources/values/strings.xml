@@ -5,7 +5,7 @@
     <string name="facebook_app_id">837800107097842</string>
     <string name="fb_login_protocol_scheme">fb837800107097842</string>
 
-    <string name="app_name">IN-ACC-ALERT:USER</string>
+    <string name="app_name">Inaccalert:user</string>
     <string name="action_settings">Settings</string>
 
     <string name="string_user">USERS</string>
@@ -80,5 +80,37 @@
 
   <string name="notifynowgo">Click this now!</string>
   <string name="okbtn">Notify Now !</string>
+
+  <string name="choosecategory">Pick Barangay</string>
+  <string-array name="ambulancelist">
+    <item>Pick Barangay</item>
+    <item>Brgy Baritan</item>
+    <item>Brgy Bayan-bayanan</item>
+    <item>Brgy Catmon</item>
+    <item>Brgy Concepcion</item>
+    <item>Brgy Flores</item>
+    <item>Brgy Dampalit</item>
+    <item>Brgy Hulong Duhat</item>
+    <item>Brgy Ibaba</item>
+    <item>Brgy Muzon</item>
+    <item>Brgy Panghulo</item>
+    <item>Brgy Maysilo</item>
+    <item>Brgy Niogan</item>
+    <item>Brgy San Agustin</item>
+    <item>Brgy Santulan</item>
+    <item>Brgy Tanong</item>
+    <item>Brgy Acacia</item>
+    <item>Brgy Longos</item>
+    <item>Brgy Potrero</item>
+    <item>Brgy Tinajeros</item>
+    <item>Brgy Tunsuya</item>
+    <item>Brgy Tugatog</item>
+  </string-array>
+
+  <string name="choosenearbrgy">Choose Nearest Barangay</string>
+  <string name="emergencynum">Emergency Number</string>
+  <string name="callstr">Call</string>
+  <string name="callambu">You can Call Ambulance</string>
+  <string name="waitvolunteer">Wait First-aider</string>
   
 </resources>

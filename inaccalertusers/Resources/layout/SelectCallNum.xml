@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:minWidth="350dp"
+    android:paddingBottom="25dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textViewnotify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="@string/callambu"
+        android:textColor="@color/loginPrimary"
+        android:textStyle="bold"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/loginPrimary"/>
+
+    <TextView
+        android:id="@+id/choosess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="@string/choosenearbrgy"
+        android:textColor="@color/loginPrimary"
+        android:textStyle="bold"/>
+
+    <Spinner
+        android:id="@+id/btgycateg"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="55dp"
+        android:prompt="@string/choosecategory"/>
+
+    <TextView
+        android:id="@+id/numbertextcall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="@string/emergencynum"
+        android:textColor="@color/loginPrimary"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/emergencynumbertext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/loginPrimary"
+        android:textStyle="bold"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/loginPrimary"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutbtncallambu"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <Button
+        android:text="@string/waitvolunteer"
+        android:layout_weight="0.5"
+        android:layout_width="1dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/waitfirstaidbtn"
+        android:textAllCaps="false"
+        android:background="@drawable/btnstyleplain"/>
+    <Button
+        android:text="@string/callstr"
+        android:layout_weight="0.5"
+        android:layout_width="1dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/callambubtn"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/btnstylered"/>
+
+    
+    </LinearLayout>
+
+</LinearLayout>

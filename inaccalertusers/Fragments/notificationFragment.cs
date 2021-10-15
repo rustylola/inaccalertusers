@@ -82,6 +82,7 @@ namespace inaccalertusers.Fragments
         //Dialog Fragments Accident Check
         AccidentAroundFragment accidentAround;
         NotifyNowFragment notifyNowFragment;
+        CallAmbulanceFragment callAmbulanceFragment;
 
         //Datamodel
         NewRequestDetails newdataRequestmodel;
@@ -153,7 +154,7 @@ namespace inaccalertusers.Fragments
             notifybtn.Visibility = ViewStates.Invisible;
 
             // PUT LOADING BAR ---------------------------->
-
+            CallAmbulanceCheck();
             jsonMapdirection(double.Parse(e.acceptedVolunteer.volunteerLat),double.Parse(e.acceptedVolunteer.volunteerLng));
         }
 
@@ -268,6 +269,7 @@ namespace inaccalertusers.Fragments
                     alert.SetTitle("Volunteer Availability Message");
                     alert.SetMessage("Available Volunteers Couldn't accept your request, Try again later");
                     alert.Show();
+                    CallAmbulanceCheck();
                 }
             });
         }
@@ -286,6 +288,7 @@ namespace inaccalertusers.Fragments
                 alert.SetTitle("Volunteer Availability Message");
                 alert.SetMessage("No Available volunteer found, Try again later");
                 alert.Show();
+                CallAmbulanceCheck();
             }
         }
 
@@ -316,7 +319,6 @@ namespace inaccalertusers.Fragments
 
             //notifybtn.Text = "Please Wait...";
             //notifybtn.Enabled = false;
-            notifybtn.Visibility = ViewStates.Invisible;
             requestdeailbottomsheet.State = BottomSheetBehavior.StateExpanded;
             RequestShow();
             //Remeber : this method must call if the volunteer already accept the request
@@ -345,6 +347,8 @@ namespace inaccalertusers.Fragments
         {
             circleMarkerFlags = false; // to remove circle marker every move the camera
             DrawMark(mainMap); // inputting marker
+            locatemebtn.Visibility = ViewStates.Invisible;
+            notifybtn.Visibility = ViewStates.Invisible;
             centermarker.Visibility = ViewStates.Invisible;
             searchbar.Enabled = false;
             //show current location
@@ -366,7 +370,7 @@ namespace inaccalertusers.Fragments
                 return;
             }
 
-            getmyCurrentLocation(); // ------------> go to locatemebtn event
+            getmyCurrentLocation();  // ------------> go to locatemebtn event
         }
 
         //Search bar layout click event
@@ -429,6 +433,11 @@ namespace inaccalertusers.Fragments
                     userAddressLocation = searchtext.Text;
                     DrawCircle(mainMap);
                 }
+            }
+            else
+            {
+                circle.Remove();
+                DrawCircle(mainMap);
             }
         }
 
@@ -551,9 +560,10 @@ namespace inaccalertusers.Fragments
             mainMap.Clear();
             circleMarkerFlags = true; // to remove circle marker every move the camera
             DrawCircle(mainMap);
-            centermarker.Visibility = ViewStates.Visible;
+            //centermarker.Visibility = ViewStates.Visible;
             searchbar.Enabled = true;
             //show current location
+            locatemebtn.Visibility = ViewStates.Visible;
             getmyCurrentLocation();
             volunteerinfobehavior.State = BottomSheetBehavior.StateHidden;
         }
@@ -607,7 +617,7 @@ namespace inaccalertusers.Fragments
             accidentAround.Dismiss();
             accidentAround = null;
         }
-        //Accident Check pannel ----------------------------------->
+        
         private void NotifyNowFragment_Clicknotifynow(object sender, EventArgs e)
         {
             notifybtn.Visibility = ViewStates.Invisible;
@@ -616,6 +626,33 @@ namespace inaccalertusers.Fragments
             notifyNowFragment.Dismiss();
             notifyNowFragment = null;
         }
+        //Accident Check pannel ----------------------------------->
 
+        public void CallAmbulanceCheck()
+        {
+            callAmbulanceFragment = new CallAmbulanceFragment();
+            callAmbulanceFragment.Cancelable = false;
+            manager = FragmentManager.BeginTransaction();
+            callAmbulanceFragment.Show(manager, "CallCheck");
+            callAmbulanceFragment.Callambu += CallAmbulanceFragment_Callambu;
+            callAmbulanceFragment.Waiting += CallAmbulanceFragment_Waiting;
+        }
+
+        private void CallAmbulanceFragment_Waiting(object sender, EventArgs e)
+        {
+            callAmbulanceFragment.Dismiss();
+            callAmbulanceFragment = null;
+        }
+
+        private void CallAmbulanceFragment_Callambu(object sender, EventArgs e)
+        {
+            //Do something
+            string brgyphonenumber = callAmbulanceFragment.number;
+            var uri = Android.Net.Uri.Parse("tel:" + brgyphonenumber);
+            Intent intent = new Intent(Intent.ActionDial, uri);
+            StartActivity(intent);
+            callAmbulanceFragment.Dismiss();
+            callAmbulanceFragment = null;
+        }
     }
 }

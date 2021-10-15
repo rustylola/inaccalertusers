@@ -5,22 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <TextView
+        android:id="@+id/textViewnotify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="@string/notifynowgo"
+        android:textColor="@color/loginPrimary"
+        android:textStyle="bold"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/loginPrimary"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:background="@color/colorWhite"
         android:id="@+id/layoutnotifynow">
 
-        <TextView
-            android:id="@+id/textViewnotify"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="22dp"
-            android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:text="@string/notifynowgo"
-            android:textColor="@color/loginPrimary"
-            android:textStyle="bold"/>
 
         <ImageView
             android:contentDescription="@string/icon_app"

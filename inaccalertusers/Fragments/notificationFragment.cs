@@ -424,6 +424,7 @@ namespace inaccalertusers.Fragments
                     searchtext.Text = await mapUpdate.FindcoordinateAddress(currentlocationLatlng);
                     userAddressLocation = searchtext.Text;
                     DrawCircle(mainMap);
+                    circle.Remove();
                 }
                 else
                 {

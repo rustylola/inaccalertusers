@@ -1,25 +1,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:minWidth="350dp"
+    android:minWidth="340dp"
     android:paddingBottom="25dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="match_parent"
         android:background="@color/colorWhite"
         android:id="@+id/layoutaccidentaround"
         android:padding="20dp">
 
         <TextView
+            android:id="@+id/maincontentmessage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="22dp"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
             android:gravity="center"
             android:text="@string/checkaccident"
             android:textColor="@color/loginPrimary"
             android:textStyle="bold"/>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/notefirst"
+            android:layout_below="@id/maincontentmessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:gravity="center"
+            android:text="@string/notefirst"
+            android:textColor="@color/loginPrimary"/>
+
     </RelativeLayout>
 
     <View

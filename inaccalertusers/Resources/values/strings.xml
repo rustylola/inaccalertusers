@@ -75,6 +75,7 @@
   <string name="loader">Loading...</string>
   
   <string name="checkaccident">Is there Accident Around you?</string>
+  <string name="notefirst">Note : Click Yes, make sure the address location is right.</string>
   <string name="yesstring">Yes</string>
   <string name="nostring">No</string>
 

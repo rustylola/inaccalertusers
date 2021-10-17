@@ -47,6 +47,8 @@ namespace inaccalertusers.Fragments
         //layout sheets
         TextView detaillocation;
         Button gonotifybtn;
+        TextView canceldetailsheets;
+
         //layout sheets
         TextView volunteername;
         TextView distanceEstimate;
@@ -114,6 +116,7 @@ namespace inaccalertusers.Fragments
             //Layout for sheets
             detaillocation = (TextView)view.FindViewById(Resource.Id.detaillocation);
             gonotifybtn = (Button)view.FindViewById(Resource.Id.gonotify);
+            canceldetailsheets = (TextView)view.FindViewById(Resource.Id.closedetails);
 
             //layout for other sheets //////////////
             volunteername = (TextView)view.FindViewById(Resource.Id.volunteername);
@@ -165,8 +168,10 @@ namespace inaccalertusers.Fragments
             locatemebtn.Click += Locatemebtn_Click;
             notifybtn.Click += Notifybtn_Click;
             gonotifybtn.Click += Gonotifybtn_Click;
+            canceldetailsheets.Click += Canceldetailsheets_Click;
             callintent.Click += Callintent_Click;
         }
+
         //call volunteer
         private void Callintent_Click(object sender, EventArgs e)
         {
@@ -208,6 +213,13 @@ namespace inaccalertusers.Fragments
             findvolunteerListener.VolunteersFound += FindvolunteerListener_VolunteersFound;
             findvolunteerListener.VolunteernotFound += FindvolunteerListener_VolunteernotFound;
             findvolunteerListener.Create();
+        }
+
+        private void Canceldetailsheets_Click(object sender, EventArgs e)
+        {
+            requestdeailbottomsheet.State = BottomSheetBehavior.StateHidden;
+            ResetApp();
+            getmyCurrentLocation();
         }
 
         private void RequestListener_VolunteerUpdate(object sender, CreateRequestEventListener.VolunteerLocationUpdateEventArgs e)
@@ -593,17 +605,33 @@ namespace inaccalertusers.Fragments
         //Accident Check pannel ----------------------------------->
         public void CheckAccident()
         {
-            accidentAround = new AccidentAroundFragment();
-            accidentAround.Cancelable = false;
-            manager = FragmentManager.BeginTransaction();
-            accidentAround.Show(manager, "FirstCheck");
-            //cancelrequest click event
-            accidentAround.YesEvent += AccidentAround_YesEvent;
-            accidentAround.NoEvent += AccidentAround_NoEvent;
+            if (!CheckGPS())
+            {
+                Android.Support.V7.App.AlertDialog.Builder alertDialog = new Android.Support.V7.App.AlertDialog.Builder(Activity);
+                alertDialog.SetTitle("GPS not Enable");
+                alertDialog.SetMessage("Please Turn on your GPS. This app will close.");
+                alertDialog.SetPositiveButton("Close", (close, args) =>
+                {
+                    Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
+                });
+                alertDialog.Show();
+            }
+            else
+            {
+                accidentAround = new AccidentAroundFragment();
+                accidentAround.Cancelable = false;
+                manager = FragmentManager.BeginTransaction();
+                accidentAround.Show(manager, "FirstCheck");
+                //cancelrequest click event
+                accidentAround.YesEvent += AccidentAround_YesEvent;
+                accidentAround.NoEvent += AccidentAround_NoEvent;
+            }
+            
         }
         private void AccidentAround_YesEvent(object sender, EventArgs e)
         {
             //Show Other Fragment here -----------
+            getmyCurrentLocation();
             accidentAround.Dismiss();
             accidentAround = null;
             notifyNowFragment = new NotifyNowFragment();

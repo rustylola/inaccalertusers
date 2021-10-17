@@ -13,6 +13,8 @@
         android:layout_height="1dp"
         android:background="@color/loginPrimary"/>
     
+    
+
     <LinearLayout
         android:id="@+id/layoutdetails"
         android:orientation="vertical"
@@ -26,7 +28,16 @@
             android:orientation="vertical"
             android:layout_height="1dp"
             android:layout_width="match_parent"
-            android:layout_weight="0.5">
+            android:layout_weight="0.6">
+        <TextView
+            android:id="@+id/closedetails"
+            android:clickable="true"
+            android:text="X"
+            android:textStyle="bold"
+            android:layout_gravity="right"
+            android:textColor="@color/colorBlack"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"/>
 
             <ImageView
                 android:contentDescription="@string/icon_app"
@@ -41,7 +52,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:textStyle="bold"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textColor="@color/colorBlack"
                 android:text="@string/checkdetail"/>
 

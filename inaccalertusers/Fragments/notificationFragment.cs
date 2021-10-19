@@ -162,10 +162,12 @@ namespace inaccalertusers.Fragments
             onlineposition.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.ic_volunteeric));
             availablevolunteer = mainMap.AddMarker(onlineposition);
             availablevolunteer.ShowInfoWindow();
+            
         }
 
         private void RequestListener_AcceptedRequestVolunteer(object sender, CreateRequestEventListener.VolunteerAcceptEventArgs e)
         {
+            availablevolunteer.Remove();
             if (requestfirsaiderfragment != null)
             {
                 requestfirsaiderfragment.Dismiss();

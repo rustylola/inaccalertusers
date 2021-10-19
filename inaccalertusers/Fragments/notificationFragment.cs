@@ -31,6 +31,7 @@ namespace inaccalertusers.Fragments
         //firebase
         CreateRequestEventListener requestListener;
         FindvolunteerListener findvolunteerListener;
+        MarkallAvailableListener onlineavailable;
 
         //Declare variable including google maps and Layouts
         public GoogleMap mainMap;
@@ -91,6 +92,10 @@ namespace inaccalertusers.Fragments
 
         //marker
         Marker userpin;
+        Marker availablevolunteer;
+        //Alert Dialog inialize
+        Android.Support.V7.App.AlertDialog.Builder alert;
+        Android.Support.V7.App.AlertDialog alertDialog;
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -139,6 +144,24 @@ namespace inaccalertusers.Fragments
             locationUpdate();
             CheckAccident();
             return view;
+        }
+
+        private void ShowNearOnline()
+        {
+            onlineavailable = new MarkallAvailableListener(currentlocationLatlng);
+            onlineavailable.DisplayOnline();
+            onlineavailable.OnlineEventList += Onlineavailable_OnlineEventList;
+        }
+
+        private void Onlineavailable_OnlineEventList(object sender, MarkallAvailableListener.VolunteerOnlinenear e)
+        {
+            LatLng volunteerlatlng = new LatLng(e.Online.onlinevolunteerlat,e.Online.onlinevolunteerlng);
+            MarkerOptions onlineposition = new MarkerOptions();
+            onlineposition.SetPosition(volunteerlatlng);
+            onlineposition.SetTitle("Available Volunteer"); // title of the marker
+            onlineposition.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.ic_volunteeric));
+            availablevolunteer = mainMap.AddMarker(onlineposition);
+            availablevolunteer.ShowInfoWindow();
         }
 
         private void RequestListener_AcceptedRequestVolunteer(object sender, CreateRequestEventListener.VolunteerAcceptEventArgs e)
@@ -357,6 +380,7 @@ namespace inaccalertusers.Fragments
         //Trip Draw Request
         void RequestShow()
         {
+            showprogressDialog();
             circleMarkerFlags = false; // to remove circle marker every move the camera
             DrawMark(mainMap); // inputting marker
             locatemebtn.Visibility = ViewStates.Invisible;
@@ -365,6 +389,8 @@ namespace inaccalertusers.Fragments
             searchbar.Enabled = false;
             //show current location
             detaillocation.Text = searchtext.Text;
+            ShowNearOnline(); //show online nearby
+            closeprogressDialog();
         }
 
         private void Locatemebtn_Click(object sender, EventArgs e)
@@ -549,12 +575,12 @@ namespace inaccalertusers.Fragments
 
         public void DrawCircle(GoogleMap gMap)
         {
-            circle = mainMap.AddCircle(new CircleOptions()
+            circle = gMap.AddCircle(new CircleOptions()
                 .InvokeCenter(currentlocationLatlng)
-                .InvokeRadius(100)
+                .InvokeRadius(200)
                 .InvokeStrokeWidth(4)
                 .InvokeStrokeColor(Android.Graphics.Color.ParseColor("#e6d9534f"))
-                .InvokeFillColor(Color.Argb(020, 209, 72, 54))); //Gmap Add Circle
+                .InvokeFillColor(Color.Argb(005, 209, 72, 54))); //Gmap Add Circle
         }
 
         public void DrawMark(GoogleMap gMap)
@@ -682,6 +708,24 @@ namespace inaccalertusers.Fragments
             StartActivity(intent);
             callAmbulanceFragment.Dismiss();
             callAmbulanceFragment = null;
+        }
+
+        void showprogressDialog()
+        {
+            alert = new Android.Support.V7.App.AlertDialog.Builder(Activity);
+            alert.SetView(Resource.Layout.progressdialogue);
+            alert.SetCancelable(false);
+            alertDialog = alert.Show();
+        }
+
+        void closeprogressDialog()
+        {
+            if (alert != null)
+            {
+                alertDialog.Dismiss();
+                alertDialog = null;
+                alert = null;
+            }
         }
     }
 }

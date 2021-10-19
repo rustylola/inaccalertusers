@@ -399,7 +399,7 @@ namespace inaccalertusers.Fragments
         private void Locatemebtn_Click(object sender, EventArgs e)
         {
             // Check if the GPS and has Internet Connection ------------->
-
+            mainMap.Clear(); // Optional
             if (!CheckInternet())
             {
                 Toast.MakeText(Activity, "Please Connect to the Internet.", ToastLength.Long).Show();

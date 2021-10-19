@@ -167,7 +167,8 @@ namespace inaccalertusers.Fragments
 
         private void RequestListener_AcceptedRequestVolunteer(object sender, CreateRequestEventListener.VolunteerAcceptEventArgs e)
         {
-            availablevolunteer.Remove();
+            mainMap.Clear(); //optional
+
             if (requestfirsaiderfragment != null)
             {
                 requestfirsaiderfragment.Dismiss();

@@ -168,6 +168,7 @@ namespace inaccalertusers
                 Toast.MakeText(this, "Permission Failed", ToastLength.Short).Show();
             }
         }
+
         public override void OnBackPressed()
         {
             Android.Support.V7.App.AlertDialog.Builder alertDialog = new Android.Support.V7.App.AlertDialog.Builder(this);
@@ -176,6 +177,7 @@ namespace inaccalertusers
             alertDialog.SetPositiveButton("Close", (close, args) =>
             {
                 Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
+
             }).SetNegativeButton("Stay", (stay, args) => {
                 return;
             });

@@ -88,65 +88,47 @@ namespace inaccalertusers.Fragments
                 case "Pick Barangay":
                     brgynumtext.Text = "";
                     break;
-                case "Brgy Baritan":
-                    brgynumtext.Text = "2825593";
+                case "BARANGAY BAGUMBAYAN NORTH":
+                    brgynumtext.Text = "+632 351-5482";
                     break;
-                case "Brgy Bayan-bayanan":
-                    brgynumtext.Text = "2817474";
+                case "BARANGAY BAGUMBAYAN SOUTH":
+                    brgynumtext.Text = "+632 351-5739";
                     break;
-                case "Brgy Catmon":
-                    brgynumtext.Text = "2880217";
+                case "BARANGAY BANGCULASI":
+                    brgynumtext.Text = "+632 281-8732";
                     break;
-                case "Brgy Flores":
-                    brgynumtext.Text = "2822227";
+                case "BARANGAY DAANGHARI":
+                    brgynumtext.Text = "+632 351-1071";
                     break;
-                case "Brgy Dampalit":
-                    brgynumtext.Text = "2826701";
+                case "BARANGAY NAVOTAS EAST":
+                    brgynumtext.Text = "+632 283-3750";
                     break;
-                case "Brgy Hulong Duhat":
-                    brgynumtext.Text = "2811373";
+                case "BARANGAY NAVOTAS WEST":
+                    brgynumtext.Text = "+632 281-7857";
                     break;
-                case "Brgy Ibaba":
-                    brgynumtext.Text = "2816597";
+                case "BARANGAY NORTH BOULEVARD NORTH":
+                    brgynumtext.Text = "+632 282-2869";
                     break;
-                case "Brgy Muzon":
-                    brgynumtext.Text = "2820255";
+                case "BARANGAY NORTH BOULEVARD SOUTH":
+                    brgynumtext.Text = "+632 283-7495";
                     break;
-                case "Brgy Panghulo":
-                    brgynumtext.Text = "4466316";
+                case "BARANGAY SAN JOSE":
+                    brgynumtext.Text = "+632 282-3051";
                     break;
-                case "Brgy Maysilo":
-                    brgynumtext.Text = "2946180";
+                case "BARANGAY SAN RAFAEL VILLAGE":
+                    brgynumtext.Text = "+632 251-8350";
                     break;
-                case "Brgy Niugan":
-                    brgynumtext.Text = "4073236";
+                case "BARANGAY SAN ROQUE":
+                    brgynumtext.Text = "+632 351-6063";
                     break;
-                case "Brgy San Agustin":
-                    brgynumtext.Text = "2810758";
+                case "BARANGAY SIPAC-ALMACEN":
+                    brgynumtext.Text = "+632 283-8800";
                     break;
-                case "Brgy Santulan":
-                    brgynumtext.Text = "4464284";
+                case "BARANGAY TANGOS":
+                    brgynumtext.Text = "8429-51-59";
                     break;
-                case "Brgy Tanong":
-                    brgynumtext.Text = "2820083";
-                    break;
-                case "Brgy Acacia":
-                    brgynumtext.Text = "4476573";
-                    break;
-                case "Brgy Longos":
-                    brgynumtext.Text = "4472744";
-                    break;
-                case "Brgy Potrero":
-                    brgynumtext.Text = "3641096";
-                    break;
-                case "Brgy Tinajeros":
-                    brgynumtext.Text = "2874162";
-                    break;
-                case "Brgy Tunsuya":
-                    brgynumtext.Text = "3511332";
-                    break;
-                case "Brgy Tugatog":
-                    brgynumtext.Text = "2875432";
+                case "BARANGAY TANZA":
+                    brgynumtext.Text = "(02) 8351 4089";
                     break;
             }
                 

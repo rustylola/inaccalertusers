@@ -82,8 +82,8 @@
   <string name="notifynowgo">Click this now!</string>
   <string name="okbtn">Notify Now !</string>
 
-  <string name="choosecategory">Pick Barangay</string>
-  <string-array name="ambulancelist">
+  <string name="choosecategorymalabon">Pick Barangay</string>
+  <string-array name="ambulancelistmalabon">
     <item>Pick Barangay</item>
     <item>Brgy Baritan</item>
     <item>Brgy Bayan-bayanan</item>
@@ -106,6 +106,25 @@
     <item>Brgy Tinajeros</item>
     <item>Brgy Tunsuya</item>
     <item>Brgy Tugatog</item>
+  </string-array>
+
+  <string name="choosecategory">Pick Barangay</string>
+  <string-array name="ambulancelist">
+    <item>Pick Barangay</item>
+    <item>BARANGAY BAGUMBAYAN NORTH</item>
+    <item>BARANGAY BAGUMBAYAN SOUTH</item>
+    <item>BARANGAY BANGCULASI</item>
+    <item>BARANGAY DAANGHARI</item>
+    <item>BARANGAY NAVOTAS EAST</item>
+    <item>BARANGAY NAVOTAS WEST</item>
+    <item>BARANGAY NORTH BOULEVARD NORTH</item>
+    <item>BARANGAY NORTH BOULEVARD SOUTH</item>
+    <item>BARANGAY SAN JOSE</item>
+    <item>BARANGAY SAN RAFAEL VILLAGE</item>
+    <item>BARANGAY SAN ROQUE</item>
+    <item>BARANGAY SIPAC-ALMACEN</item>
+    <item>BARANGAY TANGOS</item>
+    <item>BARANGAY TANZA</item>
   </string-array>
 
   <string name="choosenearbrgy">Choose Nearest Barangay</string>

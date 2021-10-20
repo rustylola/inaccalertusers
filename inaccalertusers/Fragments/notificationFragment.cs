@@ -149,7 +149,9 @@ namespace inaccalertusers.Fragments
         private void ShowNearOnline()
         {
             onlineavailable = new MarkallAvailableListener(currentlocationLatlng);
+
             onlineavailable.DisplayOnline();
+
             onlineavailable.OnlineEventList += Onlineavailable_OnlineEventList;
         }
 
@@ -162,7 +164,8 @@ namespace inaccalertusers.Fragments
             onlineposition.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.ic_volunteeric));
             availablevolunteer = mainMap.AddMarker(onlineposition);
             availablevolunteer.ShowInfoWindow();
-            
+
+            onlineavailable.CloseOnline();
         }
 
         private void RequestListener_AcceptedRequestVolunteer(object sender, CreateRequestEventListener.VolunteerAcceptEventArgs e)
@@ -354,7 +357,7 @@ namespace inaccalertusers.Fragments
 
         void Notifybtn_Click(object sender, EventArgs e)
         {
-
+            ShowNearOnline(); //show online nearby
             //notifybtn.Text = "Please Wait...";
             //notifybtn.Enabled = false;
             requestdeailbottomsheet.State = BottomSheetBehavior.StateExpanded;
@@ -392,7 +395,6 @@ namespace inaccalertusers.Fragments
             searchbar.Enabled = false;
             //show current location
             detaillocation.Text = searchtext.Text;
-            ShowNearOnline(); //show online nearby
             closeprogressDialog();
         }
 
@@ -678,6 +680,7 @@ namespace inaccalertusers.Fragments
         
         private void NotifyNowFragment_Clicknotifynow(object sender, EventArgs e)
         {
+            ShowNearOnline();
             notifybtn.Visibility = ViewStates.Invisible;
             requestdeailbottomsheet.State = BottomSheetBehavior.StateExpanded;
             RequestShow();

@@ -184,5 +184,15 @@ namespace inaccalertusers
             alertDialog.Show();
         }
 
+        protected override void OnResume()
+        {
+            base.OnResume();
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+        }
+
     }
 }

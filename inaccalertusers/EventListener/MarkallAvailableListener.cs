@@ -20,7 +20,8 @@ namespace inaccalertusers.EventListener
     {
 
         LatLng myCurrentlocation;
-
+        DatabaseReference reference;
+        FirebaseDatabase database;
         public event EventHandler<VolunteerOnlinenear> OnlineEventList;
 
         public class VolunteerOnlinenear : EventArgs
@@ -71,9 +72,14 @@ namespace inaccalertusers.EventListener
 
         public void DisplayOnline()
         {
-            FirebaseDatabase database = AppDataHelper.Getdatabase();
-            DatabaseReference reference = database.GetReference("volunteerAvailable");
+            database = AppDataHelper.Getdatabase();
+            reference = database.GetReference("volunteerAvailable");
             reference.AddValueEventListener(this);
+        }
+
+        public void CloseOnline()
+        {
+            reference.RemoveEventListener(this);
         }
     }
 }

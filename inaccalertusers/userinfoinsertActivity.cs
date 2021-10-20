@@ -119,5 +119,11 @@ namespace inaccalertusers
             Toast.MakeText(this, "All Done!", ToastLength.Short).Show();
 
         }
+
+        public override void OnBackPressed()
+        {
+            StartActivity(typeof(loginuser));
+            Finish();
+        }
     }
 }

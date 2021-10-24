@@ -59,8 +59,10 @@ namespace inaccalertusers
             connectView();
             ShowFirstFragment();
             userProfileEventListener.Create();
-            
+            Nfragment.localnotification += Nfragment_localnotification;
         }
+
+
         void ShowFirstFragment()
         {
             viewpager.SetCurrentItem(1, true);
@@ -192,6 +194,19 @@ namespace inaccalertusers
         protected override void OnPause()
         {
             base.OnPause();
+        }
+
+        private void Nfragment_localnotification(object sender, EventArgs e)
+        {
+            NotificationHelper notificationHelper = new NotificationHelper();
+            if ((int)Build.VERSION.SdkInt >= 26)
+            {
+                notificationHelper.NotifyVersion26(this, Resources, (NotificationManager)GetSystemService(NotificationService));
+            }
+            else
+            {
+                notificationHelper.NotifyOtherVersion(this, Resources, (NotificationManager)GetSystemService(NotificationService));
+            }
         }
 
     }

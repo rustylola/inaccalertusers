@@ -96,6 +96,10 @@ namespace inaccalertusers.Fragments
         //Alert Dialog inialize
         Android.Support.V7.App.AlertDialog.Builder alert;
         Android.Support.V7.App.AlertDialog alertDialog;
+
+        //event arags
+        public event EventHandler localnotification;
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -272,6 +276,7 @@ namespace inaccalertusers.Fragments
                 distanceEstimate.Text = "Volunteer Arriving";
                 MediaPlayer player = MediaPlayer.Create(Activity, Resource.Raw.AccidentAlert);
                 player.Start();
+                localnotification?.Invoke(this, new EventArgs());
             }
             else if(e.Status == "ended")
             {

@@ -98,6 +98,7 @@
     <Compile Include="LocateUpdate\GeoCodingParser.cs" />
     <Compile Include="LocateUpdate\LocationCallbackUpdate.cs" />
     <Compile Include="LocateUpdate\MapFunctionUpdate.cs" />
+    <Compile Include="LocateUpdate\NotificationHelper.cs" />
     <Compile Include="loginuser.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="registerationActivity.cs" />

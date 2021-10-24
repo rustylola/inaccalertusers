@@ -76,6 +76,7 @@
     <Compile Include="Datamodels\NewRequestDetails.cs" />
     <Compile Include="Datamodels\OnlineVolunteer.cs" />
     <Compile Include="DevActivity.cs" />
+    <Compile Include="EventListener\CheckEmailListener.cs" />
     <Compile Include="EventListener\CreateRequestEventListener.cs" />
     <Compile Include="EventListener\CreateUpdateAccListener.cs" />
     <Compile Include="EventListener\FindvolunteerListener.cs" />

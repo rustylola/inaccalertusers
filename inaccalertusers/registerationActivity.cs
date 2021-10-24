@@ -37,6 +37,7 @@ namespace inaccalertusers
 
         //Adding Eventlistener hadler
         TaskCompletionListener taskCompletionListener = new TaskCompletionListener();
+        CheckEmailListener checkEmailListener;
 
         //setting variables to public to access in other methods
         string fullname, useremail, userphone, userpassword, confirmpass;
@@ -44,6 +45,7 @@ namespace inaccalertusers
         ISharedPreferences preferences = Application.Context.GetSharedPreferences("userinfo", FileCreationMode.Private);
         ISharedPreferencesEditor editor;
 
+        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -148,7 +150,17 @@ namespace inaccalertusers
             }
 
             // adding method to checking success and failure
-            registeruser(fullname, useremail, userphone,userpassword);
+            checkEmailListener = new CheckEmailListener(useremail);
+            checkEmailListener.CheckEmail();
+            checkEmailListener.Existed += CheckEmailListener_Existed;
+
+            registeruser(fullname, useremail, userphone, userpassword);
+        }
+
+        private void CheckEmailListener_Existed(object sender, EventArgs e)
+        {
+            Toast.MakeText(this, "Email already exist. Try again.", ToastLength.Short).Show();
+            StartActivity(new Intent(Application.Context, typeof(loginuser)));
         }
 
         void registeruser(string name, string email, string phonenum, string password)
@@ -164,13 +176,13 @@ namespace inaccalertusers
         //Failed method
         private void TaskCompletionListener_Failure(object sender, EventArgs e)
         {
-            Snackbar.Make(rootView, "User Registration Failed", Snackbar.LengthShort).Show();
+            Snackbar.Make(rootView, "Email Already Exist.", Snackbar.LengthShort).Show();
         }
 
         //Sucess method : Adding UID,email,name,and phone section to the firebasedatabase
         private void TaskCompletionListener_Success(object sender, EventArgs e)
         {
-            Snackbar.Make(rootView, "User Registration Success", Snackbar.LengthShort).Show();
+            Toast.MakeText(this, "User Registration Success", ToastLength.Short).Show();
 
             HashMap userMap = new HashMap();
             userMap.Put("email", useremail);

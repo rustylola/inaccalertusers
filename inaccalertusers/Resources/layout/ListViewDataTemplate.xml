@@ -31,14 +31,15 @@
             android:text="@string/nameofuserhistory"
             android:textColor="@color/colorWhite"/>
 
-        <TextView
+    </LinearLayout>
+
+    <TextView
             android:id="@+id/usernametext"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="1dp"
+            android:textStyle="bold"
             android:textColor="@color/colorWhite"/>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_weight="0.2"
@@ -54,14 +55,16 @@
             android:text="@string/nameofvolunteerhistory"
             android:textColor="@color/colorWhite"/>
 
-        <TextView
+
+    </LinearLayout>
+
+    <TextView
             android:id="@+id/volunteernametext"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="1dp"
+            android:textStyle="bold"
             android:textColor="@color/colorWhite"/>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_weight="0.2"
@@ -77,14 +80,15 @@
             android:text="@string/historyaddress"
             android:textColor="@color/colorWhite"/>
 
-        <TextView
+    </LinearLayout>
+
+    <TextView
             android:id="@+id/addresstext"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="1dp"
+            android:textStyle="bold"
             android:textColor="@color/colorWhite"/>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_weight="0.2"
@@ -105,6 +109,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textStyle="bold"
             android:textColor="@color/colorWhite"/>
 
     </LinearLayout>

@@ -59,9 +59,21 @@ namespace inaccalertusers
             connectView();
             ShowFirstFragment();
             userProfileEventListener.Create();
+            userProfileEventListener.InputProfile += UserProfileEventListener_InputProfile;
             Nfragment.localnotification += Nfragment_localnotification;
         }
 
+        private void UserProfileEventListener_InputProfile(object sender, EventArgs e)
+        {
+            CreateMyProfileFragment createMyProfileFragment = new CreateMyProfileFragment(AppDataHelper.Getcurrentuser().Email);
+            createMyProfileFragment.Cancelable = false;
+            var trans = SupportFragmentManager.BeginTransaction();
+            createMyProfileFragment.Show(trans, "Create My Profile");
+            createMyProfileFragment.Createnow += (t, o) =>
+            {
+                createMyProfileFragment.Dismiss();
+            };
+        }
 
         void ShowFirstFragment()
         {

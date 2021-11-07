@@ -87,6 +87,7 @@
     <Compile Include="EventListener\UserProfileEventListener.cs" />
     <Compile Include="Fragments\AccidentAroundFragment.cs" />
     <Compile Include="Fragments\CallAmbulanceFragment.cs" />
+    <Compile Include="Fragments\CreateMyProfileFragment.cs" />
     <Compile Include="Fragments\historyFragment.cs" />
     <Compile Include="Fragments\notificationFragment.cs" />
     <Compile Include="Fragments\NotifyNowFragment.cs" />
@@ -440,6 +441,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\SelectCallNum.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\CreateMyProfile.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

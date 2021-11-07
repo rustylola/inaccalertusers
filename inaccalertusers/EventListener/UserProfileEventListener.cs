@@ -18,6 +18,9 @@ namespace inaccalertusers.EventListener
         //define shared preference
         ISharedPreferences preferences = Application.Context.GetSharedPreferences("userinfo", FileCreationMode.Private);
         ISharedPreferencesEditor editor;
+        //show if the users account doesnt have profile information
+        public event EventHandler InputProfile;
+
         public void OnCancelled(DatabaseError error)
         {
             
@@ -36,6 +39,10 @@ namespace inaccalertusers.EventListener
                 editor.PutString("email",email);
                 editor.PutString("phone", phone);
                 editor.Apply();
+            }
+            else
+            {
+                InputProfile?.Invoke(this, new EventArgs());
             }
         }
 
